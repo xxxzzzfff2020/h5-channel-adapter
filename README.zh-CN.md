@@ -34,7 +34,7 @@
 
 ### 1. 安装 Skill
 
-在 Codex 中，克隆到 `skills` 目录。仓库目前私有，克隆前请确认 GitHub 账号已有访问权限。
+在 Codex 中，将公开仓库克隆到 `skills` 目录，无需申请仓库访问权限。
 
 **macOS / Linux（zsh / bash）**
 
@@ -130,6 +130,6 @@ h5-channel-adapter/
 
 [贡献指南](CONTRIBUTING.zh-CN.md) · [提交问题或平台建议](https://github.com/xxxzzzfff2020/h5-channel-adapter/issues/new/choose) · [更新记录](CHANGELOG.md)
 
-目前仓库处于公开发布前的整理阶段，仍保持私有；正式公开前会确定开源许可证。
+仓库现已公开，欢迎参与维护；开源许可证尚待确定。
 
 <sub>平台图标来自各自官方站点，仅作平台标识。[图像来源](assets/branding/README.md)</sub>

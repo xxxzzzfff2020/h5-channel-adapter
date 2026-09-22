@@ -4,7 +4,7 @@
 
 Help make H5 publishing easier across platforms. Useful contributions include new platform profiles, updated listing requirements, reusable integration fixes, portable helper improvements and clearer examples.
 
-The repository is currently private, so contributions are available to invited collaborators. Public contribution access and an open-source license will be arranged before public release.
+The repository is public and welcomes issues and pull requests. An open-source license has not yet been selected.
 
 ## Start with a concrete change
 

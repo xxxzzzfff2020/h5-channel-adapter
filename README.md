@@ -32,7 +32,7 @@ This Skill gives AI Agents platform integration rules, listing-material guidance
 
 ### 1. Install the Skill
 
-For Codex, clone into your `skills` directory. The repository is currently private; your GitHub account needs access.
+For Codex, clone this public repository into your `skills` directory. No repository access invitation is needed.
 
 **macOS / Linux — zsh / bash**
 
@@ -129,6 +129,6 @@ Contribute a platform, update listing specifications, improve adaptation guidanc
 
 [Contribution guide](CONTRIBUTING.md) · [Report an issue or propose a platform](https://github.com/xxxzzzfff2020/h5-channel-adapter/issues/new/choose) · [Changelog](CHANGELOG.md)
 
-The repository remains private while preparing for public release. An open-source license will be selected before that release.
+The repository is public. An open-source license has not yet been selected.
 
 <sub>Platform icons come from their official sites and identify the respective platforms. [Artwork sources](assets/branding/README.md)</sub>
