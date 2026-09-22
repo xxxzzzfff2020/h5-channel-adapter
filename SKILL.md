@@ -18,6 +18,12 @@ Use the user's language and read one workflow, then only the selected platform r
 - **English:** [Workflow](references/workflow.md), [guided setup](references/guided-flow.md), [listing materials](references/materials.md).
 - **简体中文：**[适配流程](references/zh-CN/workflow.md)、[引导配置](references/zh-CN/guided-flow.md)、[物料制作](references/zh-CN/materials.md)。
 
+## Material selection / 物料选择
+
+After choosing platforms, ask for **images and copy / images, copy and video / projects only** unless already specified. Video processing is opt-in. Without it, do not install or invoke FFmpeg/ffprobe, record `processing.video: false` in material manifests, and keep required platform videos as pending items. A missing answer does not authorize video work. Follow [materials](references/materials.md) for manifest/report semantics.
+
+选平台后询问 **图文物料 / 图文＋视频 / 仅适配工程**，已有明确范围则沿用。视频需明确选择才启用；未选择时不安装或调用 FFmpeg/ffprobe，物料清单记录 `processing.video: false`。平台必需视频列为待补，不阻塞所选工作，也不误报全套已齐。没有回答不代表同意视频处理；清单和报告规则见[物料流程](references/zh-CN/materials.md)。
+
 ## Platforms / 平台入口
 
 | Platform / 平台 | English | 简体中文 |
@@ -36,7 +42,7 @@ Check current requirements and project compatibility before committing to a feat
 
 1. **Prepare before asking for IDs.** Inventory source and local materials, preserve one source baseline, create independent channel projects and complete work that does not require missing configuration. Preserve originals, saves and previous packages. / **先准备，再补 ID**：盘点源码和本地物料，固定来源，创建独立工程；保护原工程、存档与旧包。
 2. **Guide the next step per platform.** Provide ready-to-use listing copy, material paths, package status and the actual missing fields. Continue unblocked platforms. Keep server secrets out of frontend code and reports. / 按平台展示建项资料、文件、包状态与缺失字段，其他平台继续；服务端密钥不进前端或报告。
-3. **Produce complete listing kits.** Follow [field mappings](references/listing-fields.md) / [字段映射](references/zh-CN/listing-fields.md). Separate game packages from listing kits. For 233/4399, combine promotional content and real gameplay in the delivered video. / 按平台生成文案与物料，游戏包和物料包分开；233/4399 视频包含宣传内容与真实操作。
+3. **Produce the selected listing materials.** Follow [field mappings](references/listing-fields.md) / [字段映射](references/zh-CN/listing-fields.md). Separate game packages from listing kits. When video is selected, combine promotional content and real gameplay for 233/4399. / 按平台和所选范围生成物料，游戏包和物料包分开；选择视频时，233/4399 成片包含宣传内容与真实操作。
 4. **Ask before reducing content.** Check original and final package sizes using [package budgets](references/package-budget.md) / [包体流程](references/zh-CN/package-budget.md). On overflow, obtain a specific plan; an approved media removal must also update menus, playback and save compatibility. / 初始包和最终包均测大小；超限先选方案，删媒体时同步菜单、播放逻辑与旧档兼容。
 5. **Fit the environment.** Follow [macOS/Windows guidance](references/portability.md) / [系统环境](references/zh-CN/portability.md). Default Android target: Xiaomi 8 / Android 10, unless overridden. Check host-engine constraints using [compatibility guidance](references/compatibility.md) / [兼容说明](references/zh-CN/compatibility.md). / 按系统执行，安卓默认小米 8、Android 10，并单独核对宿主内核。
 6. **Report the actual result.** Distinguish local preparation, SDK/device testing and platform upload/review/release. Never fabricate rewarded-ad completion or borrow another game's IDs. Follow the user's scope for external actions. / 区分本地准备、SDK/真机测试与上传/审核/发布；不伪造广告完成、不借用其他游戏 ID；外部操作遵循用户范围。

@@ -67,7 +67,7 @@ def main():
         details = [still(f'detail-{i}.png', 720, 1280) for i in range(4)]
         cover = still('cover.jpg', 1280, 720)
         movie = clip('video.mp4', 1280, 720)
-        manifest = {'channel': '233', 'game': '合成 fixture', 'source_version': 'synthetic-fixture',
+        manifest = {'channel': '233', 'game': '合成 fixture', 'source_version': 'synthetic-fixture', 'processing': {'video': True},
                     'text': {'description': '测试', 'one_liner': '测试', 'recommendation': '测试'},
                     'files': [item('icon', icon), item('home_16_9', home), item('home_16_13', home13)]
                     + [item('detail', p, 'brand' if i == 0 else 'screenshot_browser')
@@ -114,7 +114,7 @@ def main():
         portrait = still('portrait.jpg', 1080, 1920)
         movie4399 = clip('video4399.mp4', 1920, 1080)
         check('valid-4399', {'channel': '4399', 'game': '合成 fixture',
-                           'source_version': 'synthetic-fixture',
+                           'source_version': 'synthetic-fixture', 'processing': {'video': True},
                            'text': {'description': '测试', 'controls': '测试'},
                            'files': [item('icon', small), item('promo', promo),
                                      item('video_cover', portrait), video(movie4399)]}, True)

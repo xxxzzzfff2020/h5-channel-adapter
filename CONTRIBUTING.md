@@ -35,13 +35,13 @@ For a new platform, follow [extension guidance](references/extending.md). Use of
 
 ## Check the change
 
-For documentation changes, review links and the corresponding translation. For changes to helpers or executable rules, run the existing checks with Python 3.9+, `ffmpeg` and `ffprobe` available:
+For documentation changes, review links and the corresponding translation. For helper or rule changes, first run the image/copy and package checks with Python 3.9+; FFmpeg is not needed:
 
 ```sh
-python3 tests/smoke.py
+python3 tests/no_ffmpeg.py
 ```
 
-On Windows PowerShell, use `py -3 tests/smoke.py` or your verified `python` command. The tests generate temporary synthetic assets. Add focused cases when behavior changes; don't add tests that only match document wording.
+For video changes, also run `python3 tests/smoke.py` with ffmpeg/ffprobe available. On Windows PowerShell, replace `python3` with `py -3` or your verified `python` command. The tests generate temporary synthetic assets. Add focused cases when behavior changes; don't add tests that only match document wording.
 
 The [CI template](ci/validate.github.yml) can run the same helpers on macOS and Windows when a maintainer enables it as `.github/workflows/validate.yml`.
 

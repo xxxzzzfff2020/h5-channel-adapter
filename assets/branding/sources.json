@@ -1,0 +1,46 @@
+{
+  "retrieved_on": "2026-09-22",
+  "purpose": "Platform identification in documentation; original brand assets, unmodified. Marks belong to their respective owners.",
+  "icons": [
+    {
+      "platform": "233",
+      "file": "233.png",
+      "page": "https://www.233leyuan.com/",
+      "source": "https://www.233leyuan.com/img/icon.png",
+      "sha256": "9682dfc3819f0fa74f33f2d240f58d7ddbec5fc586f26472655b7c33a647b8bf",
+      "bytes": 12317
+    },
+    {
+      "platform": "4399",
+      "file": "4399.ico",
+      "page": "https://www.4399.com/",
+      "source": "https://www.4399.com/favicon.ico",
+      "sha256": "b792c387937747066149c26af0ce5ecd24b967e72147f807db22e354d06f69cb",
+      "bytes": 1406
+    },
+    {
+      "platform": "xiaohongshu",
+      "file": "xiaohongshu.ico",
+      "page": "https://www.xiaohongshu.com/",
+      "source": "https://fe-video-qc.xhscdn.com/fe-platform/ed8fe781ce9e16c1bfac2cd962f0721edabe2e49.ico",
+      "sha256": "a2dc2a235f74251f72d1692ac246098a98d8cb4f4a474e606617b5208a2c83bf",
+      "bytes": 4286
+    },
+    {
+      "platform": "bilibili",
+      "file": "bilibili.ico",
+      "page": "https://www.bilibili.com/",
+      "source": "https://www.bilibili.com/favicon.ico",
+      "sha256": "2681561eb24e7435fea1acf26f3af95e4efc9f7d451587b58bef62f030f337e9",
+      "bytes": 4286
+    },
+    {
+      "platform": "xingxia",
+      "file": "xingxia.png",
+      "page": "https://game.virtualoverapp.com/",
+      "source": "https://gz-vchar-pub.nosdn.127.net/front-static/star-letter/web/apple-touch-icon.png",
+      "sha256": "c2805662448cb47b2e9521cb4542f5396bec3216be09417847fc96fc8d1d0303",
+      "bytes": 4611
+    }
+  ]
+}

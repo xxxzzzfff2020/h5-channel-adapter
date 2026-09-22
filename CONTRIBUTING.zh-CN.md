@@ -35,13 +35,13 @@
 
 ## 检查修改
 
-文档修改检查链接和对应翻译。涉及脚本或可执行规则时，在 Python 3.9+、`ffmpeg`、`ffprobe` 可用的环境运行：
+文档修改检查链接和对应翻译。涉及脚本或可执行规则时，先用 Python 3.9+ 运行图文与包体检查，无需 FFmpeg：
 
 ```sh
-python3 tests/smoke.py
+python3 tests/no_ffmpeg.py
 ```
 
-Windows PowerShell 使用 `py -3 tests/smoke.py` 或已核实的 `python`。测试会生成临时合成素材。行为变化时补充相关用例，不为匹配文档措辞新增测试。
+视频相关修改另在 ffmpeg/ffprobe 可用时运行 `python3 tests/smoke.py`。Windows PowerShell 将 python3 换为 py -3 或已核实的 python。测试会生成临时合成素材。行为变化时补充相关用例，不为匹配文档措辞新增测试。
 
 [CI 模板](ci/validate.github.yml)可由维护者启用到 `.github/workflows/validate.yml`，在 macOS 和 Windows 上执行相同检查。
 

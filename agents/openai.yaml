@@ -1,4 +1,4 @@
 interface:
   display_name: "H5 Channel Adapter · 多平台适配"
   short_description: "H5 publishing / 生成多平台独立工程、上架物料与发布包"
-  default_prompt: "使用 $h5-channel-adapter，准备开始当前 TapTap H5 项目的多平台适配，请先引导我选择目标平台，再完成本地准备并提示缺少的建项信息。"
+  default_prompt: "使用 $h5-channel-adapter，准备开始当前 TapTap H5 项目的多平台适配，请先引导我选择目标平台与物料范围（视频可选），再完成本地准备并提示缺少的建项信息。"

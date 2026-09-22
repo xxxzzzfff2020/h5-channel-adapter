@@ -8,6 +8,7 @@ from pathlib import Path
 import shutil
 import subprocess
 from datetime import datetime, timezone
+from image_metadata import IMAGE_SUFFIXES, image_probe
 
 SKIP = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', '.cache',
         'backups', 'backup', 'logs', 'evidence', 'release', 'dist', 'build',
@@ -33,6 +34,8 @@ def sensitive(path):
 
 
 def probe(path):
+    if not shutil.which('ffprobe'):
+        return {'error': 'Selected audio/video inspection needs ffprobe; defer it or use an existing FFmpeg installation'}
     r = subprocess.run(['ffprobe', '-v', 'error', '-show_entries',
                         'format=format_name,duration:stream=codec_type,codec_name,width,height,r_frame_rate',
                         '-of', 'json', str(path)], capture_output=True, text=True,
@@ -47,6 +50,7 @@ def main():
     ap.add_argument('root', type=Path)
     ap.add_argument('--output', type=Path, required=True)
     ap.add_argument('--no-probe', action='store_true')
+    ap.add_argument('--probe-av', action='store_true', help='Opt in to audio/video metadata via ffprobe')
     a = ap.parse_args()
     root, output = a.root.resolve(), a.output.resolve()
     if not root.is_dir():
@@ -54,7 +58,10 @@ def main():
     if output.exists():
         ap.error('output exists; choose a new evidence filename')
     files, skipped, errors = [], {'directories': 0, 'symlinks': 0, 'sensitive': 0}, []
-    has_probe = bool(shutil.which('ffprobe')) and not a.no_probe
+    has_probe = bool(a.probe_av and not a.no_probe and shutil.which('ffprobe'))
+    if a.probe_av and not a.no_probe and not has_probe:
+        ap.error('--probe-av needs ffprobe; omit it for image/copy-only work')
+    probe_used = False
     for base, dirs, names in os.walk(root, followlinks=False):
         kept = []
         for d in sorted(dirs):
@@ -83,8 +90,12 @@ def main():
                 item = {'path': rel, 'bytes': before.st_size, 'sha256': digest(p),
                         'kind': ('media' if ext in MEDIA else 'source_or_document' if ext in SOURCE
                                  else 'archive' if ext in {'.zip', '.rar', '.7z', '.tar'} else 'other_resource')}
-                if ext in MEDIA and has_probe:
+                if not a.no_probe and ext in IMAGE_SUFFIXES:
+                    item['media'] = image_probe(p)
+                elif ext in MEDIA and has_probe:
                     item['media'] = probe(p)
+                    probe_used = True
+                if 'media' in item:
                     if 'error' in item['media']:
                         errors.append({'path': rel, 'error': 'media_probe_failed'})
                 after = p.stat()
@@ -95,7 +106,7 @@ def main():
                 errors.append({'path': rel, 'error': str(e)[:300]})
     report = {'schema_version': 1, 'root': str(root),
               'created_at': datetime.now(timezone.utc).isoformat(),
-              'ffprobe_used': has_probe, 'source_read_only': True,
+              'ffprobe_used': probe_used, 'source_read_only': True,
               'excluded_directory_names': sorted(SKIP), 'skipped_counts': skipped,
               'files': files, 'errors': errors}
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -104,7 +115,7 @@ def main():
         f.write('\n')
     print(json.dumps({'output': str(output), 'files': len(files),
                       'media': sum(x['kind'] == 'media' for x in files),
-                      'errors': len(errors), 'ffprobe_used': has_probe}, ensure_ascii=True))
+                      'errors': len(errors), 'ffprobe_used': probe_used}, ensure_ascii=True))
     return int(bool(errors))
 
 

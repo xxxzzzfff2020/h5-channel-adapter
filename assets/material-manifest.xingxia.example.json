@@ -33,5 +33,8 @@
   "manual_review": {
     "visual": "pending",
     "platform_form": "pending"
+  },
+  "processing": {
+    "video": false
   }
 }

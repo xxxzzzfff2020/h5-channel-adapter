@@ -1,5 +1,13 @@
 # Changelog / 更新记录
 
+## 0.4.0 — 2026-09-22
+
+- Make video processing opt-in during material selection; image/copy and project-only workflows do not require FFmpeg. / 物料选择新增可选视频，图文与仅工程流程无需 FFmpeg。
+- Read PNG/JPEG/WebP dimensions with Python; default inventory skips audio/video probing. Material reports distinguish checked scope from deferred video. / Python 读取图片尺寸，盘点默认跳过音视频探测，报告明确待补视频。
+- Add an FFmpeg-free test suite and refresh bilingual README navigation, artwork and official platform icons. / 新增无 FFmpeg 测试，润色双语首页并加入横幅与官方平台图标。
+
+Migration: material manifests now default to `processing.video: false`; set it to `true` only for explicitly selected video work. / 清单现在默认不处理视频，明确选择后才设为 true。
+
 ## 0.3.0 — 2026-09-22
 
 - Rework English and Chinese documentation around purpose, deliverables and quick start. / 中英文首页聚焦定位、交付与快速使用。

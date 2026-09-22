@@ -1,12 +1,12 @@
 # Adaptation workflow
 
-Prepare independent, rebuildable channel projects and complete listing materials from an existing TapTap H5 game. This is an agent workflow with validation helpers, not a universal source-to-source compiler.
+Prepare independent, rebuildable channel projects and selected listing materials from an existing TapTap H5 game. This is an agent workflow with validation helpers, not a universal source-to-source compiler.
 
 ## Scope and interaction
 
 Identify the game root, authoritative TapTap source, selected channels, and whether the task is a first port, incremental update, requirements assessment or platform-profile update. A discussion of the process is not permission to port a game. If targets are missing, offer the current platform list; for “all platforms”, state that list and apply each platform’s requirements. Read only selected platform profiles.
 
-Use [guided interaction](guided-flow.md) when targets or necessary fields are missing. While waiting for platform selection, inventory sources read-only. After selection, finish independent local work before asking for configuration. One channel waiting for an ID does not block another. Continue already-authorized uploads within their original scope; otherwise deliver local candidates and exact next inputs.
+Use [guided interaction](guided-flow.md) to choose platforms and material scope when missing. Video is optional and requires an explicit selection; projects-only requests skip material work. While waiting for platform selection, inventory sources read-only. After selection, finish independent local work before asking for configuration. One channel waiting for an ID does not block another. Continue already-authorized uploads within their original scope; otherwise deliver local candidates and exact next inputs.
 
 ## Phase 1: credential-independent work
 
@@ -20,7 +20,7 @@ Search the game root and TapTap source for brand masters, icons, alternate aspec
 python3 <skill-dir>/scripts/inventory_project.py <game-root> --output <evidence-dir>/inventory.json
 ```
 
-Review relevant text, images and video frames; the helper cannot select the authoritative source. Freeze the same baseline for all channels, copying required source, runtime assets, lockfiles, build scripts and licenses. Never chain-copy from another changing channel. If source changes while copying, compare hashes and recopy affected files from one coherent baseline.
+Review relevant text and images; inspect video frames only when video work is selected; the helper cannot select the authoritative source. Freeze the same baseline for all channels, copying required source, runtime assets, lockfiles, build scripts and licenses. Never chain-copy from another changing channel. If source changes while copying, compare hashes and recopy affected files from one coherent baseline.
 
 Before changing channel content, check the frozen artifact against selected [package budgets](package-budget.md). Over-limit platforms require an explicit reduction choice; continue other channels and independent assets while waiting. Recheck each actual final channel artifact.
 
@@ -49,15 +49,15 @@ Centralize SDK, capabilities, ads, saves, container behavior and checks. Preserv
 
 Missing IDs leave explicit empty configuration and block only dependent release checks. Still build preview, materials and compatibility changes. Never borrow example IDs or package mock rewards. SDK failure should not prevent ordinary gameplay where the platform permits fallback.
 
-### Prepare all listing materials
+### Prepare selected listing materials
 
-Read [materials](materials.md) and the platform profile. Produce separate game and material archives, copy, provenance and review previews. For 233/4399, edit promotional/brand content and real gameplay into one video. First try capturing missing footage from an isolated runnable build; request device recordings only when necessary. Use available image tools for missing artwork; retain masters/prompts. Illustration is not a gameplay screenshot.
+For requested materials, read [materials](materials.md) and the platform profile. In projects-only mode skip this step. Produce separate game and material archives, copy, provenance and review previews. When video is selected, for 233/4399 edit promotional/brand content and real gameplay into one video. For selected video work, first try capturing missing footage from an isolated runnable build; request device recordings only when necessary. Use available image tools for missing artwork; retain masters/prompts. Illustration is not a gameplay screenshot.
 
 Unknown rules and unavailable assets must be explicit. Continue unrelated work. Do not call icons plus a game ZIP a complete kit, or defer independent materials until an AppID arrives.
 
 ### Verify and request next inputs
 
-Run relevant builds, archive checks and critical behavior tests. Inspect final images, video joins, playback and representative gameplay. Default non-TapTap Android target is Xiaomi 8 / Android 10; inspect the host kernel and stricter platform requirements. Report device tests as pending if no device was used.
+Run relevant builds, archive checks and critical behavior tests. Inspect final images and representative gameplay; inspect video joins and playback when video work is selected. Default non-TapTap Android target is Xiaomi 8 / Android 10; inspect the host kernel and stricter platform requirements. Report device tests as pending if no device was used.
 
 Report each channel's source version/hash, paths, material status, checks, gaps and rebuild command. Use a compact table: upload candidate ready; prepared awaiting configuration; candidate with unavailable features disabled; missing assets/rules.
 
@@ -67,7 +67,7 @@ Distinguish SecretID from SecretKey and verify their roles. Request a secure ser
 
 ## Phase 2: bind, build and validate
 
-Confirm game/channel identity, fill required fields and enabled capabilities, rebuild, and produce `<game>_<channel>_v<version>_<date>.zip` plus a separate material ZIP. Record size, SHA-256, entry hash, file list and checks. Preserve old packages. Exclude placeholders, test bridges, demonstration saves, environment files and unrelated IDs.
+Confirm game/channel identity, fill required fields and enabled capabilities, rebuild, and produce `<game>_<channel>_v<version>_<date>.zip` plus a separate material ZIP when requested. Record size, SHA-256, entry hash, file list and checks. Preserve old packages. Exclude placeholders, test bridges, demonstration saves, environment files and unrelated IDs.
 
 Accept partial answers. Store non-secret IDs, permissions and gaps in existing channel notes; resume ready channels immediately. Pending permissions may allow a disabled-feature candidate; never claim those features work. New product systems require explicit scope.
 
@@ -77,6 +77,6 @@ Separate local, real-SDK, device, upload, review and release evidence. Verify co
 
 ## Incremental updates
 
-Compare previous SOURCE_BASELINE, current TapTap and current channel in a three-way update. Merge upstream changes while preserving channel hooks, saves and compatibility. Rerecord changed UI; label older footage with its actual version. Reuse verified brand masters and recheck exports.
+Compare previous SOURCE_BASELINE, current TapTap and current channel in a three-way update. Merge upstream changes while preserving channel hooks, saves and compatibility. For selected video work, rerecord changed UI; label older footage with its actual version. Reuse verified brand masters and recheck exports.
 
 For new platform knowledge use [extension rules](extending.md), separating user decisions, official rules, observed implementation and assumptions.

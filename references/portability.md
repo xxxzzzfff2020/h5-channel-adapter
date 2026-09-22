@@ -4,9 +4,9 @@ Keep the same Skill, rules and Python helpers on both systems. Paths come from t
 
 ## Runtime discovery
 
-- Detect OS and shell. On macOS, locate `python3`, `ffprobe`, `ffmpeg` with the available shell. On Windows PowerShell, use `Get-Command python, py, ffprobe, ffmpeg -ErrorAction SilentlyContinue`; check the actual interpreter with `python --version` or `py -3 --version`. The Windows Store alias is not proof that Python is installed.
-- Helpers require Python ≥3.9, standard library only. `verify_materials.py` needs ffprobe on PATH. Inventory can run with `--no-probe`, but that does not validate media. Video production and fixture tests use ffmpeg as well.
-- Prefer installed/bundled runtimes. If missing, use the user's approved package manager or official distribution with the correct OS/architecture; do not run macOS `brew` or Unix curl-pipe-shell installers on Windows. Some official platform tools offer a Windows executable/PowerShell installer instead; fetch the current upstream instructions.
+- Detect OS and shell. On macOS, locate `python3`. On Windows PowerShell, use `Get-Command python, py -ErrorAction SilentlyContinue`; check the actual interpreter with `python --version` or `py -3 --version`. The Windows Store alias is not proof that Python is installed.
+- Helpers require Python ≥3.9, standard library only. Image/copy workflows and package checks do not require FFmpeg. Inventory reads PNG/JPEG/WebP headers by default and does not probe audio/video. `--no-probe` also disables image metadata. Only selected audio/video work discovers ffprobe/ffmpeg: `--probe-av` enables inventory probing; `processing.video: true` enables material-video checks. Video editing and the optional full media tests use ffmpeg.
+- Only check/install a media tool when the selected task needs it. Prefer installed/bundled runtimes. If missing, use the user's approved package manager or official distribution with the correct OS/architecture; do not run macOS `brew` or Unix curl-pipe-shell installers on Windows. Some official platform tools offer a Windows executable/PowerShell installer instead; fetch the current upstream instructions.
 - Quote paths containing spaces or Chinese characters. Use `pathlib` and argument arrays, not shell-concatenated paths, Unix-only copy commands or mandatory symlinks. Use explicit UTF-8 for stored text and subprocess JSON. Windows package paths must not use reserved filename characters or device names.
 
 ## Equivalent helper commands
@@ -33,4 +33,4 @@ Respect the game's actual stack and lockfile. Detect Node/npm if needed and use 
 
 Use available isolated browser automation or a user-authorized host preview. Do not require the Codex desktop popup API, a particular browser driver or native OS automation on all agents. Fall back to text questions and explicit verification gaps when those capabilities are unavailable.
 
-The repository CI template exercises Python helpers on macOS and Windows with synthetic media, including paths with spaces/non-ASCII characters. This is helper portability evidence only, not a Windows game build, phone test or platform SDK acceptance.
+Run `python3 tests/no_ffmpeg.py` for image/copy checks; it removes media tools from subprocess PATH. Run `python3 tests/smoke.py` only for the full media suite with FFmpeg. On Windows use `py -3` or the verified interpreter. The CI template includes both suites; helper checks do not replace host or device testing.

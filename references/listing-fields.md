@@ -10,7 +10,7 @@ Listing requirements were recorded from creator forms on 2026-09-22. `assets/mat
 | bilibili-toy | name, slug (required) | no additional fields currently recorded | poster + icon (one each) |
 | xingxia | name, description (required); about, controls (optional) | categories (1–2), tags (1–5); game_type/orientation optional | cover (one); promo_media (0–8 images/videos combined) |
 
-Use the example manifests in assets for shape only. Fill real project copy, file paths and provenance. Use the current game’s name, features and tags. Imported H5 uses the applicable existing-game upload route; workshop-managed publishing is a separate route.
+Use the example manifests in assets for shape only; they default to `processing.video: false`. Set it to true only for selected video work, then add the video/cover records. See [scope semantics](materials.md#scope-and-optional-video). Fill real project copy, file paths and provenance. Use the current game’s name, features and tags. Imported H5 uses the applicable existing-game upload route; workshop-managed publishing is a separate route.
 
 Xiaohongshu name and description are each ≤14; version syntax was not specified. Scene options are the seven categories in the shared rules. Permission values in our manifest (`album`, `camera`, `microphone`, `storage`) are internal metadata labels, not asserted SDK identifiers: select only used capabilities, map through the current official workflow and verify whether the backend requires an explicit no-permission option. Do not request all permissions by default.
 

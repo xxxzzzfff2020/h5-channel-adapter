@@ -21,7 +21,7 @@ def exercise(base, skill, still, ff, item):
     poster = still('poster-small.jpg', 160, 120)
 
     def manifest(channel, text, files, metadata=None):
-        return {'game': 'synthetic fixture', 'source_version': 'synthetic-fixture',
+        return {'game': 'synthetic fixture', 'source_version': 'synthetic-fixture', 'processing': {'video': True},
                 'channel': channel, 'text': text, 'files': files, 'metadata': metadata or {}}
 
     def verify(name, value, expected, rule_path=rules):

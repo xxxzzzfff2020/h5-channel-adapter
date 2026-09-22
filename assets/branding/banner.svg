@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="240" viewBox="0 0 1120 240" role="img" aria-labelledby="title desc">
+<title id="title">H5 Channel Adapter</title><desc id="desc">One project, multiple platforms. Source, listing assets and packages.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101c35"/><stop offset="1" stop-color="#1c3653"/></linearGradient><linearGradient id="accent"><stop stop-color="#7ce2ce"/><stop offset="1" stop-color="#8baefa"/></linearGradient></defs>
+<rect width="1120" height="240" rx="20" fill="url(#bg)"/>
+<circle cx="1060" cy="15" r="155" fill="#6bd5d0" opacity=".045"/>
+<g font-family="Inter,Segoe UI,Arial,sans-serif"><text x="46" y="54" font-size="13" font-weight="700" letter-spacing="2.5" fill="#7ce2ce">AI AGENT SKILL</text><text x="44" y="111" font-size="42" font-weight="700" fill="#ffffff">H5 Channel Adapter</text><text x="46" y="148" font-size="19" fill="#c6d3e4">One project. Multiple platforms.</text><text x="46" y="197" font-size="13" fill="#8fa7c2">SOURCE PROJECTS  /  LISTING ASSETS  /  PLATFORM PACKAGES</text></g>
+<g stroke="#56738f" stroke-width="2" fill="none"><path d="M784 120H845V51H886M845 120V189H886M845 120H886"/><path d="M845 85H886M845 155H886"/></g>
+<rect x="687" y="83" width="98" height="74" rx="16" fill="url(#accent)"/>
+<text x="736" y="132" text-anchor="middle" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="34" font-weight="700" fill="#142338">H5</text>
+<g fill="#263d58" stroke="#54708c"><rect x="886" y="35" width="181" height="32" rx="9"/><rect x="886" y="70" width="181" height="32" rx="9"/><rect x="886" y="105" width="181" height="32" rx="9"/><rect x="886" y="140" width="181" height="32" rx="9"/><rect x="886" y="175" width="181" height="32" rx="9"/></g>
+<g font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13" fill="#e8eff9" text-anchor="middle"><text x="976" y="56">233 LEYUAN</text><text x="976" y="91">4399 H5</text><text x="976" y="126">XIAOHONGSHU</text><text x="976" y="161">BILIBILI TOY</text><text x="976" y="196">NETEASE XINGXIA</text></g></svg>

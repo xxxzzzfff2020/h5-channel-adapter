@@ -6,9 +6,9 @@ import json
 import math
 from pathlib import Path
 import re
-import shutil
 import subprocess
 from inventory_project import digest, probe
+from image_metadata import image_probe
 
 VIDEO_FORMATS = {'mp4', 'webm', 'ogg'}
 SUFFIXES = {'png': {'.png'}, 'jpeg': {'.jpg', '.jpeg'}, 'webp': {'.webp'},
@@ -95,6 +95,11 @@ def validate(manifest_path, rules_path):
         raise ValueError('Unknown platform; add verified platform rules first')
     rules = all_rules[m['channel']]
     errors, records, warnings = [], [], list(rules.get('unverified', []))
+    processing = m.get('processing', {})
+    if not isinstance(processing, dict) or not isinstance(processing.get('video', False), bool):
+        raise ValueError('processing.video must be a boolean')
+    video_enabled = processing.get('video', False)
+    deferred = []
     base = manifest_path.parent
     for k in ('game', 'source_version'):
         if not isinstance(m.get(k), str) or not m[k].strip():
@@ -105,7 +110,14 @@ def validate(manifest_path, rules_path):
         raise ValueError('files must be an array of objects')
     counts = Counter(x.get('role') for x in files)
     for role, rule in rules['roles'].items():
-        if not rule['count'][0] <= counts[role] <= rule['count'][1]:
+        video_role = role in {'video', 'video_cover'}
+        minimum = rule['count'][0]
+        if video_role and not video_enabled:
+            if role == 'video' or counts[role] < minimum:
+                deferred.append({'role': role, 'reason': 'video processing not selected',
+                                 'required_by_profile': minimum > 0})
+            minimum = 0
+        if not minimum <= counts[role] <= rule['count'][1]:
             errors.append(f'{role}: count {counts[role]} outside {rule["count"]}')
     for unknown in counts.keys() - rules['roles'].keys():
         errors.append('Unknown role: ' + str(unknown))
@@ -133,8 +145,13 @@ def validate(manifest_path, rules_path):
             errors.append(f'{role}: missing file {rel}')
             continue
         try:
-            fmt, info = media_format(p), probe(p)
+            fmt = media_format(p)
             is_video = fmt in VIDEO_FORMATS
+            if not video_enabled and (is_video or p.suffix.lower() in {'.mp4', '.webm', '.ogg', '.mov', '.m4v'} or role == 'video'):
+                deferred.append({'role': role, 'path': rel, 'reason': 'video processing not selected',
+                                 'required_by_profile': rule['count'][0] > 0})
+                continue
+            info = probe(p) if is_video else image_probe(p)
             constraints = dict(rule)
             constraints.update(rule.get('media', {}).get('video' if is_video else 'image', {}))
             stream = next((s for s in info.get('streams', []) if s.get('codec_type') == 'video'), {})
@@ -211,10 +228,14 @@ def validate(manifest_path, rules_path):
         covers = [r for r in records if r['role'] == 'video_cover']
         if videos and covers and (videos[0]['width'] > videos[0]['height']) != (covers[0]['width'] > covers[0]['height']):
             errors.append('video_cover: orientation differs from video')
-    return {'schema_version': 2, 'channel': m['channel'], 'game': m.get('game'),
+    if deferred:
+        warnings.append('Video work deferred by selection; pass covers checked materials only, not a complete listing.')
+    return {'schema_version': 3, 'channel': m['channel'], 'game': m.get('game'),
+            'processing': {'video': video_enabled}, 'deferred': deferred,
+            'profile_complete': not errors and not deferred,
             'technical_status': 'pass' if not errors else 'fail', 'errors': errors,
             'warnings': warnings, 'files': records, 'manual_review': m.get('manual_review', {}),
-            'not_certified': ['visual authenticity/quality', 'full decode and listening',
+            'not_certified': ['visual authenticity/quality', 'full image/video decode and listening',
                               'current platform form', 'real SDK/device/review/release']}
 
 
@@ -224,8 +245,6 @@ def main():
     ap.add_argument('--report', type=Path, required=True)
     ap.add_argument('--rules', type=Path, default=Path(__file__).resolve().parents[1] / 'assets/material-rules.json')
     a = ap.parse_args()
-    if not shutil.which('ffprobe'):
-        ap.error('ffprobe required; locate existing runtime before installing anything')
     if a.report.exists():
         ap.error('report exists; choose a new evidence filename')
     try:

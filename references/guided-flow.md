@@ -8,9 +8,15 @@ Only ask when the user actually requests adaptation and has not named targets. O
 
 While waiting for a required selection, inventory source/assets read-only. Do not create unselected channel projects. If several source games are possible, offer known game names rather than guessing from a studio directory. Do not ask users to choose ordinary implementation details.
 
+## Choose listing materials
+
+After platform selection, ask which materials to process unless the user already said so: “Images and copy (recommended)”, “Images, copy and video”, or “Projects only”. Accept custom or per-platform scopes. This is task selection, not an approval gate for every local step. If the user has not selected video, continue independent work without video or FFmpeg; never interpret a preselected answer as consent.
+
+Persist the choice with channel notes. Image/copy manifests use `processing.video: false` (also the default if omitted); opt-in uses `true`. Projects-only work skips material production/validation. Follow [materials](materials.md) for deferred video reporting. Only discover/install FFmpeg or request footage when video processing is actually selected. Copying an existing video without inspecting it leaves its checks pending.
+
 ## Prepare and report
 
-Create actual source projects, copy runtime assets, adapt/test, prepare listing copy and materials. First look for missing assets locally or capture them. Questions may ask for existing paths; text-only tools cannot request attachment uploads.
+Create actual source projects, copy runtime assets, adapt/test, prepare selected listing copy and materials. First look for missing assets locally or capture them. Questions may ask for existing paths; text-only tools cannot request attachment uploads.
 
 After phase one show each platform's source/material status, game ZIP and next action. Distinguish a ready local upload candidate, preparation awaiting required identity, a candidate with disabled pending capabilities, and missing materials/rules. A ZIP does not prove real SDK, device, review or release success.
 
