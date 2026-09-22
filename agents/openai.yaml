@@ -1,0 +1,4 @@
+interface:
+  display_name: "H5 Channel Adapter · 多平台适配"
+  short_description: "TapTap H5 channel ports / 引导生成独立源码、物料与渠道包"
+  default_prompt: "使用 $h5-channel-adapter，准备开始当前 TapTap H5 项目的多平台适配，请先引导我选择目标平台，再完成本地准备并提示缺少的建项信息。"

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "channel": "233",
+  "game": "填写正式游戏名",
+  "source_version": "填写本轮源版本或快照标识",
+  "text": {"description": "", "one_liner": "", "recommendation": ""},
+  "files": [
+    {"role": "icon", "path": "上传文件/icon.png", "sources": [{"path": "制作记录/icon-master.png", "kind": "brand", "sha256": "填写来源哈希"}]},
+    {"role": "home_16_9", "path": "上传文件/home-16x9.jpg", "sources": [{"path": "制作记录/home-master.png", "kind": "brand", "sha256": "填写来源哈希"}]},
+    {"role": "home_16_13", "path": "上传文件/home-16x13.jpg", "sources": [{"path": "制作记录/home-16x13-master.png", "kind": "brand", "sha256": "填写来源哈希"}]},
+    {"role": "detail", "path": "上传文件/detail-01.jpg", "sources": [{"path": "制作记录/detail-cover-master.png", "kind": "brand", "sha256": "填写来源哈希"}]},
+    {"role": "detail", "path": "上传文件/detail-02.png", "sources": [{"path": "制作记录/capture-02.png", "kind": "screenshot_browser", "version": "填写录制版本", "sha256": "填写来源哈希"}]},
+    {"role": "detail", "path": "上传文件/detail-03.png", "sources": [{"path": "制作记录/capture-03.png", "kind": "screenshot_browser", "version": "填写录制版本", "sha256": "填写来源哈希"}]},
+    {"role": "detail", "path": "上传文件/detail-04.png", "sources": [{"path": "制作记录/capture-04.png", "kind": "screenshot_browser", "version": "填写录制版本", "sha256": "填写来源哈希"}]},
+    {"role": "video", "path": "上传文件/promo-gameplay.mp4", "sources": [
+      {"path": "制作记录/promo.mp4", "kind": "promo", "sha256": "填写来源哈希", "source_seconds": [0, 10], "output_seconds": [0, 10]},
+      {"path": "制作记录/gameplay.mp4", "kind": "gameplay_browser", "version": "填写录制版本", "sha256": "填写来源哈希", "source_seconds": [5, 25], "output_seconds": [10, 30]}
+    ]},
+    {"role": "video_cover", "path": "上传文件/video-cover.jpg", "sources": [{"path": "制作记录/home-master.png", "kind": "brand", "sha256": "填写来源哈希"}]}
+  ],
+  "manual_review": {"visual": "pending", "video_join_and_sound": "pending", "platform_form": "pending"}
+}

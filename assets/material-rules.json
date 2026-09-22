@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-09-22",
+  "byte_unit": "decimal MB",
+  "channels": {
+    "233": {
+      "basis": "用户 2026-09-20 提供的 233 后台字段，正式交付时复核当前规则",
+      "unverified": [],
+      "text": {"description": null, "one_liner": 100, "recommendation": 25},
+      "roles": {
+        "icon": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 1000000, "variants": [[256, 256, "min"]], "recommended": [512, 512]},
+        "home_16_9": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[1920, 1080, "min"]]},
+        "home_16_13": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[1280, 1040, "min"]]},
+        "detail": {"count": [4, 5], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[720, 1280, "min"], [1280, 720, "min"]]},
+        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": 500000000, "variants": [[1280, 720, "min"], [720, 1280, "min"]], "recommended": [1920, 1080], "codecs": ["h264", "hevc"]},
+        "video_cover": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[1280, 720, "min"], [720, 1280, "min"]]}
+      }
+    },
+    "4399": {
+      "basis": "用户两游戏4399表单要求；视频、截图的默认制作标准不代表平台硬限制",
+      "unverified": ["视频时长与大小上限", "图片字节上限", "详情截图字段、数量和规格", "当前后台额外必填字段"],
+      "text": {"description": 300, "controls": 300},
+      "roles": {
+        "icon": {"count": [1, 1], "formats": ["png"], "max_bytes": null, "variants": [[124, 124, "exact"]]},
+        "promo": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[300, 200, "exact"]]},
+        "video_cover": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[1080, 1920, "exact"]]},
+        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": null, "variants": [[1920, 1080, "exact"]], "codecs": ["h264"], "basis_override": "用户要求宣传与实录合成；此尺寸编码为工作室默认"},
+        "detail": {"count": [0, 5], "formats": ["png", "jpeg"], "max_bytes": null, "variants": [[720, 1280, "min"], [1280, 720, "min"]], "basis_override": "可选预备截图，非已核实平台要求"}
+      }
+    }
+  }
+}
