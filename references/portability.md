@@ -16,6 +16,7 @@ macOS/zsh (replace paths):
 ```sh
 python3 "/path/to/skill/scripts/inventory_project.py" "/path/to/game" --output "/path/to/evidence/inventory.json"
 python3 "/path/to/skill/scripts/verify_materials.py" "/path/to/materials/manifest.json" --report "/path/to/evidence/materials-check.json"
+python3 "/path/to/skill/scripts/verify_game_package.py" "/path/to/game-4399.zip" --channel 4399 --expected-public-id "<public-AppID>" --report "/path/to/evidence/package-preflight.json"
 ```
 
 Windows/PowerShell (use `python` instead if that is the verified interpreter):
@@ -23,6 +24,7 @@ Windows/PowerShell (use `python` instead if that is the verified interpreter):
 ```powershell
 py -3 "C:\Tools\h5-channel-adapter\scripts\inventory_project.py" "D:\Games\My Game" --output "D:\Evidence\inventory.json"
 py -3 "C:\Tools\h5-channel-adapter\scripts\verify_materials.py" "D:\Materials\manifest.json" --report "D:\Evidence\materials-check.json"
+py -3 "C:\Tools\h5-channel-adapter\scripts\verify_game_package.py" "D:\Builds\game-4399.zip" --channel 4399 --expected-public-id "<public-AppID>" --report "D:\Evidence\package-preflight.json"
 ```
 
 Manifest paths may use portable forward slashes relative to the manifest. Delivery outputs must stay in its directory tree. JSON serialization handles Windows backslashes; do not build JSON by hand with unescaped paths. Existing reports are not overwritten: choose a new evidence filename.

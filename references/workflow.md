@@ -59,6 +59,8 @@ Unknown rules and unavailable assets must be explicit. Continue unrelated work. 
 
 Run relevant builds, archive checks and critical behavior tests. Inspect final images and representative gameplay; inspect video joins and playback when video work is selected. Default non-TapTap Android target is Xiaomi 8 / Android 10; inspect the host kernel and stricter platform requirements. Report device tests as pending if no device was used.
 
+For each actual channel ZIP/HTML, run the static [game-package preflight](package-budget.md) as well as the budget check. Keep one compact per-capability [validation-state row](../assets/validation-status.example.md) in the game's delivery notes, with version/date/redacted evidence for each achieved layer; unknown stays unknown.
+
 Report each channel's source version/hash, paths, material status, checks, gaps and rebuild command. Use a compact table: upload candidate ready; prepared awaiting configuration; candidate with unavailable features disabled; missing assets/rules.
 
 After independent work, collect only necessary missing fields. 4399 may need AppID, ad/save permissions, and rank ID/rules only if a leaderboard is required. Established 233 IAA does not take a frontend AppID, though backend creation/binding and host tests remain necessary. Xingxia injects runtime gameId. Xiaohongshu needs the current upload-page rewrite command. Follow the profile instead of asking everyone for “AppID and Secret”.

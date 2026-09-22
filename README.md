@@ -49,6 +49,8 @@ git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $sk
 
 For other agents supporting `SKILL.md`, use their Skill installation method. One installation serves both languages. If the directory exists, inspect local changes first; clean Git installations can update with `git pull --ff-only` from the Skill directory.
 
+Studios can pin the tested `v0.5.0` tag and update this Skill when needed; existing game packages are not rebuilt automatically. This repository supplies instructions and checks, while the agent still implements SDK and source changes in each game project.
+
 ### 2. Prepare source and materials
 
 Keep source code, build instructions, TapTap listing copy and existing images in the main project folder. Preserve your existing folder structure. Include a current game ZIP if available.
@@ -99,6 +101,8 @@ flowchart LR
 2. **Progress per platform** — waiting for an ID or permission on one platform does not hold up the others.
 3. **Choose reductions before applying them** — review size and impact, select a plan, then check the rebuilt package.
 4. **Get files and next steps** — receive source, game packages, materials and remaining inputs; resume when configuration arrives.
+
+Each final candidate also runs a [static game-package preflight](references/package-budget.md) for ZIP integrity, entry layout, static assets and common release residue. Real SDK callbacks and device behavior still need host testing.
 
 ## Requirements
 

@@ -117,8 +117,12 @@ def validate(manifest_path, rules_path):
                 deferred.append({'role': role, 'reason': 'video processing not selected',
                                  'required_by_profile': minimum > 0})
             minimum = 0
-        if not minimum <= counts[role] <= rule['count'][1]:
+        maximum = rule['count'][1]
+        if counts[role] < minimum or (maximum is not None and counts[role] > maximum):
             errors.append(f'{role}: count {counts[role]} outside {rule["count"]}')
+        recommended_count = rule.get('recommended_count')
+        if recommended_count and counts[role] and not recommended_count[0] <= counts[role] <= recommended_count[1]:
+            warnings.append(f'{role}: count {counts[role]} differs from working recommendation {recommended_count} (not a hard limit)')
     for unknown in counts.keys() - rules['roles'].keys():
         errors.append('Unknown role: ' + str(unknown))
     seen, hash_cache, detail_number = set(), {}, 0
@@ -170,6 +174,9 @@ def validate(manifest_path, rules_path):
             variants = constraints.get('variants')
             if variants and not any(size_ok(w, h, v) for v in variants):
                 errors.append(f'{role}: invalid dimensions/ratio {w}x{h}')
+            recommended_variants = constraints.get('recommended_variants')
+            if recommended_variants and w and h and not any(size_ok(w, h, v) for v in recommended_variants):
+                warnings.append(f'{role}: {w}x{h} differs from working dimensions (not a hard limit)')
             recommended = constraints.get('recommended_ratio', constraints.get('recommended'))
             if recommended and w and h and w * recommended[1] != h * recommended[0]:
                 warnings.append(f'{role}: differs from recommended ratio {recommended[0]}:{recommended[1]} (not a hard limit)')
@@ -182,6 +189,8 @@ def validate(manifest_path, rules_path):
                     errors.append('video: invalid duration')
                 if constraints.get('codecs') and stream.get('codec_name') not in constraints['codecs']:
                     errors.append('video: unexpected codec')
+                if constraints.get('recommended_codecs') and stream.get('codec_name') not in constraints['recommended_codecs']:
+                    warnings.append(f'{role}: codec differs from working recommendation (not a hard limit)')
                 if constraints.get('max_duration_seconds') is not None and duration > constraints['max_duration_seconds']:
                     errors.append(f'{role}: video exceeds {constraints["max_duration_seconds"]} seconds')
             sources = entry.get('sources', [])

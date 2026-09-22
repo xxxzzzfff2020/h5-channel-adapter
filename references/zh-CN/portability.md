@@ -16,6 +16,7 @@
 ```powershell
 py -3 "C:\Tools\h5-channel-adapter\scripts\inventory_project.py" "D:\Games\My Game" --output "D:\Evidence\inventory.json"
 py -3 "C:\Tools\h5-channel-adapter\scripts\verify_materials.py" "D:\Materials\manifest.json" --report "D:\Evidence\materials-check.json"
+py -3 "C:\Tools\h5-channel-adapter\scripts\verify_game_package.py" "D:\Builds\game-4399.zip" --channel 4399 --expected-public-id "<public-AppID>" --report "D:\Evidence\package-preflight.json"
 ```
 
 Mac 使用 python3 和对应路径，完整示例见 [English](../portability.md)。manifest 内可用相对路径与 /；输出必须在 manifest 目录树内。Windows 反斜线由 JSON 序列化处理，不手工拼未转义 JSON。工具拒绝覆盖旧报告，使用新的证据文件名。

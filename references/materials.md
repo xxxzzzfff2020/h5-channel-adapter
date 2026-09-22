@@ -2,6 +2,8 @@
 
 `assets/material-rules.json` (relative to the Skill root) is the single machine-readable rule set. It contains the known listing fields for the five platform profiles. Read [listing fields](listing-fields.md) for text/metadata/role mapping and examples. Unknown limits must remain unknown. Workflow export defaults are not platform requirements.
 
+In the rules, `variants`, `count`, `codecs` and known byte limits are enforced only where the profile records a platform requirement. `recommended_variants`, `recommended_count`, `recommended_codecs`, `recommended` and `recommended_ratio` produce advice, not errors. `null` means the constraint is unknown. For 4399, 1920×1080 H.264 video and 4–5 prepared detail shots are studio defaults; current backend requirements still need checking.
+
 ## Scope and optional video
 
 Use the material choice from [guided setup](guided-flow.md). Produce only selected work. For image/copy work, set `"processing": {"video": false}` in the manifest; this is the default when absent. Video processing requires an explicit `true`. Projects-only mode skips this workflow. Do not install, look for or invoke FFmpeg/ffprobe on the image/copy path.

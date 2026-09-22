@@ -1,5 +1,13 @@
 # Changelog / 更新记录
 
+## 0.5.0 — 2026-09-23
+
+- Treat 4399's video export dimensions/codec and prepared detail-shot sizes/count as studio recommendations, not platform rejection rules. / 4399 宣传片导出尺寸与编码、预备详情图尺寸和数量只提醒，不再冒充平台硬限制。
+- Add a bounded read-only game-package preflight for ZIP integrity, entry layout, static assets, common release residue and selected channel constraints. / 新增只读游戏包静态预检，检查 ZIP 完整性、入口、静态资源与常见发行残留。
+- Add a compact per-game validation-state template. Real SDK, host, device and review results remain separate from static checks. / 增加简短的单游戏验证状态模板，静态检查不代替真实 SDK、宿主、真机与审核结果。
+
+For stable internal use, pin a tested release tag; updating this Skill does not rebuild previously delivered game packages. / 内部稳定使用可固定已验证的发布标签；更新 Skill 不会自动重建已交付游戏包。
+
 ## 0.4.0 — 2026-09-22
 
 - Make video processing opt-in during material selection; image/copy and project-only workflows do not require FFmpeg. / 物料选择新增可选视频，图文与仅工程流程无需 FFmpeg。

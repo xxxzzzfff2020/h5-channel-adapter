@@ -15,6 +15,16 @@ On Windows use the verified `py -3` or `python` interpreter and quoted paths. Th
 
 Exit codes: 0 = within known limits; 1 = over a known limit, user decision required; 2 = invalid input/candidate; 3 = incomplete because a limit is unknown. Do not retry exit 1/3 as transient failures or label an unknown limit “unlimited”.
 
+## Static preflight for each final game artifact
+
+After the build, run a separate read-only check on the actual upload candidate, then keep its report beside the budget report:
+
+```sh
+python3 <skill-dir>/scripts/verify_game_package.py <channel-game.zip> --channel 4399 --expected-public-id <this-game-AppID> --report <new-preflight-report.json>
+```
+
+For other channels omit `--expected-public-id`; TOY also accepts a standalone `.html`. The ID option currently checks only 4399 and records whether its public value appears, never the value itself. The check reads ZIP entries and CRC, entry layout, static HTML/CSS local assets, known wrong-channel SDK script URLs, 4399's page-game API marker, selected mock/test markers, and obvious credential/development files. Xiaohongshu's recorded offline file whitelist and TOY's relative-path requirement are also checked. The scan is bounded; an oversized text entry yields `needs_review`. Dynamic JS-generated paths, SDK callbacks, host behavior, device checks and backend acceptance remain separate. Exit codes: 0 = static checks passed, 1 = static errors, 2 = bad arguments/existing report, 3 = incomplete review. A missing 4399 ID leaves a local candidate at `needs_review`, not a publish-ready pass.
+
 ## Required decision when over limit
 
 As soon as a selected platform is over its known limit, notify the user and ask which plan to use **before applying content reductions**. Do not wait for AppID. Finish other selected platforms and independent materials while waiting. Respect an already explicit, still-applicable per-channel choice; never infer it from silence, a default selection or another channel's decision.

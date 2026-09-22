@@ -24,8 +24,8 @@
         "icon": {"count": [1, 1], "formats": ["png"], "max_bytes": null, "variants": [[124, 124, "exact"]]},
         "promo": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[300, 200, "exact"]]},
         "video_cover": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[1080, 1920, "exact"]]},
-        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": null, "variants": [[1920, 1080, "exact"]], "codecs": ["h264"], "basis_override": "宣传与实录合成；此尺寸编码为工作流导出默认值", "require_promo_gameplay": true},
-        "detail": {"count": [0, 5], "formats": ["png", "jpeg"], "max_bytes": null, "variants": [[720, 1280, "min"], [1280, 720, "min"]], "basis_override": "可选预备截图，非已核实平台要求"}
+        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": null, "variants": null, "recommended_variants": [[1920, 1080, "exact"]], "recommended_codecs": ["h264"], "basis_override": "宣传与实录合成；尺寸和编码是工作流导出默认值，并非已核实的平台硬限制", "require_promo_gameplay": true},
+        "detail": {"count": [0, null], "recommended_count": [4, 5], "formats": ["png", "jpeg"], "max_bytes": null, "variants": null, "recommended_variants": [[720, 1280, "min"], [1280, 720, "min"]], "basis_override": "可选预备截图，数量和尺寸是工作室建议，非已核实平台要求"}
       }
     },
     "xiaohongshu": {

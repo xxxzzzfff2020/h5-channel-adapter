@@ -113,11 +113,20 @@ def main():
         promo = still('promo-300.jpg', 300, 200)
         portrait = still('portrait.jpg', 1080, 1920)
         movie4399 = clip('video4399.mp4', 1920, 1080)
-        check('valid-4399', {'channel': '4399', 'game': '合成 fixture',
+        channel_4399 = {'channel': '4399', 'game': '合成 fixture',
                            'source_version': 'synthetic-fixture', 'processing': {'video': True},
                            'text': {'description': '测试', 'controls': '测试'},
                            'files': [item('icon', small), item('promo', promo),
-                                     item('video_cover', portrait), video(movie4399)]}, True)
+                                     item('video_cover', portrait), video(movie4399)]}
+        check('valid-4399', channel_4399, True)
+        channel_4399['files'][-1] = video(movie)
+        path = check('4399-workflow-video-size-is-advisory', channel_4399, True)
+        report = validate(path, SKILL / 'assets/material-rules.json')
+        assert any('working dimensions' in note for note in report['warnings'])
+        channel_4399['files'].append(item('detail', details[0], 'screenshot_browser'))
+        path = check('4399-prepared-detail-is-advisory', channel_4399, True)
+        report = validate(path, SKILL / 'assets/material-rules.json')
+        assert any('working recommendation' in note for note in report['warnings'])
 
         source = base / '游戏 source'
         (source / 'src').mkdir(parents=True)
