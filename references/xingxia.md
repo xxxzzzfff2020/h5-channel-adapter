@@ -1,6 +1,6 @@
 # NetEase Xingxia / 星匣
 
-Status: documentation reviewed on 2026-09-22; no representative port, host/device test or release yet. Read [upstream tools](upstream-tools.md) before invoking platform tooling; use the official live Skill/CLI without maintaining a modified copy.
+Use this profile to import an existing H5 game into NetEase Xingxia. Read [upstream tools](upstream-tools.md) before invoking the official Skill/CLI; follow current upstream instructions.
 
 ## Phase-one adaptation
 
@@ -14,7 +14,7 @@ Storage uses object inputs: `sdk.storage.get({key})`, `sdk.storage.set({key,valu
 
 ## Materials and next inputs
 
-The user-supplied 2026-09-22 form narrows cover formats to JPG/PNG; the prior verified ≤5 MB limit remains recorded. 800×450 is recommended. Name 2–30 characters, description ≤300, classifications 1–2, tags 1–5; optional about ≤1000 Markdown-source characters and controls ≤500. Promotional images/videos are optional, up to eight combined: images JPG/PNG/WebP ≤5 MB; videos MP4/WebM/OGG ≤100 MB and ≤60 seconds. 1024×556 is recommended, not required. The supplied workshop-managed example is not a requirement to use that route or copy its game text/tags. Read [listing fields](listing-fields.md) and [package budgets](package-budget.md).
+The creator-form requirements recorded on 2026-09-22 specify JPG/PNG covers, at most 5 MB. 800×450 is recommended. Name 2–30 characters, description ≤300, classifications 1–2, tags 1–5; optional about ≤1000 Markdown-source characters and controls ≤500. Promotional images/videos are optional, up to eight combined: images JPG/PNG/WebP ≤5 MB; videos MP4/WebM/OGG ≤100 MB and ≤60 seconds. 1024×556 is recommended, not required. Use the existing-game route for imported H5 and the current game’s own copy and tags. Read [listing fields](listing-fields.md) and [package budgets](package-budget.md).
 
 Local packages do not need an AppID questionnaire. For platform previews or publishing, use creator login and select/create the intended game only within authorization. Official CLI supports `star-letter login`; normal device login does not require manually creating an API key. Creation/publish binding IDs belong to creator tooling, not hardcoded runtime init. AI scenes/exchange items are separate, opt-in features.
 

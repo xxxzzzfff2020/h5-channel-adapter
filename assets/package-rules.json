@@ -9,21 +9,21 @@
       "formats": [
         "zip"
       ],
-      "basis": "Package size limit not established by current case evidence; do not reuse the 500 MB promotional-video limit."
+      "basis": "Package size limit not yet recorded; verify the current creator requirements; do not reuse the 500 MB promotional-video limit."
     },
     "4399": {
       "max_bytes": null,
       "formats": [
         "zip"
       ],
-      "basis": "Package size limit not established by current case evidence."
+      "basis": "Package size limit not yet recorded; verify the current creator requirements."
     },
     "xiaohongshu": {
       "max_bytes": 10000000,
       "formats": [
         "zip"
       ],
-      "basis": "User-supplied upload form, 2026-09-22: ZIP only, maximum 10 MB."
+      "basis": "Creator upload form, 2026-09-22: ZIP only, maximum 10 MB."
     },
     "bilibili-toy": {
       "max_bytes": 140000000,
@@ -31,14 +31,14 @@
         "zip",
         "html"
       ],
-      "basis": "User-supplied upload form, 2026-09-22: ZIP/HTML, current package limit 140 MB; refresh live form/CLI."
+      "basis": "Creator upload form, 2026-09-22: ZIP/HTML, current package limit 140 MB; refresh live form/CLI."
     },
     "xingxia": {
       "max_bytes": 50000000,
       "formats": [
         "zip"
       ],
-      "basis": "50 MB from official Track A existing-game upload documentation reviewed 2026-09-22; supplied form lists ZIP or workshop-managed content, without a newer size limit. Recheck the selected upload route; workshop-managed example is not the default for imported H5."
+      "basis": "50 MB from official Track A existing-game upload documentation reviewed 2026-09-22; creator forms may also offer workshop-managed content. Recheck the selected upload route; imported H5 uses the existing-game route."
     }
   }
 }

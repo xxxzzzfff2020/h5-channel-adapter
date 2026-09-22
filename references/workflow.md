@@ -4,7 +4,7 @@ Prepare independent, rebuildable channel projects and complete listing materials
 
 ## Scope and interaction
 
-Identify the game root, authoritative TapTap source, selected channels, and whether the task is a first port, incremental update, documentation assessment or experience update. A discussion of the process is not permission to port a game. “All supported” means 233 and 4399 unless otherwise specified. Read only selected platform profiles.
+Identify the game root, authoritative TapTap source, selected channels, and whether the task is a first port, incremental update, requirements assessment or platform-profile update. A discussion of the process is not permission to port a game. If targets are missing, offer the current platform list; for “all platforms”, state that list and apply each platform’s requirements. Read only selected platform profiles.
 
 Use [guided interaction](guided-flow.md) when targets or necessary fields are missing. While waiting for platform selection, inventory sources read-only. After selection, finish independent local work before asking for configuration. One channel waiting for an ID does not block another. Continue already-authorized uploads within their original scope; otherwise deliver local candidates and exact next inputs.
 

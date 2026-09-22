@@ -1,6 +1,6 @@
 # Xiaohongshu MiniTool / 小红书小工具
 
-Status: conditional offline H5 profile; documentation reviewed 2026-09-22, page dated 2026-09-10. No sandbox port/device acceptance yet. This is the MiniTool container, not an assumed generic minigame SDK.
+Use this profile for offline H5 content in the MiniTool container. Confirm the current container capabilities and upload-page instructions before adaptation.
 
 Before adaptation obtain the **current complete rewrite command from step one of the upload page** and read the official Skill it references. The capability page explicitly is not a substitute. Do not reuse a stale saved command or vendor a modified official Skill; follow [upstream tools](upstream-tools.md).
 
@@ -18,6 +18,6 @@ Prefer native storage on client ≥9.46.0, with buildVersion and method checks. 
 
 Exposed native APIs include note publishing, image saving, temporary files, launch options and storage. No rewarded-ad or leaderboard API is established by this capability list. Do not fake ad completion, silently grant rewards or advertise cloud saves. Material progression/economy changes require a product decision; offline ordinary gameplay can proceed separately.
 
-The supplied 2026-09-22 upload form establishes name ≤14, description ≤14, an icon (PNG/JPG/JPEG ≤5 MB, recommended 1:1), ZIP-only upload ≤10 MB, version, scene tag and permissions. Exact icon pixel dimensions/version syntax are unspecified. Select only used album/camera/microphone/local-storage capabilities; map permission labels through the official workflow. No listing-video field or AppID/Secret requirement was supplied. In-game note rules are separate. The current rewrite command is still needed. See [listing fields](listing-fields.md) and [package budgets](package-budget.md).
+The upload-form requirements recorded on 2026-09-22 specify name ≤14, description ≤14, an icon (PNG/JPG/JPEG ≤5 MB, recommended 1:1), ZIP-only upload ≤10 MB, version, scene tag and permissions. Exact icon pixel dimensions/version syntax are unspecified. Select only used album/camera/microphone/local-storage capabilities; map permission labels through the official workflow. No listing-video field or AppID/Secret requirement is currently recorded. In-game note rules are separate. The current rewrite command is still needed. See [listing fields](listing-fields.md) and [package budgets](package-budget.md).
 
 Source: [official container capabilities](https://miniapp-sandbox.xiaohongshu.com/minitool/doc). Recheck the upload-page Skill and run its current checks during the first real port.

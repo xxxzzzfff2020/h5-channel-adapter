@@ -1,100 +1,95 @@
 # H5 Channel Adapter
 
-[简体中文](README.zh-CN.md) · [Skill entry](SKILL.md) · [Changes](CHANGELOG.md)
+**An AI Agent Skill for taking one H5 game to multiple publishing platforms.**
 
-A bilingual agent Skill for adapting an existing TapTap H5 game into independent channel source projects, runtime assets, listing kits and game ZIPs.
+[简体中文](README.zh-CN.md) · [Get started](#get-started) · [Contribute](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
 
-**Choose platforms → complete local preparation → identify missing configuration → bind and build → validate per platform.** Prepare what can be done without credentials first. A blocked channel does not stop the others.
+Start with your existing TapTap H5 project, artwork and listing copy. Tell your agent where the project lives and choose your target platforms. The Skill guides it through code adaptation, listing-material production and packaging, then asks for platform configuration when it is needed.
 
-This is an agent workflow with resource-inventory and material-validation helpers, not a one-command universal game converter. Source-specific coding and actual platform/device checks are still required.
+## What you get
 
-## Platform status
+- **Independent platform projects** — source code, runtime assets and build instructions for each selected platform, while preserving the original project.
+- **Listing kits** — platform-sized icons, covers, screenshots, promotional videos and copy, using the source material in your project folder.
+- **Guided setup** — a clear list of platforms ready for upload and those waiting for an AppID, account setup or capability access.
+- **Package-size choices** — if a package exceeds a platform limit, see the options before music, video or functionality is removed.
+- **Repeatable updates** — bring later source changes into existing channel projects and update the affected materials.
 
-| Platform | Current evidence |
+The Skill gives your agent the workflow, platform references and helper tools. The agent performs project-specific edits using the tools available in your environment. Platform accounts, permissions and host compatibility determine which features can be delivered.
+
+## Platforms
+
+| Platform | Adaptation scope |
 | --- | --- |
-| 233 Leyuan H5 | Experience from two game adaptations; material checker included |
-| 4399 H5 minigames | Experience from two game adaptations; material checker included |
-| NetEase Xingxia | Official docs reviewed; first port and real-host acceptance pending |
-| Xiaohongshu MiniTool | Offline H5 constraints documented; current official rewrite command and first port required |
-| Bilibili TOY | Official SDK/Skill reviewed; first port and real-host acceptance pending |
+| 233 Leyuan H5 | H5 packaging, rewarded-ad integration and listing materials |
+| 4399 H5 minigames | H5 packaging, AppID setup, ads, saves and optional leaderboards |
+| Xiaohongshu MiniTool | Offline H5 adaptation, permissions, compact ZIP and listing fields |
+| Bilibili TOY | Static H5 packaging, TOY SDK integration, covers and icons |
+| NetEase Xingxia | Existing-game import, SDK integration and listing media |
 
-Default “all supported” includes **233 + 4399**. Other profiles are explicitly selected documentation-stage targets. Reviews are dated **2026-09-22**; recheck official rules before delivery.
+Choose one platform or several. The agent checks the selected platform's current requirements against your project before adapting it. Features such as ads, saves and rankings depend on the platform and your application's enabled capabilities.
 
-## Install
+## Get started
 
-The repository root is a standard Skill directory: `SKILL.md` with YAML name/description, `agents/`, `references/`, `scripts/` and `assets/`. One install serves both languages. Compatible agents can read the same Skill; Codex-specific UI questions fall back to ordinary text choices when unavailable.
+### 1. Install the Skill
 
-The repository is private. The owner must grant repository access before friends can clone it. Authenticate Git/GitHub locally; never put a token in the clone URL or Skill. For a fresh Codex installation, clone into an **absent** destination:
+For Codex, clone this repository into your skills directory. The repository is currently private; your GitHub account needs access.
 
-macOS (zsh/bash):
+macOS — zsh/bash:
 
 ```sh
 git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git "${CODEX_HOME:-$HOME/.codex}/skills/h5-channel-adapter"
 ```
 
-Windows (PowerShell):
+Windows — PowerShell:
 
 ```powershell
 $skillBase = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $env:USERPROFILE '.codex' }
 git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $skillBase 'skills/h5-channel-adapter')
 ```
 
-If a Skill already exists there, inspect it before updating; do not overwrite custom work. For another agent, use that agent's documented Skill directory or installer and this repository URL. Platform toolkits are separate, optional dependencies selected for the task; this install does not install them or rewrite global agent settings.
+For other agents that support `SKILL.md`, install this repository as one Skill using that agent's installation method. English and Chinese share the same installation. If the destination already exists, update it instead of cloning over it. Clean Git installations can update with `git pull --ff-only` from the Skill directory.
 
-## Use
+### 2. Prepare your project
+
+Keep the game source, build instructions, TapTap listing copy and available artwork/video in the main project folder. Existing subfolders are fine; no mandatory input layout is required. Include a current game ZIP if available.
+
+The agent searches the folder first and asks only for missing material. Put account credentials in your secure local configuration, separate from game source and listing assets.
+
+### 3. Ask your agent
+
+Let the Skill guide platform selection:
 
 ```text
-Use $h5-channel-adapter for the TapTap H5 game at <project path>.
-Guide me through target-platform selection. First prepare independent source
-projects and all listing assets, then tell me exactly which platform setup
-information is still needed and continue packaging when I provide it.
+Use $h5-channel-adapter for the game at <project path>.
+Guide me through choosing platforms, then prepare the independent projects
+and listing materials. Tell me what platform setup information is still needed.
 ```
+
+Or name the platforms directly:
 
 ```text
-使用 $h5-channel-adapter，项目在 <项目路径>。
-请先引导我选择目标平台，完成独立源码与全套上架物料，
-再提示缺少的建项信息；收到信息后继续出包。
+Use $h5-channel-adapter to adapt <project path> for 4399 and Bilibili TOY.
+The TapTap copy, screenshots and promotional footage are in the project folder.
 ```
 
-Inspect existing source, assets and permissions before asking questions. UI tools may provide single-choice cards; multi-platform selection can use grouped yes/no questions or one text list. No native multi-select support is assumed.
+## How it works
 
-The default non-TapTap Android target is **Xiaomi 8 / Android 10**, configurable by the project owner. Actual host-engine requirements and device evidence remain separate.
+**Choose platforms → prepare projects and materials → fill missing configuration → build platform packages.**
 
-## macOS and Windows
+The first round completes work that does not depend on account credentials. You receive each platform's project and material locations, available packages and next steps. After you provide the necessary AppID or capability status, the agent continues that platform's build. One platform waiting for information does not hold up the others.
 
-All Python helpers use standard-library Python **3.9+**. Locate an existing interpreter and `ffprobe` (FFmpeg distribution) on PATH; video generation/tests also use `ffmpeg`. The Windows launcher may be `py -3` instead of `python`. See [portable commands](references/portability.md).
+If a package is too large, the agent reports its size and the main contributors, then offers relevant choices: optimize while keeping features, remove background music while retaining sound effects, remove optional in-game video, or defer that platform. An approved removal also updates menus, settings and playback logic. Listing videos remain separate from in-game media.
 
-Helpers inventory resources and validate known fields for all five platform manifests; they do not modify original game files. Reports refuse overwrite. Use explicit paths and quoted arguments, including paths with spaces/non-ASCII characters.
+## Environment and official tools
 
-```sh
-python3 scripts/inventory_project.py <game-root> --output <new-inventory.json>
-python3 scripts/verify_materials.py <material-manifest.json> --report <new-report.json>
-```
+Use the same Skill on **macOS or Windows**. The helpers require Python 3.9+; media inspection and video production use FFmpeg. The agent locates these tools for your operating system. The default Android target is Xiaomi 8 / Android 10 and can be changed for your project.
 
-On PowerShell use the verified `py -3` or `python` in place of `python3`, and quote actual paths. Start manifests from [the example](assets/material-manifest.example.json); the example placeholders are not deliverable assets. Technical pass does not certify visuals, real ads, devices or release.
+Platform-owned Skills, CLI tools and MCP integrations are used from their official sources. The agent checks for relevant updates when they are needed; this repository maintains the shared adaptation workflow. See [environment setup](references/portability.md) and [official-tool integration](references/upstream-tools.md).
 
-## Package budgets
+## Contribute
 
-Check the actual baseline and final game artifacts with `scripts/check_package_budget.py`. Known snapshots are Xiaohongshu 10 MB, Bilibili 140 MB, and Xingxia Track A 50 MB; unknown 233/4399 limits remain explicit. An over-limit report triggers a measured options question. No music/video removal occurs without the selected plan; an approved removal also updates settings, menus, playback and save compatibility. Listing promotional videos remain separate. See [budget workflow](references/package-budget.md) and [listing fields/examples](references/listing-fields.md).
+Help add a platform, update listing requirements, improve adaptation guidance, fix Windows/macOS compatibility, or clarify the documentation. Start with the [contribution guide](CONTRIBUTING.md) or [open an issue](https://github.com/xxxzzzfff2020/h5-channel-adapter/issues/new/choose).
 
-## Follow official tools
+The repository uses a standard Skill layout: [agent instructions](SKILL.md), `references/` for platform guidance, `assets/` for shared rules and examples, and `scripts/` for helpers. English and Chinese documentation are maintained together.
 
-Read the current official Skill, CLI help or MCP schema when performing platform operations. **Do not fork/vendor the official platform Skill into this one.** Compare installed vs upstream versions, notify about relevant updates, and use the official update mechanism within user authorization. See [update policy](references/upstream-tools.md) and [source registry](assets/platform-sources.json).
-
-This is an on-use update check, not a background monitor. No game upload, paid API call or global settings change is implied by installing this Skill.
-
-## Maintain and update
-
-The repository contains the maintained source. Check `git status` before changes; keep local customizations safe. Clean installations can update with `git pull --ff-only` from their Skill directory. Conflicts or local edits need review, not force-reset.
-
-Update English and Chinese references together, retain one machine rule file, and record changed behavior/evidence in `CHANGELOG.md`. Keep new profiles at documentation stage until tested with a representative project. Never commit game source/media, IDs, credentials, temporary preview URLs or private task history.
-
-Run the portable synthetic helper checks from the repository root:
-
-```sh
-python3 tests/smoke.py
-```
-
-PowerShell: `py -3 tests/smoke.py` (or the verified `python`). Tests require `ffmpeg` and `ffprobe`; they create isolated synthetic media, not game assets. The [GitHub Actions template](ci/validate.github.yml) runs the same helper checks on macOS and Windows when enabled as `.github/workflows/validate.yml`. Activation requires repository workflow permission; a template is not a passed Windows run. Platform/device acceptance is tracked separately.
-
-Distribution remains private; no public release or open-source license has been selected.
+The repository remains private during preparation for public release. An open-source license will be selected before that release.

@@ -1,86 +1,95 @@
 # H5 多平台适配 Skill
 
-[English](README.md) · [标准 Skill 入口](SKILL.md) · [更新记录](CHANGELOG.md)
+**让 AI Agent 从一个 H5 游戏项目，完成多个平台的适配与上架准备。**
 
-把已有 TapTap H5 游戏转换为各平台可独立维护的源码工程、运行资源、全套上架物料和渠道 ZIP。
+[English](README.md) · [开始使用](#开始使用) · [参与贡献](CONTRIBUTING.zh-CN.md) · [更新记录](CHANGELOG.md)
 
-**选择平台 → 先完成本地初转与物料 → 展示真实缺口 → 补配置出包 → 分层验证。** 不依赖凭证的工作先做完，一个平台等待信息不阻塞其他平台。
+将已有 TapTap H5 项目的源码、图片、视频和上架文案放在项目目录中，告诉 Agent 项目位置并选择目标平台。Skill 会引导它完成代码适配、物料制作和出包，并在需要时向你收集平台配置。
 
-这是 Agent 工作流和辅助校验工具，不是一个命令转换所有游戏的编译器。仍需针对源项目改代码，并完成真实平台/设备验证。
+## 能帮你做什么
 
-## 当前平台范围
+- **生成独立平台工程**：每个平台有自己的源码、运行资源和构建方式，保留原始项目。
+- **制作上架物料**：读取现有素材，按平台要求生成图标、封面、截图、宣传视频和文案。
+- **引导平台配置**：告诉你哪些包已准备好、哪些平台需要建应用，以及缺少哪些 AppID 或能力开通信息。
+- **处理包体超限**：先说明大小和可选方案，由你决定是否压缩或删减音乐、视频等功能。
+- **持续同步更新**：主项目迭代后，更新已有渠道工程及受影响的物料。
 
-| 平台 | 当前证据 |
+Skill 为 Agent 提供流程、平台接入说明和辅助工具，由 Agent 结合当前项目执行修改。具体可交付的能力取决于平台支持、账号权限和项目兼容情况。
+
+## 平台范围
+
+| 平台 | 适配内容 |
 | --- | --- |
-| 233 乐园 H5 | 两个游戏适配经验，包含物料校验规则 |
-| 4399 H5 小游戏 | 两个游戏适配经验，包含物料校验规则 |
-| 网易星匣 | 已读官方文档，待首个项目与真实宿主验证 |
-| 小红书小工具 | 已整理离线约束，需当时的官方改写命令和首个项目验证 |
-| B 站 TOY | 已读官方 SDK/Skill，待首个项目与真实宿主验证 |
+| 233 乐园 H5 | H5 打包、激励广告接入、上架物料 |
+| 4399 H5 小游戏 | H5 打包、AppID 配置、广告、存档及可选排行榜 |
+| 小红书小工具 | 离线 H5 适配、权限配置、小体积 ZIP 与上架字段 |
+| B 站 TOY | 静态 H5 打包、TOY SDK 接入、封面与图标 |
+| 网易星匣 | 已有游戏导入、SDK 接入、图文与宣传媒体 |
 
-未另列目标时，“全部已支持”默认 **233＋4399**。新增三平台需显式选择，不能把读过文档等同于适配验收。文档核对日 **2026-09-22**，实际交付需复核最新规则。
+可以选择一个或多个平台。Agent 会先根据当前平台要求判断项目适配条件；广告、云存档、排行榜等能力按平台支持与应用实际开通情况接入。
 
-## 安装与分享
+## 开始使用
 
-仓库根目录就是标准 Skill：包含 YAML name/description 的 `SKILL.md`、`agents/`、`references/`、`scripts/`、`assets/`。中英文共用一次安装。其他兼容 Agent 可读取同一入口；没有 Codex 提问工具时退回文字选项。
+### 1. 安装 Skill
 
-仓库目前私有，朋友需要先取得仓库访问权限，再使用自己已认证的 Git/GitHub 克隆；不要把 token 写进地址或 Skill。首次安装到**尚不存在**的目标目录：
+在 Codex 中，将仓库克隆到 skills 目录。仓库目前私有，你的 GitHub 账号需要先获得访问权限。
 
-macOS（zsh/bash）：
+macOS — zsh/bash：
 
 ```sh
 git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git "${CODEX_HOME:-$HOME/.codex}/skills/h5-channel-adapter"
 ```
 
-Windows（PowerShell）：
+Windows — PowerShell：
 
 ```powershell
 $skillBase = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $env:USERPROFILE '.codex' }
 git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $skillBase 'skills/h5-channel-adapter')
 ```
 
-已有同名 Skill 时先检查，不覆盖旧定制。其他 Agent 按其官方 Skill 安装目录/安装器使用本仓库；不会同时安装平台工具或改写全局 AGENTS/CLAUDE。
+其他支持 `SKILL.md` 的 Agent，按其安装方式将本仓库作为一个 Skill 安装；中英文共用一次安装。已有同名目录时更新现有安装，避免覆盖。Git 工作区干净时，可在 Skill 目录运行 `git pull --ff-only` 更新。
 
-## 使用
+### 2. 准备项目
+
+把游戏源码、构建说明、TapTap 上架文案和已有图片、视频放在项目主目录中。可以保留原有子目录，无需提前整理成固定格式；有当前游戏 ZIP 也一起保留。
+
+Agent 会先搜索已有资源，再询问缺失项。账号凭证放在本地安全配置中，与游戏源码和物料分开。
+
+### 3. 告诉 Agent 你要做什么
+
+让 Skill 引导选择平台：
 
 ```text
 使用 $h5-channel-adapter，项目在 <项目路径>。
-请先引导我选择目标平台，完成独立源码与全套上架物料，
-再提示缺少的建项信息；收到信息后继续出包。
+请先引导我选择目标平台，再生成独立工程与上架物料，
+并告诉我还需要补充哪些平台建项信息。
 ```
 
-Agent 先找本地已有资源，再问真实缺口。当前弹窗可能是单选卡片，多平台用分组“做/不做”或一次文字列举；不假称原生多选已实现。
+也可以直接指定：
 
-非 TapTap 安卓默认最低目标为**小米 8、Android 10**，项目负责人可明确覆盖。宿主内核要求和真机结果另行记录。
-
-## Mac / Windows 工具
-
-三个 Python helper 需 **Python 3.9+**，只用标准库；媒体检测需 FFmpeg 的 `ffprobe`，视频制作/夹具测试还需 `ffmpeg` 在 PATH。优先使用已有环境。Windows 通常用 `py -3` 或核实过的 `python`，不是直接照抄所有 Mac 命令。见[跨系统说明](references/zh-CN/portability.md)。
-
-工具只读盘点游戏、校验五个平台已知物料字段，不修改原游戏，且拒绝覆盖旧报告。路径含空格/中文时引用。manifest 使用[示例结构](assets/material-manifest.example.json)并填写真实路径/哈希；示例占位并非可交付内容。
-
-## 包体超限处理
-
-`scripts/check_package_budget.py` 检查初始和最终实际游戏包。当前小红书10 MB、B站140 MB、星匣轨道A50 MB；233/4399未知上限保持显式待核。超限先展示大小/占用/方案并引导选择，不擅自删音乐视频；获选方案需同步改设置、菜单、播放点与旧档兼容。上架宣传视频独立保留。见[包体流程](references/zh-CN/package-budget.md)与[字段/示例](references/zh-CN/listing-fields.md)。
-
-## 官方能力更新
-
-平台官方 Skill、CLI、MCP **独立使用、跟随上游，不下载改造成我们的副本**。每次执行对应平台时检查当前官方文档、版本和接口 schema；有更新提示影响，并在实际授权内按官方方式更新。详见[上游机制](references/zh-CN/upstream-tools.md)与[来源表](assets/platform-sources.json)。
-
-这里是使用时核对，不是后台监控；安装本 Skill 不意味着上传游戏、启用收费接口或修改全局设置。
-
-## 后续维护
-
-本仓库是维护源。更新前检查 `git status`；工作区干净的安装可在 Skill 目录执行 `git pull --ff-only`。存在本地改动/冲突时先处理，不能 force reset 覆盖定制。
-
-同步维护中英文、共用唯一机器规则表；变更记录在 CHANGELOG。新平台经过代表项目验证后再提升状态。不提交游戏源码/媒体、实例 ID、凭证、预览 token 或私有对话记录。
-
-在仓库根运行合成夹具检查（需 ffmpeg/ffprobe）：
-
-```sh
-python3 tests/smoke.py
+```text
+使用 $h5-channel-adapter，把 <项目路径> 适配到 4399 和 B 站 TOY。
+TapTap 文案、截图和宣传视频都在项目目录里。
 ```
 
-Windows PowerShell 使用 `py -3 tests/smoke.py` 或已核实的 `python`。[GitHub Actions 模板](ci/validate.github.yml)启用到 `.github/workflows/validate.yml` 后，会在 macOS/Windows 运行同一套 helper 检查。启用需仓库 workflow 权限；模板存在不代表 Windows 实测通过，更不代表真机、真实广告或发布通过。
+## 使用流程
 
-当前仅私有分发，尚未选择公开发布与开源许可证。
+**选择平台 → 准备工程和物料 → 补充缺失配置 → 生成平台包。**
+
+第一轮先完成不依赖账号凭证的工作，给出各平台的工程、物料位置、可用包和下一步。你补充必要的 AppID、广告或存档开通状态后，Agent 继续对应平台的出包；一个平台等待信息，其他平台可以继续。
+
+包体超限时，Agent 会列出实际大小和主要占用，再提供适用方案：保留功能优化、去掉背景音乐但保留音效、移除可选游戏内视频，或暂缓该平台。选定删减后，会同步处理菜单、设置和播放逻辑。上架宣传视频与游戏内视频分别处理。
+
+## 运行环境与官方工具
+
+同一个 Skill 可用于 **macOS 和 Windows**。辅助脚本需要 Python 3.9+，媒体检查和视频制作使用 FFmpeg；Agent 会按当前系统查找工具。安卓默认目标为小米 8 / Android 10，可按项目调整。
+
+平台官方 Skill、CLI、MCP 从官方渠道获取，并在使用时检查相关更新；本仓库维护各平台共用的适配流程。详见[系统环境](references/zh-CN/portability.md)与[官方工具接入](references/zh-CN/upstream-tools.md)。
+
+## 参与贡献
+
+欢迎补充新平台、更新上架要求、改进适配流程、修复 Windows/macOS 兼容问题，或完善文档。可以阅读[贡献指南](CONTRIBUTING.zh-CN.md)，也可以先[提交 Issue](https://github.com/xxxzzzfff2020/h5-channel-adapter/issues/new/choose)。
+
+仓库采用标准 Skill 结构：[Agent 执行入口](SKILL.md)、存放平台说明的 `references/`、共用规则与示例的 `assets/`，以及辅助工具 `scripts/`。中英文文档同步维护。
+
+目前仍为私有仓库，正在为后续公开发布整理；正式公开前会确定开源许可证。

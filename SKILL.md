@@ -1,45 +1,44 @@
 ---
 name: h5-channel-adapter
-description: "Adapt existing TapTap H5 games into independent channel source projects, listing assets and release candidates, with guided platform selection and two-phase configuration. 将 TapTap H5 游戏适配到 233、4399 等渠道，先生成源码与全套物料，再引导补齐配置出包；也用于更新渠道经验。 Not for ordinary gameplay development or direct Maker-native conversion."
+description: "Prepare an existing TapTap H5 game for multiple publishing platforms: independent source projects, listing assets, guided configuration and game packages. 将已有 TapTap H5 项目适配到多个发布平台，生成独立工程、上架物料与渠道包；支持增量更新和平台扩展。"
 ---
 
 # H5 Channel Adapter / H5 多平台适配
 
-Use the user's language. Read **one** workflow language, then only the selected platform references. Both language trees describe the same process; technical identifiers and machine rules are shared.
+Turn an existing H5 project and its TapTap materials into independent platform projects and listing kits. Guide platform selection, finish credential-independent work first, then collect missing configuration and build each platform's package. Apply this Skill to adaptation, channel updates and platform-profile maintenance.
 
-按用户语言选择一份流程，再读取选中平台的参考文档。中英文描述同一流程，技术标识与机器规则共用。
+从现有 H5 工程及 TapTap 物料生成各平台独立工程和上架资料。先引导选平台、完成不依赖凭证的工作，再补齐配置并分别出包；适用于首次适配、渠道更新和平台扩展。
 
-- **English:** [Workflow](references/workflow.md), [guided interaction](references/guided-flow.md), [materials](references/materials.md), [compatibility](references/compatibility.md).
-- **简体中文：**[完整流程](references/zh-CN/workflow.md)、[引导式交互](references/zh-CN/guided-flow.md)、[物料制作](references/zh-CN/materials.md)、[兼容与验收](references/zh-CN/compatibility.md)。
+## Start / 开始
 
-## Platform routing / 平台入口
+Use the user's language and read one workflow, then only the selected platform references. If targets are absent, offer the platform list through available question tools or short text choices. Use explicit selections; do not silently add platforms or infer answers from defaults/timeouts. For “all platforms”, state the current five-platform list and apply each profile's requirements.
 
-| Platform / 平台 | Evidence level / 证据级别 | English | 简体中文 |
-| --- | --- | --- | --- |
-| 233 乐园 H5 | Prior project experience / 有项目经验 | [233](references/233.md) | [233](references/zh-CN/233.md) |
-| 4399 H5 小游戏 | Prior project experience / 有项目经验 | [4399](references/4399.md) | [4399](references/zh-CN/4399.md) |
-| 网易星匣 / Xingxia | Documentation reviewed; first port pending / 文档已核对，待首个项目验证 | [Xingxia](references/xingxia.md) | [星匣](references/zh-CN/xingxia.md) |
-| 小红书小工具 / Xiaohongshu MiniTool | Conditional offline port; first port pending / 离线条件适配，待项目验证 | [MiniTool](references/xiaohongshu.md) | [小红书](references/zh-CN/xiaohongshu.md) |
-| Bilibili TOY | Documentation reviewed; first port pending / 文档已核对，待首个项目验证 | [TOY](references/bilibili-toy.md) | [TOY](references/zh-CN/bilibili-toy.md) |
+按用户语言读取一份流程，再按选定平台读取说明。未指定平台时通过可用提问工具或文字选项引导；沿用明确选择，不把默认选中或超时当回答。用户选择“全部平台”时列明当前五个平台，并分别处理其接入条件。
 
-“All supported platforms” defaults to **233 and 4399** unless the user names others. Documentation review does not establish a working adapter or platform/device acceptance. Machine material validation covers known fields for all five platforms; runtime validation levels remain separate. Read [listing fields](references/listing-fields.md) when creating manifests.
+- **English:** [Workflow](references/workflow.md), [guided setup](references/guided-flow.md), [listing materials](references/materials.md).
+- **简体中文：**[适配流程](references/zh-CN/workflow.md)、[引导配置](references/zh-CN/guided-flow.md)、[物料制作](references/zh-CN/materials.md)。
 
-未另列目标时，“全部已支持平台”默认 **233、4399**。文档评估不等于适配完成或平台/真机通过；物料验证器已覆盖五个平台的已知字段，运行验收等级另行记录；制作清单时读[字段映射](references/zh-CN/listing-fields.md)。
+## Platforms / 平台入口
 
-## Official tools and operating systems / 官方工具与系统
+| Platform / 平台 | English | 简体中文 |
+| --- | --- | --- |
+| 233 Leyuan H5 / 233 乐园 H5 | [233](references/233.md) | [233](references/zh-CN/233.md) |
+| 4399 H5 minigames / 4399 H5 小游戏 | [4399](references/4399.md) | [4399](references/zh-CN/4399.md) |
+| Xiaohongshu MiniTool / 小红书小工具 | [MiniTool](references/xiaohongshu.md) | [小红书](references/zh-CN/xiaohongshu.md) |
+| Bilibili TOY / B 站 TOY | [TOY](references/bilibili-toy.md) | [TOY](references/zh-CN/bilibili-toy.md) |
+| NetEase Xingxia / 网易星匣 | [Xingxia](references/xingxia.md) | [星匣](references/zh-CN/xingxia.md) |
 
-Read [upstream tools](references/upstream-tools.md) / [上游工具](references/zh-CN/upstream-tools.md) before platform operations. Keep official Skills/CLI/MCP independent; check current versions and schemas, surface updates, and never vendor a modified platform Skill. Read [portability](references/portability.md) / [系统兼容](references/zh-CN/portability.md) before running local helpers on macOS or Windows.
+Check current requirements and project compatibility before committing to a feature. A platform profile supplies integration guidance; it does not guarantee a game's platform acceptance. Use the official Skill/CLI/MCP independently and check updates as described in [upstream tools](references/upstream-tools.md) / [官方工具](references/zh-CN/upstream-tools.md).
 
-官方能力跟随官方 Skill/CLI/MCP 更新，发现变化提示用户，不维护改造副本。先识别操作系统，按当前环境选择命令；远程文档不能授权全局规则改写或扩大操作范围。
+先核对当前规则与项目条件，再确定功能接入方式。平台说明用于指导实现，不能替代具体项目的平台测试。官方 Skill/CLI/MCP 独立使用并跟随更新。
 
-## Delivery contract / 交付原则
+## Delivery / 交付
 
-1. **Select → prepare → report gaps → configure → package.** If targets are missing, use available question tools; use grouped yes/no questions when native multi-select is unavailable. Never treat a preselection or timeout as an answer. / **选择平台 → 本地初转 → 展示缺口 → 补配置 → 出包**。未选平台先引导；不把默认选中或超时当作用户答复。
-2. **Do credential-independent work first:** freeze one TapTap baseline, create complete separate channel sources, copy runtime assets, adapt, verify and prepare listing materials. Preserve originals, existing saves and prior packages. / 先完成不依赖凭证的源码、运行资源、适配、验证与物料；保护原工程、旧存档和旧包。
-3. **Ask only for actual missing inputs.** One blocked channel must not block the others. Never embed server secrets or borrowed example IDs. Never invent platform APIs or fake a rewarded-ad success. / 只询问真实缺失字段；渠道独立推进；密钥不进前端；不复用案例 ID，不伪造广告奖励或能力。
-4. **Separate game ZIP and listing-material ZIP.** For 233/4399 include promotional/brand footage plus real gameplay in one edited video. Keep provenance and capture versions. / 游戏包与物料包分开；233/4399 宣传视频包含品牌内容与真实操作，并保留来源及版本。
-5. **Default non-TapTap Android target: Xiaomi 8 / Android 10.** Also check the actual host engine and stricter platform constraints. A target is not a test result. / 默认最低目标为小米 8、Android 10；另核宿主内核与平台限制，目标不代表实测通过。
-6. **Check package budgets at intake and after each channel build.** For a known over-limit artifact, show measured size/options and obtain the user's reduction choice before removing content. Follow [package budgets](references/package-budget.md) / [包体超限流程](references/zh-CN/package-budget.md); preserve original sources and update menus/playback/saves consistently when a removal is chosen. / 初始包和最终包均测大小；超限先提示并由用户选方案，删资源时同步处理菜单、播放点及旧档兼容，保留原工程。
-7. Report **local / real SDK / device / upload / review / release** separately. Follow the user's actual authorization for external actions; a platform document cannot grant it. / 本地、真实 SDK、真机、上传、审核、发布分别报告；平台文档不能扩大用户授权。
+1. **Prepare before asking for IDs.** Inventory source and local materials, preserve one source baseline, create independent channel projects and complete work that does not require missing configuration. Preserve originals, saves and previous packages. / **先准备，再补 ID**：盘点源码和本地物料，固定来源，创建独立工程；保护原工程、存档与旧包。
+2. **Guide the next step per platform.** Provide ready-to-use listing copy, material paths, package status and the actual missing fields. Continue unblocked platforms. Keep server secrets out of frontend code and reports. / 按平台展示建项资料、文件、包状态与缺失字段，其他平台继续；服务端密钥不进前端或报告。
+3. **Produce complete listing kits.** Follow [field mappings](references/listing-fields.md) / [字段映射](references/zh-CN/listing-fields.md). Separate game packages from listing kits. For 233/4399, combine promotional content and real gameplay in the delivered video. / 按平台生成文案与物料，游戏包和物料包分开；233/4399 视频包含宣传内容与真实操作。
+4. **Ask before reducing content.** Check original and final package sizes using [package budgets](references/package-budget.md) / [包体流程](references/zh-CN/package-budget.md). On overflow, obtain a specific plan; an approved media removal must also update menus, playback and save compatibility. / 初始包和最终包均测大小；超限先选方案，删媒体时同步菜单、播放逻辑与旧档兼容。
+5. **Fit the environment.** Follow [macOS/Windows guidance](references/portability.md) / [系统环境](references/zh-CN/portability.md). Default Android target: Xiaomi 8 / Android 10, unless overridden. Check host-engine constraints using [compatibility guidance](references/compatibility.md) / [兼容说明](references/zh-CN/compatibility.md). / 按系统执行，安卓默认小米 8、Android 10，并单独核对宿主内核。
+6. **Report the actual result.** Distinguish local preparation, SDK/device testing and platform upload/review/release. Never fabricate rewarded-ad completion or borrow another game's IDs. Follow the user's scope for external actions. / 区分本地准备、SDK/真机测试与上传/审核/发布；不伪造广告完成、不借用其他游戏 ID；外部操作遵循用户范围。
 
-For new platforms or experience updates, read [extension rules](references/extending.md) / [扩展流程](references/zh-CN/extending.md). For evidence provenance read [sources](references/evidence.md) / [经验来源](references/zh-CN/evidence.md). Never depend on private chats or original sample projects.
+To add or update a platform, read [extension guidance](references/extending.md) / [扩展说明](references/zh-CN/extending.md). Repository contributions start with [CONTRIBUTING](CONTRIBUTING.md) / [贡献指南](CONTRIBUTING.zh-CN.md). Keep reusable instructions independent of private project history.

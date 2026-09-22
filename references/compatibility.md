@@ -2,7 +2,7 @@
 
 Default non-TapTap target: **Xiaomi 8 / Android 10**, unless the project owner explicitly overrides it. This is a workflow target, not a platform minimum or a passed test. Honor stricter platform engine requirements.
 
-Android version does not identify the QQ/X5, UC, WebView or channel-app kernel. Record host/engine versions when available. Historical targets (Chrome 57/ES2015 for one 4399 build, Chromium 70/ES2018 for one 233 build) are examples, not properties of Xiaomi 8. Use evidence-backed conservative targets and feature detection without blocking initial work on repeated questions.
+Android version does not identify the QQ/X5, UC, WebView or channel-app kernel. Record host/engine versions when available. Choose build targets for the actual host engine, independently of the phone model. Use conservative targets and feature detection without blocking initial work on repeated questions.
 
 ## Compatibility checks
 
@@ -14,7 +14,7 @@ Android version does not identify the QQ/X5, UC, WebView or channel-app kernel. 
 
 If converting color-mix, count source declarations independently; counts must match conversion coverage, with no unexplained skips. Zero source declarations is a valid result. Handle minified lines, media-query colons, strings/comments, final declarations without semicolons and spacing; never rewrite string literals. Inspect dynamic/inline CSS and variable scope/theme semantics; a last declaration is not necessarily the global base theme.
 
-## Evidence
+## Runtime checks
 
 Ads: completion, cancellation, failure/no fill, timeout, duplicate/late callbacks, persistence failure and restart-safe single rewards. Saves: refresh, corrupt primary, unwritable storage, old versions, multiple windows and channel isolation. Play meaningful actions with a new save; preserve old-save unlock/tutorial state.
 

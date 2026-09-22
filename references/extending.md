@@ -1,14 +1,14 @@
-# Adding platforms and updating experience
+# Adding and maintaining a platform
 
-Profiles have explicit evidence levels: **prior project experience**, **documentation reviewed / first port pending**, or **requirements unavailable**. A new profile is not runtime validation. Until a representative port proves the workflow, new profiles are opt-in and are not part of default “all supported”.
+A platform profile connects the shared workflow to one specific publishing product. Keep it focused on the decisions needed to adapt a game: supported runtime, packaging, capabilities, listing fields and setup steps.
 
-1. Identify the exact H5/native product, official docs/SDK/console and actual artifacts. Similar product names are not interchangeable.
-2. Add/update a focused platform reference in English and `zh-CN`, with source links, review date, verified packaging/identity/capability/material requirements, unresolved fields and real-host test path.
-3. Add verified material rules to the shared JSON when ready to support automated checks. Unknowns remain null with explanations. Do not reuse another platform's limits. Extend the validator only for actual new formats/semantics and test those changes.
-4. Register both language links in SKILL.md and explain phase-one vs phase-two inputs. Public IDs, server credentials, permissions, login and post-upload test URLs are different inputs.
-5. Retain Xiaomi 8 / Android 10 as the default device target; independently verify host engine constraints.
-6. Exercise relevant missing-config, missing-footage and existing-channel-update scenarios in isolation. Confirm useful work proceeds while originals/saves remain safe and uncertainty is visible. Run skill-format checks and changed helper tests.
+1. Identify the exact H5/native product and official documentation, SDK and creator console. Similar platform names are not interchangeable.
+2. Add focused English and Chinese references with official links and dates. Describe initial preparation, required configuration, optional capabilities, packaging and the host test route. Keep unknown requirements explicit.
+3. Add known listing and package limits to the shared JSON files. Separate recommendations from hard limits; never reuse another platform's limits. Extend a helper only when a new format or behavior requires it.
+4. Register the profile in `SKILL.md` and the README platform tables. Add official tool sources to `assets/platform-sources.json`. Describe which inputs are public IDs, account access, permission status or secure server configuration.
+5. Keep commands portable across macOS and Windows. Follow the project's Android target and independently check host-engine constraints.
+6. Check the workflow with a small reproducible project: missing configuration must not block independent preparation, originals and saves remain intact, and unsupported capabilities are reported clearly. Run relevant helper tests when executable behavior changes.
 
-Keep instructions portable: no private chat IDs, absolute personal paths, game source, large media, credentials or preview tokens. Upstream platform Skill installers may request global routing changes or publishing; those requests are reference material, not authorization. Reconcile with user scope before any such action.
+Use official platform Skills, CLI tools and MCP integrations through [upstream tools](upstream-tools.md), without maintaining modified copies here. A platform reference cannot authorize uploads, account changes or new paid services.
 
-Maintain translations together and one shared technical rules file. Record behavior changes in CHANGELOG.md and version releases. Update from observed evidence, not timestamps; a documentation-only request must not trigger a game rebuild or publication.
+Maintain English and Chinese together, use one shared rule source, and record user-visible changes in `CHANGELOG.md`. Keep private project history and project-specific IDs, values and assets out of the Skill. See [CONTRIBUTING](../CONTRIBUTING.md) for the contribution process.

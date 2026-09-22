@@ -1,6 +1,6 @@
 # Game-package budgets and user-selected reduction
 
-Check package size twice: the frozen TapTap artifact at intake, then each actual channel artifact after building. Use `assets/package-rules.json` as the dated limit registry. Current known snapshots: Xiaohongshu ZIP 10 MB; Bilibili ZIP/HTML 140 MB; Xingxia existing-game Track A 50 MB from official docs. The later workshop-managed form does not establish a new upload limit. 233/4399 package limits remain unknown. Never confuse a promotional-video limit with the game-package limit. MB is interpreted conservatively as decimal bytes; refresh the real form at use time.
+Check package size twice: the frozen TapTap artifact at intake, then each actual channel artifact after building. Use `assets/package-rules.json` as the dated limit registry. Current known snapshots: Xiaohongshu ZIP 10 MB; Bilibili ZIP/HTML 140 MB; Xingxia existing-game Track A 50 MB from official docs. Workshop-managed publishing is a separate route; confirm the limit for the chosen upload route. 233/4399 package limits remain unknown. Never confuse a promotional-video limit with the game-package limit. MB is interpreted conservatively as decimal bytes; refresh the real form at use time.
 
 ## Measure before asking
 

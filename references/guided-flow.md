@@ -4,7 +4,7 @@ Use available conversation questions, not a new website or approval system. If `
 
 ## Select platforms
 
-Only ask when the user actually requests adaptation and has not named targets. For the two case-backed channels, offer “233 + 4399”, “233 only”, “4399 only”. Other combinations can be typed. With more choices, group 2–3 platform-specific yes/no questions and label documentation-stage profiles accurately. “All supported” defaults to 233/4399. Do not silently include new platforms.
+Only ask when the user actually requests adaptation and has not named targets. Offer 233, 4399, Xiaohongshu MiniTool, Bilibili TOY and NetEase Xingxia. With single-select tools, group 2–3 platform-specific yes/no questions or accept one text list. For “all platforms”, state the current list and apply each profile’s compatibility requirements. Do not silently include platforms outside the requested scope.
 
 While waiting for a required selection, inventory source/assets read-only. Do not create unselected channel projects. If several source games are possible, offer known game names rather than guessing from a studio directory. Do not ask users to choose ordinary implementation details.
 

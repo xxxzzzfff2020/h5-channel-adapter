@@ -1,6 +1,6 @@
 # Listing materials
 
-`assets/material-rules.json` (relative to the Skill root) is the single machine-readable rule set. It covers known 233/4399 fields and the three creator forms supplied on 2026-09-22. Read [listing fields](listing-fields.md) for text/metadata/role mapping and examples. Runtime maturity remains separate from material rules. Unknown limits must remain unknown. Studio defaults are not platform requirements.
+`assets/material-rules.json` (relative to the Skill root) is the single machine-readable rule set. It contains the known listing fields for the five platform profiles. Read [listing fields](listing-fields.md) for text/metadata/role mapping and examples. Unknown limits must remain unknown. Workflow export defaults are not platform requirements.
 
 ## Provenance and images
 
@@ -14,7 +14,7 @@ Only a detail hero may be branded artwork; other gameplay screenshots must show 
 
 For 233 and 4399, deliver one edited video combining promotional/brand content with actual gameplay operations, not two unjoined files. Prefer existing promotional footage; use brand opening/closing frames if needed. The default export is 1920×1080, 30 fps, H.264, yuv420p, AAC, faststart; platform-specific limits win.
 
-Portrait footage may be centered or arranged in panels with an honest branded background. Preserve proportions and meaningful UI; repeated stills are not gameplay. Do not impose sample durations. Use authorized music and identify recorded vs added sound. Keep genuine operation speed; avoid idle stretches and page-loading gaps.
+Portrait footage may be centered or arranged in panels with an honest branded background. Preserve proportions and meaningful UI; repeated stills are not gameplay. Choose durations based on the content and platform limits. Use authorized music and identify recorded vs added sound. Keep genuine operation speed; avoid idle stretches and page-loading gaps.
 
 Record originals, source/output time intervals, layout, audio source, source/target versions and hashes. Unknown host/version remains unknown. Probe metadata, decode the whole video (`ffmpeg -v error -i <video> -f null -`), inspect opening/middle/joins/end and listen to playback.
 

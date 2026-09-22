@@ -4,36 +4,36 @@
   "policy": "Official tools stay upstream. Refresh selected-platform instructions and schemas at use time; no vendored Skill or credentials.",
   "platforms": {
     "233": {
-      "status": "case_backed",
       "sdk": "https://cdn.233xyx.com/h5ad/metah5ad_v1.min.js",
       "official_skill": null,
-      "cli_or_mcp": "not established"
+      "cli_or_mcp": "not established",
+      "integration": "sdk"
     },
     "4399": {
-      "status": "case_backed",
       "docs": "https://open.4399.cn/docs/h5mini/faq.md",
       "official_skill": null,
-      "cli_or_mcp": "not established"
+      "cli_or_mcp": "not established",
+      "integration": "sdk"
     },
     "xingxia": {
-      "status": "docs_reviewed",
       "official_skill_entry": "https://game.virtualoverapp.com/creator/center?section=guide&cat=create&doc=agent-skill",
       "sdk_docs": "https://game.virtualoverapp.com/creator/center?section=guide&cat=sdk&doc=index",
-      "refresh": "Read current resolver/manifest; compare workflowRev; follow current official OS-specific CLI instructions."
+      "refresh": "Read current resolver/manifest; compare workflowRev; follow current official OS-specific CLI instructions.",
+      "integration": "official_skill_cli_sdk"
     },
     "xiaohongshu": {
-      "status": "conditional_docs_reviewed",
       "docs": "https://miniapp-sandbox.xiaohongshu.com/minitool/doc",
       "official_skill_entry": null,
-      "refresh": "Obtain current complete rewrite command from upload page step one; do not reuse a cached command."
+      "refresh": "Obtain current complete rewrite command from upload page step one; do not reuse a cached command.",
+      "integration": "official_rewrite_workflow"
     },
     "bilibili-toy": {
-      "status": "docs_reviewed",
       "official_skill_entry": "https://www.bilibili.com/toy/publish/sdk/skill",
       "official_repository": "https://github.com/bilibili/toy",
       "official_skill_path": "skills/toy/SKILL.md",
       "sdk_docs": "https://www.bilibili.com/toy/publish/sdk",
-      "refresh": "Read current upstream Skill and references; compare installed revision, inspect current CLI help-json and available official MCP schemas."
+      "refresh": "Read current upstream Skill and references; compare installed revision, inspect current CLI help-json and available official MCP schemas.",
+      "integration": "official_skill_cli_sdk"
     }
   }
 }

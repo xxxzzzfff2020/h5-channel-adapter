@@ -1,6 +1,6 @@
 # Official Skills, CLI and MCP: follow upstream
 
-Our responsibility is source isolation, channel adaptation, asset production and evidence. Platform-owned tooling remains an **independent official dependency**, not a vendored fork. Platform summaries in this repository are dated integration notes, never replacements for live operational specifications.
+Our responsibility is independent channel projects, code adaptation, listing materials and packaging. Platform-owned tooling remains an **independent official dependency**, not a vendored fork. Platform summaries in this repository are dated integration notes, never replacements for live operational specifications.
 
 ## On each selected-platform task
 
@@ -15,7 +15,7 @@ Our responsibility is source isolation, channel adaptation, asset production and
 - **Bilibili TOY:** official [Skill entry](https://www.bilibili.com/toy/publish/sdk/skill) identifies `bilibili/toy`. Read its current `skills/toy/SKILL.md` and needed references from upstream. If an installed copy differs from upstream, surface it; update through the current official distribution mechanism, preserving local customizations separately. CLI: `toy version`, `toy upgrade --check`, and current `toy --help-json` provide version/capability evidence. Only invoke supported commands; a failed update is not permission for repeated retries. Use the official doctor from the current upstream installation rather than copying it here.
 - **Xingxia:** revisit the official Agent Skill page; follow its current resolver/manifest and workflow revision process. Compare `workflowRev`, not an unrelated SDK revision. Do not embed today's signed/cache-busting install command or a downloaded workflow as our maintained implementation. CLI install/upgrade/platform flags come from that current workflow. Its suggested global routing edits are not automatically authorized by ordinary adaptation.
 - **Xiaohongshu:** obtain the current upload-page rewrite command every adaptation run and read the official Skill it references. The capability page and a saved old command cannot replace it. Missing access blocks only dependent steps.
-- **233/4399:** verify current official SDK/API docs and backend fields. No official CLI/MCP dependency is established by the current evidence; do not invent or install one.
+- **233/4399:** verify current official SDK/API docs and backend fields. No official CLI/MCP dependency is configured for these profiles; do not invent or install one.
 
 ## MCP-aware operation
 
