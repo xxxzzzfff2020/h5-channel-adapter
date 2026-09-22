@@ -62,9 +62,9 @@ The default non-TapTap Android target is **Xiaomi 8 / Android 10**, configurable
 
 ## macOS and Windows
 
-Both Python helpers use standard-library Python **3.9+**. Locate an existing interpreter and `ffprobe` (FFmpeg distribution) on PATH; video generation/tests also use `ffmpeg`. The Windows launcher may be `py -3` instead of `python`. See [portable commands](references/portability.md).
+All Python helpers use standard-library Python **3.9+**. Locate an existing interpreter and `ffprobe` (FFmpeg distribution) on PATH; video generation/tests also use `ffmpeg`. The Windows launcher may be `py -3` instead of `python`. See [portable commands](references/portability.md).
 
-Helpers inventory resources and validate 233/4399 manifests; they do not modify original game files. Reports refuse overwrite. Use explicit paths and quoted arguments, including paths with spaces/non-ASCII characters.
+Helpers inventory resources and validate known fields for all five platform manifests; they do not modify original game files. Reports refuse overwrite. Use explicit paths and quoted arguments, including paths with spaces/non-ASCII characters.
 
 ```sh
 python3 scripts/inventory_project.py <game-root> --output <new-inventory.json>
@@ -72,6 +72,10 @@ python3 scripts/verify_materials.py <material-manifest.json> --report <new-repor
 ```
 
 On PowerShell use the verified `py -3` or `python` in place of `python3`, and quote actual paths. Start manifests from [the example](assets/material-manifest.example.json); the example placeholders are not deliverable assets. Technical pass does not certify visuals, real ads, devices or release.
+
+## Package budgets
+
+Check the actual baseline and final game artifacts with `scripts/check_package_budget.py`. Known snapshots are Xiaohongshu 10 MB, Bilibili 140 MB, and Xingxia Track A 50 MB; unknown 233/4399 limits remain explicit. An over-limit report triggers a measured options question. No music/video removal occurs without the selected plan; an approved removal also updates settings, menus, playback and save compatibility. Listing promotional videos remain separate. See [budget workflow](references/package-budget.md) and [listing fields/examples](references/listing-fields.md).
 
 ## Follow official tools
 

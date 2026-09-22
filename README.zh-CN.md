@@ -55,9 +55,13 @@ Agent 先找本地已有资源，再问真实缺口。当前弹窗可能是单�
 
 ## Mac / Windows 工具
 
-两个 Python helper 需 **Python 3.9+**，只用标准库；媒体检测需 FFmpeg 的 `ffprobe`，视频制作/夹具测试还需 `ffmpeg` 在 PATH。优先使用已有环境。Windows 通常用 `py -3` 或核实过的 `python`，不是直接照抄所有 Mac 命令。见[跨系统说明](references/zh-CN/portability.md)。
+三个 Python helper 需 **Python 3.9+**，只用标准库；媒体检测需 FFmpeg 的 `ffprobe`，视频制作/夹具测试还需 `ffmpeg` 在 PATH。优先使用已有环境。Windows 通常用 `py -3` 或核实过的 `python`，不是直接照抄所有 Mac 命令。见[跨系统说明](references/zh-CN/portability.md)。
 
-工具只读盘点游戏、校验 233/4399 物料，不修改原游戏，且拒绝覆盖旧报告。路径含空格/中文时引用。manifest 使用[示例结构](assets/material-manifest.example.json)并填写真实路径/哈希；示例占位并非可交付内容。
+工具只读盘点游戏、校验五个平台已知物料字段，不修改原游戏，且拒绝覆盖旧报告。路径含空格/中文时引用。manifest 使用[示例结构](assets/material-manifest.example.json)并填写真实路径/哈希；示例占位并非可交付内容。
+
+## 包体超限处理
+
+`scripts/check_package_budget.py` 检查初始和最终实际游戏包。当前小红书10 MB、B站140 MB、星匣轨道A50 MB；233/4399未知上限保持显式待核。超限先展示大小/占用/方案并引导选择，不擅自删音乐视频；获选方案需同步改设置、菜单、播放点与旧档兼容。上架宣传视频独立保留。见[包体流程](references/zh-CN/package-budget.md)与[字段/示例](references/zh-CN/listing-fields.md)。
 
 ## 官方能力更新
 

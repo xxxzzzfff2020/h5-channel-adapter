@@ -14,7 +14,7 @@ Storage uses object inputs: `sdk.storage.get({key})`, `sdk.storage.set({key,valu
 
 ## Materials and next inputs
 
-Prepare cover JPG/PNG/WebP ≤5 MB; 800×450 (16:9) is recommended, not mandatory. Name 2–30 characters with prohibited symbols checked from the live field guide; description ≤300; gameplay classifications 1–2; tags 1–5. Optional about ≤1000 Markdown-source characters and controls ≤500. Screenshots/video quotas are not established by these pages; do not copy 233 requirements.
+The user-supplied 2026-09-22 form narrows cover formats to JPG/PNG; the prior verified ≤5 MB limit remains recorded. 800×450 is recommended. Name 2–30 characters, description ≤300, classifications 1–2, tags 1–5; optional about ≤1000 Markdown-source characters and controls ≤500. Promotional images/videos are optional, up to eight combined: images JPG/PNG/WebP ≤5 MB; videos MP4/WebM/OGG ≤100 MB and ≤60 seconds. 1024×556 is recommended, not required. The supplied workshop-managed example is not a requirement to use that route or copy its game text/tags. Read [listing fields](listing-fields.md) and [package budgets](package-budget.md).
 
 Local packages do not need an AppID questionnaire. For platform previews or publishing, use creator login and select/create the intended game only within authorization. Official CLI supports `star-letter login`; normal device login does not require manually creating an API key. Creation/publish binding IDs belong to creator tooling, not hardcoded runtime init. AI scenes/exchange items are separate, opt-in features.
 

@@ -27,3 +27,7 @@ Accept a combined free-text answer, extract fields and resume without making the
 Persist selected platforms, non-secret IDs, permissions, candidate paths, gaps and next actions in existing delivery notes. Partial responses unblock ready channels. Pending capabilities may be safely disabled when allowed, but do not invent reward success or silently change product economics.
 
 Do not recopy source, replace saves or remake unchanged materials just because the user returns later. Continue ordinary local steps without further approvals. For external writes, use the actual user's authorization and applicable platform workflow.
+
+## Over-limit package question
+
+Follow [package budgets](package-budget.md) immediately when a selected channel exceeds its limit. Show actual size/limit/overage and measured resource contributors; offer only feasible options (preserve content and optimize, remove BGM while keeping SFX, remove optional in-game video, an explicit combination, or defer). Wait for a specific choice before changing content. Reuse an already-authorized matching choice, never a default/timeout. The question is needed because reducing features changes the delivered game, not because ordinary local packaging requires approval.

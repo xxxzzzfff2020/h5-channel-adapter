@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "channel": "xiaohongshu",
+  "game": "填写正式游戏名称",
+  "source_version": "填写来源版本",
+  "text": {
+    "name": "示例小工具",
+    "description": "填写真实简介",
+    "version": "填写版本"
+  },
+  "metadata": {
+    "scene": "休闲游戏",
+    "permissions": [
+      "storage"
+    ]
+  },
+  "files": [
+    {
+      "role": "icon",
+      "path": "upload/icon.png",
+      "sources": [
+        {
+          "path": "masters/icon.png",
+          "kind": "brand",
+          "sha256": "填写来源SHA256"
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "visual": "pending",
+    "platform_form": "pending"
+  }
+}

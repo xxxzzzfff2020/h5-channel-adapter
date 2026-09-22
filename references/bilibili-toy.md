@@ -16,7 +16,7 @@ Container APIs are App-only. Subscribe before `setContainerMode` and confirm an 
 
 ## Materials and publication
 
-Poster and icon are separate fields. Current official checklist supports PNG/JPG/JPEG, recommends a 4:3 poster around 1200×900, and defers icon limits to current CLI help. Treat the ratio as a recommendation. Other quotas and video requirements require live form/help verification; do not apply 233/4399 video rules automatically.
+The user-supplied 2026-09-22 form establishes ZIP/HTML upload with a current 140 MB limit. Poster and icon are separate JPG/PNG/JPEG fields: poster ratio 4:3 (recommended 1200×900), icon ratio 1:1 (recommended 500×500). This form makes ratios constraints; only pixel sizes remain recommendations. Byte limits and name length were not supplied. Prepare title and slug; no promotional-video field was supplied. See [listing fields](listing-fields.md) and [package budgets](package-budget.md).
 
 No frontend AppID/Secret requirement was established. First finish local preparation; creator login, chosen immutable slug and verified target ID are needed at publishing/update time. Inspect `toy --help-json` and command-specific help before constructing commands; use structured `--json` for API commands. Version/upgrade commands have their own behavior, so do not blindly append flags to all commands.
 

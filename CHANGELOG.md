@@ -1,5 +1,11 @@
 # Changelog / 更新记录
 
+## 0.2.0 — 2026-09-22
+
+- Add the supplied Xiaohongshu, Bilibili TOY and Xingxia form fields, formats, ratios, optional media and limits to shared material validation. / 收录三个后台表单字段和物料规则，推荐尺寸与强制要求分开。
+- Add read-only actual-artifact budget reports and an explicit per-channel reduction-choice workflow, including complete media/settings/playback cleanup after a chosen removal. / 新增实际包体报告与超限方案选择，选定删减后同步资源、设置和播放逻辑。
+- Keep listing media separate from game-package budgets; preserve unknown limits, original sources and upstream official-tool updates. / 区分宣传物料与游戏包体，保留未知项、原源和官方工具更新机制。
+
 ## 0.1.0 — 2026-09-22
 
 - Publish the first private, portable Skill distribution with English and Simplified Chinese entry points, workflows and platform notes. / 首个私有可分享版本，提供中英文入口、流程与平台说明。

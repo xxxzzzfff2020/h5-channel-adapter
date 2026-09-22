@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "recorded_on": "2026-09-22",
   "byte_unit": "decimal MB",
   "channels": {
@@ -12,7 +12,7 @@
         "home_16_9": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[1920, 1080, "min"]]},
         "home_16_13": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[1280, 1040, "min"]]},
         "detail": {"count": [4, 5], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[720, 1280, "min"], [1280, 720, "min"]]},
-        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": 500000000, "variants": [[1280, 720, "min"], [720, 1280, "min"]], "recommended": [1920, 1080], "codecs": ["h264", "hevc"]},
+        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": 500000000, "variants": [[1280, 720, "min"], [720, 1280, "min"]], "recommended": [1920, 1080], "codecs": ["h264", "hevc"], "require_promo_gameplay": true},
         "video_cover": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 2000000, "variants": [[1280, 720, "min"], [720, 1280, "min"]]}
       }
     },
@@ -24,8 +24,44 @@
         "icon": {"count": [1, 1], "formats": ["png"], "max_bytes": null, "variants": [[124, 124, "exact"]]},
         "promo": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[300, 200, "exact"]]},
         "video_cover": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[1080, 1920, "exact"]]},
-        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": null, "variants": [[1920, 1080, "exact"]], "codecs": ["h264"], "basis_override": "用户要求宣传与实录合成；此尺寸编码为工作室默认"},
+        "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": null, "variants": [[1920, 1080, "exact"]], "codecs": ["h264"], "basis_override": "用户要求宣传与实录合成；此尺寸编码为工作室默认", "require_promo_gameplay": true},
         "detail": {"count": [0, 5], "formats": ["png", "jpeg"], "max_bytes": null, "variants": [[720, 1280, "min"], [1280, 720, "min"]], "basis_override": "可选预备截图，非已核实平台要求"}
+      }
+    },
+    "xiaohongshu": {
+      "basis": "User-supplied MiniTool upload form, 2026-09-22. Recommended ratios are not hard constraints.",
+      "unverified": ["Exact icon pixel dimensions not specified; 1:1 is a recommendation.", "Permission metadata must be mapped to the current official rewrite/upload workflow."],
+      "text": {"name": {"required": true, "min_chars": 1, "max_chars": 14, "counting": "utf16_conservative"}, "description": {"required": true, "min_chars": 1, "max_chars": 14, "counting": "utf16_conservative"}, "version": {"required": true, "min_chars": 1, "max_chars": null, "counting": "utf16_conservative"}},
+      "metadata": {
+        "scene": {"type": "string", "required": true, "choices": ["生活方式", "休闲游戏", "图像创作", "学习知识", "实用工具", "娱乐测试", "其他"]},
+        "permissions": {"type": "array", "required": true, "min_items": 0, "max_items": 4, "choices": ["album", "camera", "microphone", "storage"]}
+      },
+      "roles": {
+        "icon": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 5000000, "variants": null, "recommended_ratio": [1, 1]}
+      }
+    },
+    "bilibili-toy": {
+      "basis": "User-supplied TOY upload form, 2026-09-22; slug syntax from the official TOY checklist. Form ratio requirements override prior recommendations.",
+      "unverified": ["Poster/icon byte limits and Toy name character limit are not supplied; refresh current form/CLI help."],
+      "text": {"name": {"required": true, "min_chars": 1, "max_chars": null, "counting": "utf16_conservative"}, "slug": {"required": true, "min_chars": 1, "max_chars": 64, "counting": "utf16_conservative", "pattern": "[A-Za-z0-9_-]+"}},
+      "roles": {
+        "poster": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": null, "variants": [[4, 3, "ratio"]], "recommended": [1200, 900]},
+        "icon": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": null, "variants": [[1, 1, "ratio"]], "recommended": [500, 500]}
+      }
+    },
+    "xingxia": {
+      "basis": "User-supplied creator form, 2026-09-22, plus earlier official field documentation for character/cover-byte limits. Cover now follows narrower JPG/PNG form.",
+      "unverified": ["Category/tag options are dynamic; do not reuse the example game selections.", "Cover 800x450 and promotional 1024x556 are recommendations, not hard dimensions."],
+      "text": {"name": {"required": true, "min_chars": 2, "max_chars": 30, "counting": "utf16_conservative", "forbidden_chars": "<>{}[]|\\/\"';"}, "description": {"required": true, "min_chars": 1, "max_chars": 300, "counting": "utf16_conservative"}, "about": {"required": false, "min_chars": 0, "max_chars": 1000, "counting": "utf16_conservative"}, "controls": {"required": false, "min_chars": 0, "max_chars": 500, "counting": "utf16_conservative"}},
+      "metadata": {
+        "categories": {"type": "array", "required": true, "min_items": 1, "max_items": 2},
+        "tags": {"type": "array", "required": true, "min_items": 1, "max_items": 5},
+        "game_type": {"type": "string", "required": false, "choices": ["game", "creative_tool"]},
+        "orientation": {"type": "string", "required": false, "choices": ["portrait", "landscape", "unspecified"]}
+      },
+      "roles": {
+        "cover": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 5000000, "variants": null, "recommended": [800, 450]},
+        "promo_media": {"count": [0, 8], "variants": null, "recommended": [1024, 556], "media": {"image": {"formats": ["png", "jpeg", "webp"], "max_bytes": 5000000}, "video": {"formats": ["mp4", "webm", "ogg"], "max_bytes": 100000000, "max_duration_seconds": 60}}}
       }
     }
   }

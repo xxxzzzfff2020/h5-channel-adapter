@@ -19,10 +19,14 @@ Reviewed: 2026-09-22. The 233 and 4399 profiles were distilled from four authori
 - Xingxia: [existing-game upload](https://game.virtualoverapp.com/creator/center?section=guide&cat=create&doc=track-a-upload), [Agent Skill](https://game.virtualoverapp.com/creator/center?section=guide&cat=create&doc=agent-skill), [SDK](https://game.virtualoverapp.com/creator/center?section=guide&cat=sdk&doc=index).
 - Bilibili: [SDK](https://www.bilibili.com/toy/publish/sdk), [Skill entry](https://www.bilibili.com/toy/publish/sdk/skill), [official Skill repository](https://github.com/bilibili/toy).
 
-New platform profiles are based on documentation inspection only. No new platform application, upload, paid call, device acceptance or review was performed as part of preparing this distribution. The actual material validator scope remains 233/4399.
+New platform profiles are based on documentation inspection only. No new platform application, upload, paid call, device acceptance or review was performed as part of preparing this distribution. The user subsequently supplied MiniTool, TOY and Xingxia creator forms on the same date. Their known material fields now have machine checks; package budgets are separately tracked. This is schema/helper evidence, not a completed port.
 
 ## Helper validation
 
 Initial development exercised synthetic valid 233/4399 materials and failure cases: missing roles, unknown roles, excessive text, wrong ratios, absent gameplay provenance, changed source hash, path escape, false file suffix, CLI operation and read-only inventory with credential/symlink exclusions. Existing project media were also probed read-only. None of this certifies gameplay authenticity, a full game build or physical-device behavior.
 
-The repository's reproducible test command is documented in README.md. Synthetic fixtures are not commercial game assets and do not count as live-host evidence. Both helpers need Python 3.9+; media validation requires ffprobe, and the test fixtures use ffmpeg.
+The repository's reproducible test command is documented in README.md. Synthetic fixtures are not commercial game assets and do not count as live-host evidence. All helpers need Python 3.9+; media validation requires ffprobe, and the test fixtures use ffmpeg.
+
+## Version 0.2.0 validation
+
+On macOS, 40 synthetic scenarios passed, covering all five material profiles and the actual-artifact budget helper: optional vs required fields, hard vs recommended ratios, mixed-media count, 60-second and byte limits, WebP/WebM inspection, audio-only OGG rejection, original-source immutability, budget boundaries, unknown limits and CLI non-overwrite behavior. OGG video decoding was not separately exercised because the local FFmpeg lacks a Theora encoder. Windows execution remains pending; the portable CI template is not an execution receipt. Skill-format, Python/JSON syntax and bilingual-reference/link checks passed.

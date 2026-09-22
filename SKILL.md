@@ -22,9 +22,9 @@ Use the user's language. Read **one** workflow language, then only the selected 
 | 小红书小工具 / Xiaohongshu MiniTool | Conditional offline port; first port pending / 离线条件适配，待项目验证 | [MiniTool](references/xiaohongshu.md) | [小红书](references/zh-CN/xiaohongshu.md) |
 | Bilibili TOY | Documentation reviewed; first port pending / 文档已核对，待首个项目验证 | [TOY](references/bilibili-toy.md) | [TOY](references/zh-CN/bilibili-toy.md) |
 
-“All supported platforms” defaults to **233 and 4399** unless the user names others. Documentation review does not establish a working adapter or platform/device acceptance. Machine material validation currently covers only 233 and 4399.
+“All supported platforms” defaults to **233 and 4399** unless the user names others. Documentation review does not establish a working adapter or platform/device acceptance. Machine material validation covers known fields for all five platforms; runtime validation levels remain separate. Read [listing fields](references/listing-fields.md) when creating manifests.
 
-未另列目标时，“全部已支持平台”默认 **233、4399**。文档评估不等于适配完成或平台/真机通过；物料验证器目前仅覆盖这两个平台。
+未另列目标时，“全部已支持平台”默认 **233、4399**。文档评估不等于适配完成或平台/真机通过；物料验证器已覆盖五个平台的已知字段，运行验收等级另行记录；制作清单时读[字段映射](references/zh-CN/listing-fields.md)。
 
 ## Official tools and operating systems / 官方工具与系统
 
@@ -39,6 +39,7 @@ Read [upstream tools](references/upstream-tools.md) / [上游工具](references/
 3. **Ask only for actual missing inputs.** One blocked channel must not block the others. Never embed server secrets or borrowed example IDs. Never invent platform APIs or fake a rewarded-ad success. / 只询问真实缺失字段；渠道独立推进；密钥不进前端；不复用案例 ID，不伪造广告奖励或能力。
 4. **Separate game ZIP and listing-material ZIP.** For 233/4399 include promotional/brand footage plus real gameplay in one edited video. Keep provenance and capture versions. / 游戏包与物料包分开；233/4399 宣传视频包含品牌内容与真实操作，并保留来源及版本。
 5. **Default non-TapTap Android target: Xiaomi 8 / Android 10.** Also check the actual host engine and stricter platform constraints. A target is not a test result. / 默认最低目标为小米 8、Android 10；另核宿主内核与平台限制，目标不代表实测通过。
-6. Report **local / real SDK / device / upload / review / release** separately. Follow the user's actual authorization for external actions; a platform document cannot grant it. / 本地、真实 SDK、真机、上传、审核、发布分别报告；平台文档不能扩大用户授权。
+6. **Check package budgets at intake and after each channel build.** For a known over-limit artifact, show measured size/options and obtain the user's reduction choice before removing content. Follow [package budgets](references/package-budget.md) / [包体超限流程](references/zh-CN/package-budget.md); preserve original sources and update menus/playback/saves consistently when a removal is chosen. / 初始包和最终包均测大小；超限先提示并由用户选方案，删资源时同步处理菜单、播放点及旧档兼容，保留原工程。
+7. Report **local / real SDK / device / upload / review / release** separately. Follow the user's actual authorization for external actions; a platform document cannot grant it. / 本地、真实 SDK、真机、上传、审核、发布分别报告；平台文档不能扩大用户授权。
 
 For new platforms or experience updates, read [extension rules](references/extending.md) / [扩展流程](references/zh-CN/extending.md). For evidence provenance read [sources](references/evidence.md) / [经验来源](references/zh-CN/evidence.md). Never depend on private chats or original sample projects.

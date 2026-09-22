@@ -10,14 +10,25 @@ import shutil
 import subprocess
 from inventory_project import digest, probe
 
+VIDEO_FORMATS = {'mp4', 'webm', 'ogg'}
+SUFFIXES = {'png': {'.png'}, 'jpeg': {'.jpg', '.jpeg'}, 'webp': {'.webp'},
+            'mp4': {'.mp4'}, 'webm': {'.webm'}, 'ogg': {'.ogg'}}
+
 
 def media_format(path):
     with path.open('rb') as f:
-        b = f.read(64)
+        b = f.read(4096)
     if b.startswith(b'\x89PNG\r\n\x1a\n'):
         return 'png'
     if b.startswith(b'\xff\xd8\xff'):
         return 'jpeg'
+    if b.startswith(b'RIFF') and b[8:12] == b'WEBP':
+        return 'webp'
+    # EBML DocType "webm" (ID 0x4282, four-byte value).
+    if b.startswith(b'\x1a\x45\xdf\xa3') and b'\x42\x82\x84webm' in b:
+        return 'webm'
+    if b.startswith(b'OggS'):
+        return 'ogg'
     if len(b) >= 12 and b[4:8] == b'ftyp':
         return 'mp4'
     return 'unknown'
@@ -25,7 +36,56 @@ def media_format(path):
 
 def size_ok(w, h, variant):
     rw, rh, mode = variant
-    return w * rh == h * rw and ((w == rw and h == rh) if mode == 'exact' else (w >= rw and h >= rh))
+    return w * rh == h * rw and (mode == 'ratio' or
+                                ((w == rw and h == rh) if mode == 'exact' else (w >= rw and h >= rh)))
+
+
+def validate_fields(manifest, rules, errors):
+    values = manifest.get('text', {})
+    for field, spec in rules['text'].items():
+        # Existing v1 rules use a maximum or null and are required.
+        if not isinstance(spec, dict):
+            spec = {'required': True, 'min_chars': 1, 'max_chars': spec}
+        value = values.get(field)
+        if value is None and not spec.get('required', True):
+            continue
+        if not isinstance(value, str):
+            errors.append('Missing/invalid text: ' + field)
+            continue
+        if spec.get('required', True) and not value.strip():
+            errors.append('Missing text: ' + field)
+        length = (len(value.encode('utf-16-le')) // 2
+                  if spec.get('counting') == 'utf16_conservative' else len(value))
+        maximum = spec.get('max_chars')
+        if maximum is not None and length > maximum:
+            errors.append('Text too long: ' + field)
+        if length < spec.get('min_chars', 0):
+            errors.append('Text too short: ' + field)
+        if spec.get('pattern') and not re.fullmatch(spec['pattern'], value):
+            errors.append('Invalid text pattern: ' + field)
+        if any(c in value for c in spec.get('forbidden_chars', '')):
+            errors.append('Forbidden text character: ' + field)
+    metadata = manifest.get('metadata', {})
+    for field, spec in rules.get('metadata', {}).items():
+        value = metadata.get(field)
+        if value is None and not spec.get('required', True):
+            continue
+        if spec['type'] == 'array':
+            if not isinstance(value, list) or not all(isinstance(x, str) and x.strip() for x in value):
+                errors.append('Missing/invalid metadata array: ' + field)
+                continue
+            if not spec.get('min_items', 0) <= len(value) <= spec.get('max_items', float('inf')):
+                errors.append('Metadata count outside limits: ' + field)
+            if len(set(value)) != len(value):
+                errors.append('Duplicate metadata items: ' + field)
+            items = value
+        else:
+            if not isinstance(value, str) or not value.strip():
+                errors.append('Missing/invalid metadata: ' + field)
+                continue
+            items = [value]
+        if 'choices' in spec and any(x not in spec['choices'] for x in items):
+            errors.append('Unknown metadata choice: ' + field)
 
 
 def validate(manifest_path, rules_path):
@@ -39,15 +99,10 @@ def validate(manifest_path, rules_path):
     for k in ('game', 'source_version'):
         if not isinstance(m.get(k), str) or not m[k].strip():
             errors.append('Missing ' + k)
-    for field, maximum in rules['text'].items():
-        s = m.get('text', {}).get(field)
-        if not isinstance(s, str) or not s.strip():
-            errors.append('Missing text: ' + field)
-        elif maximum is not None and len(s) > maximum:
-            errors.append('Text too long: ' + field)
+    validate_fields(m, rules, errors)
     files = m.get('files', [])
-    if not isinstance(files, list):
-        raise ValueError('files must be an array')
+    if not isinstance(files, list) or not all(isinstance(x, dict) for x in files):
+        raise ValueError('files must be an array of objects')
     counts = Counter(x.get('role') for x in files)
     for role, rule in rules['roles'].items():
         if not rule['count'][0] <= counts[role] <= rule['count'][1]:
@@ -79,6 +134,9 @@ def validate(manifest_path, rules_path):
             continue
         try:
             fmt, info = media_format(p), probe(p)
+            is_video = fmt in VIDEO_FORMATS
+            constraints = dict(rule)
+            constraints.update(rule.get('media', {}).get('video' if is_video else 'image', {}))
             stream = next((s for s in info.get('streams', []) if s.get('codec_type') == 'video'), {})
             w, h = stream.get('width', 0), stream.get('height', 0)
             record = {'role': role, 'path': rel, 'format': fmt, 'width': w, 'height': h,
@@ -86,22 +144,29 @@ def validate(manifest_path, rules_path):
             records.append(record)
             if 'error' in info:
                 errors.append(f'{role}: media probe failed')
-            if fmt not in rule['formats']:
-                errors.append(f'{role}: format {fmt} is not {rule["formats"]}')
-            valid_suffix = {'png': {'.png'}, 'jpeg': {'.jpg', '.jpeg'}, 'mp4': {'.mp4'}}
-            if p.suffix.lower() not in valid_suffix.get(fmt, set()):
+            if fmt not in constraints.get('formats', []):
+                errors.append(f'{role}: format {fmt} is not {constraints.get("formats", [])}')
+            if p.suffix.lower() not in SUFFIXES.get(fmt, set()):
                 errors.append(f'{role}: suffix does not match actual encoding')
-            if not any(size_ok(w, h, v) for v in rule['variants']):
+            if not w or not h:
+                errors.append(f'{role}: no visual image/video stream')
+            variants = constraints.get('variants')
+            if variants and not any(size_ok(w, h, v) for v in variants):
                 errors.append(f'{role}: invalid dimensions/ratio {w}x{h}')
-            limit = rule.get('max_bytes')
+            recommended = constraints.get('recommended_ratio', constraints.get('recommended'))
+            if recommended and w and h and w * recommended[1] != h * recommended[0]:
+                warnings.append(f'{role}: differs from recommended ratio {recommended[0]}:{recommended[1]} (not a hard limit)')
+            limit = constraints.get('max_bytes')
             if limit is not None and record['bytes'] > limit:
                 errors.append(f'{role}: exceeds {limit} bytes')
-            if role == 'video':
+            if is_video:
                 duration = float(info.get('format', {}).get('duration', 0))
                 if not math.isfinite(duration) or duration <= 0:
                     errors.append('video: invalid duration')
-                if stream.get('codec_name') not in rule['codecs']:
+                if constraints.get('codecs') and stream.get('codec_name') not in constraints['codecs']:
                     errors.append('video: unexpected codec')
+                if constraints.get('max_duration_seconds') is not None and duration > constraints['max_duration_seconds']:
+                    errors.append(f'{role}: video exceeds {constraints["max_duration_seconds"]} seconds')
             sources = entry.get('sources', [])
             if not sources:
                 errors.append(f'{role}: missing provenance')
@@ -123,7 +188,7 @@ def validate(manifest_path, rules_path):
                         errors.append(f'{role}: missing capture version')
                     elif source['version'] != m.get('source_version'):
                         warnings.append(f'{rel}: capture version differs from current source')
-                if role == 'video' and kind in {'promo', 'brand'} | {'gameplay_browser', 'gameplay_host', 'gameplay_device'}:
+                if is_video and kind in {'promo', 'brand', 'gameplay_browser', 'gameplay_host', 'gameplay_device'}:
                     for key in ('source_seconds', 'output_seconds'):
                         times = source.get(key)
                         valid = (isinstance(times, list) and len(times) == 2
@@ -133,7 +198,7 @@ def validate(manifest_path, rules_path):
                             errors.append(f'video: missing/invalid {key}')
                         elif key == 'output_seconds' and times[1] > duration + 0.1:
                             errors.append('video: segment extends beyond output duration')
-            if role == 'video':
+            if rule.get('require_promo_gameplay'):
                 if not kinds & {'promo', 'brand'} or not kinds & {'gameplay_browser', 'gameplay_host', 'gameplay_device'}:
                     errors.append('video: needs both promotional and real gameplay source records')
             if role == 'detail' and detail_number > 1 and not kinds & {'screenshot_browser', 'screenshot_host', 'screenshot_device'}:
@@ -146,7 +211,7 @@ def validate(manifest_path, rules_path):
         covers = [r for r in records if r['role'] == 'video_cover']
         if videos and covers and (videos[0]['width'] > videos[0]['height']) != (covers[0]['width'] > covers[0]['height']):
             errors.append('video_cover: orientation differs from video')
-    return {'schema_version': 1, 'channel': m['channel'], 'game': m.get('game'),
+    return {'schema_version': 2, 'channel': m['channel'], 'game': m.get('game'),
             'technical_status': 'pass' if not errors else 'fail', 'errors': errors,
             'warnings': warnings, 'files': records, 'manual_review': m.get('manual_review', {}),
             'not_certified': ['visual authenticity/quality', 'full decode and listening',

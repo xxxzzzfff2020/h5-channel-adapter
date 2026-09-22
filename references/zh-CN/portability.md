@@ -5,7 +5,7 @@
 ## 检查环境
 
 - 先识别 OS/shell。Mac 查 python3/ffprobe/ffmpeg；Windows PowerShell 用 `Get-Command python, py, ffprobe, ffmpeg -ErrorAction SilentlyContinue`，再用 `python --version` 或 `py -3 --version` 核对解释器。Windows Store 别名不代表已装 Python。
-- 两个 helper 需 Python ≥3.9，仅标准库；物料验证需 ffprobe 在 PATH。盘点可用 --no-probe，但不能据此称媒体通过。视频制作与合成夹具测试还需 ffmpeg。
+- 三个 helper 需 Python ≥3.9，仅标准库；物料验证需 ffprobe 在 PATH。盘点可用 --no-probe，但不能据此称媒体通过。视频制作与合成夹具测试还需 ffmpeg。
 - 优先已有/内置环境。缺失时按用户认可的包管理器或官方对应 OS/架构版本安装；Windows 不运行 brew 或 Unix curl-pipe-shell。平台 CLI 可能提供独立 exe/PowerShell 安装方式，以当前上游为准。
 - 空格/中文路径必须引用；用 pathlib、参数数组，不拼 shell、不依赖 Unix 复制命令或符号链接。文本和进程 JSON 显式 UTF-8；Windows 产物名称避开保留字符和设备名。
 

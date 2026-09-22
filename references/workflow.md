@@ -22,6 +22,8 @@ python3 <skill-dir>/scripts/inventory_project.py <game-root> --output <evidence-
 
 Review relevant text, images and video frames; the helper cannot select the authoritative source. Freeze the same baseline for all channels, copying required source, runtime assets, lockfiles, build scripts and licenses. Never chain-copy from another changing channel. If source changes while copying, compare hashes and recopy affected files from one coherent baseline.
 
+Before changing channel content, check the frozen artifact against selected [package budgets](package-budget.md). Over-limit platforms require an explicit reduction choice; continue other channels and independent assets while waiting. Recheck each actual final channel artifact.
+
 ### Create independent projects
 
 Keep established folder names. A new layout can be:

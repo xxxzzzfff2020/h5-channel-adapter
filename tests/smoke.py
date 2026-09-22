@@ -13,6 +13,7 @@ SKILL = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SKILL / 'scripts'))
 from inventory_project import digest
 from verify_materials import validate
+from extended_checks import exercise
 
 
 def run(args):
@@ -160,6 +161,8 @@ def main():
         assert json.loads(out.read_text(encoding='utf-8'))['game'] == '合成 fixture'
         assert subprocess.run(cmd, capture_output=True).returncode != 0
         results.append('validator-cli-unicode-and-no-overwrite')
+
+        results.extend(exercise(base, SKILL, still, ff, item))
 
     print(json.dumps({'passed': len(results), 'cases': results,
                       'symlink_checks': symlinks, 'platform': sys.platform}))

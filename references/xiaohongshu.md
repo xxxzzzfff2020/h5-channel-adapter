@@ -18,6 +18,6 @@ Prefer native storage on client ≥9.46.0, with buildVersion and method checks. 
 
 Exposed native APIs include note publishing, image saving, temporary files, launch options and storage. No rewarded-ad or leaderboard API is established by this capability list. Do not fake ad completion, silently grant rewards or advertise cloud saves. Material progression/economy changes require a product decision; offline ordinary gameplay can proceed separately.
 
-Listing dimensions, package-size limit and AppID/Secret requirements are not established here. Note-publishing title/text/media limits describe **in-game posts**, not store listing requirements. Request the current rewrite command and actual upload fields, not a generic credentials form.
+The supplied 2026-09-22 upload form establishes name ≤14, description ≤14, an icon (PNG/JPG/JPEG ≤5 MB, recommended 1:1), ZIP-only upload ≤10 MB, version, scene tag and permissions. Exact icon pixel dimensions/version syntax are unspecified. Select only used album/camera/microphone/local-storage capabilities; map permission labels through the official workflow. No listing-video field or AppID/Secret requirement was supplied. In-game note rules are separate. The current rewrite command is still needed. See [listing fields](listing-fields.md) and [package budgets](package-budget.md).
 
 Source: [official container capabilities](https://miniapp-sandbox.xiaohongshu.com/minitool/doc). Recheck the upload-page Skill and run its current checks during the first real port.

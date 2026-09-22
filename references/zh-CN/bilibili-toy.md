@@ -16,7 +16,7 @@ SDK 为 `https://s1.hdslb.com/bfs/seed/toy/app/sdk/toy-sdk.js`，全局 `window.
 
 ## 物料与发布
 
-封面和图标为独立字段；当前官方清单支持 PNG/JPG/JPEG，封面推荐 4:3 /1200×900，图标限制以当时 CLI help 为准。比例仅推荐。其他配额和视频要求待最新表单/help 核对，不自动套 233/4399 视频规则。
+2026-09-22用户后台表单确认上传 ZIP/HTML，当前包体上限140 MB。封面/图标为独立 JPG/PNG/JPEG 字段：封面比例4:3，推荐1200×900；图标比例1:1，推荐500×500。本次表单把比例作为要求，像素尺寸仍是推荐。图片字节上限/名称字数未给，需名称与页面地址slug，本片段未给宣传视频字段。见[字段映射](listing-fields.md)与[包体超限流程](package-budget.md)。
 
 未建立前端 AppID/Secret 要求。先完成本地，发布/更新阶段再创作者登录、确认不可变 slug 与目标 ID。构造命令前读取 `toy --help-json` /子命令 help，API 调用用 `--json`；版本/升级命令单独核对，不机械附加所有 flag。
 

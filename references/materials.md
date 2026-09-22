@@ -1,6 +1,6 @@
 # Listing materials
 
-`assets/material-rules.json` (relative to the Skill root) is the single machine-readable rule set. It currently covers 233/4399 only. For documentation-stage platforms use their profiles, report unknowns explicitly, and add rules only after verifying the current fields. Unknown limits must remain unknown. Studio defaults are not platform requirements.
+`assets/material-rules.json` (relative to the Skill root) is the single machine-readable rule set. It covers known 233/4399 fields and the three creator forms supplied on 2026-09-22. Read [listing fields](listing-fields.md) for text/metadata/role mapping and examples. Runtime maturity remains separate from material rules. Unknown limits must remain unknown. Studio defaults are not platform requirements.
 
 ## Provenance and images
 
