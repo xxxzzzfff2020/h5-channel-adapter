@@ -19,6 +19,7 @@ from image_metadata import image_probe
 from inventory_project import digest
 from verify_materials import validate
 from package_preflight import exercise as package_preflight
+from selection_checks import exercise as selection_checks
 
 JPEG = '/9j/4AAQSkZJRgABAgAAAQABAAD//gAQTGF2YzYyLjI4LjEwMQD/2wBDAAgEBAQEBAUFBQUFBQYGBgYGBgYGBgYGBgYHBwcICAgHBwcGBgcHCAgICAkJCQgICAgJCQoKCgwMCwsODg4RERT/xABMAAEBAAAAAAAAAAAAAAAAAAAABwEBAQAAAAAAAAAAAAAAAAAABQcQAQAAAAAAAAAAAAAAAAAAAAARAQAAAAAAAAAAAAAAAAAAAAD/wAARCAAMABADASIAAhEAAxEA/9oADAMBAAIRAxEAPwCOAL+Kf//Z'
 WEBP = 'UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA'
@@ -145,6 +146,7 @@ def main():
         run('check_package_budget.py',[str(artifact),'--channels','xiaohongshu','--report',str(base/'budget.json')])
         results.append('package-budget-without-ffmpeg')
         results.extend(package_preflight(base))
+        results.extend(selection_checks(base))
     print(json.dumps({'passed':len(results),'cases':results,'ffmpeg_on_child_path':False,'platform':sys.platform}))
 
 

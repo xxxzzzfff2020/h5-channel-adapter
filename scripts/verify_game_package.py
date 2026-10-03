@@ -12,7 +12,7 @@ import zipfile
 
 from inventory_project import digest
 
-CHANNELS = {'233', '4399', 'xiaohongshu', 'bilibili-toy', 'xingxia'}
+CHANNELS = set(json.loads((Path(__file__).resolve().parents[1] / 'assets/package-rules.json').read_text(encoding='utf-8'))['channels'])
 SDK_URLS = {
     '233': 'https://cdn.233xyx.com/h5ad/metah5ad_v1.min.js',
     '4399': 'https://h.api.4399.com/h5mini-2.0/h5api-interface.php',

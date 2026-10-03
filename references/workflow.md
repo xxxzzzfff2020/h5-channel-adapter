@@ -1,10 +1,12 @@
 # Adaptation workflow
 
-Prepare independent, rebuildable channel projects and selected listing materials from an existing TapTap H5 game. This is an agent workflow with validation helpers, not a universal source-to-source compiler.
+Prepare independent, rebuildable channel projects and selected listing materials from any existing local H5 game. This is an agent workflow with validation helpers, not a universal source-to-source compiler.
 
 ## Scope and interaction
 
-Identify the game root, authoritative TapTap source, selected channels, and whether the task is a first port, incremental update, requirements assessment or platform-profile update. A discussion of the process is not permission to port a game. If targets are missing, offer the current platform list; for “all platforms”, state that list and apply each platform’s requirements. Read only selected platform profiles.
+Identify the game root, authoritative H5 source and its inspected source kind, selected channels, and whether the task is a first port, incremental update, requirements assessment or platform-profile update. A discussion of the process is not permission to port a game. If targets are missing, offer the current platform list; for “all platforms”, state that list and apply each platform’s requirements. Read only selected platform profiles.
+
+Complete [source and per-target feature selection](selection.md), persist the answers, and constrain all work to its plan. Same-channel TapTap updates preserve existing integration rather than recreating it. Consult [H5 reliability](h5-reliability.md) only for the selected areas.
 
 Use [guided interaction](guided-flow.md) to choose platforms and material scope when missing. Video is optional and requires an explicit selection; projects-only requests skip material work. While waiting for platform selection, inventory sources read-only. After selection, finish independent local work before asking for configuration. One channel waiting for an ID does not block another. Continue already-authorized uploads within their original scope; otherwise deliver local candidates and exact next inputs.
 
@@ -14,7 +16,7 @@ Use [guided interaction](guided-flow.md) to choose platforms and material scope 
 
 Read applicable instructions; inspect source version, Git branch/dirty files, active writers, existing channel directories and old packages. Without Git, capture file hashes. Use the confirmed product name, not a guessed folder name.
 
-Search the game root and TapTap source for brand masters, icons, alternate aspect ratios, screenshots, promotional video, gameplay recordings, music, fonts, copy and licenses. Do not ask for files already present. Backups and timestamps do not establish authority.
+Search the game root and selected source for brand masters, icons, alternate aspect ratios, screenshots, promotional video, gameplay recordings, music, fonts, copy and licenses. Do not ask for files already present. Backups and timestamps do not establish authority.
 
 ```sh
 python3 <skill-dir>/scripts/inventory_project.py <game-root> --output <evidence-dir>/inventory.json
@@ -30,7 +32,7 @@ Keep established folder names. A new layout can be:
 
 ```text
 <game-root>/
-  Taptap项目/                 # original source
+  source-project/            # selected original source
   233项目/                   # complete channel source
     src/ assets/ build configuration and lockfiles
     上架物料/上传文件/        # final upload assets
@@ -79,6 +81,6 @@ Separate local, real-SDK, device, upload, review and release evidence. Verify co
 
 ## Incremental updates
 
-Compare previous SOURCE_BASELINE, current TapTap and current channel in a three-way update. Merge upstream changes while preserving channel hooks, saves and compatibility. For selected video work, rerecord changed UI; label older footage with its actual version. Reuse verified brand masters and recheck exports.
+Compare previous SOURCE_BASELINE, current source and current channel in a three-way update. Merge upstream changes while preserving channel hooks, saves and compatibility. For selected video work, rerecord changed UI; label older footage with its actual version. Reuse verified brand masters and recheck exports.
 
 For new platform knowledge use [extension rules](extending.md), separating user decisions, official rules, observed implementation and assumptions.

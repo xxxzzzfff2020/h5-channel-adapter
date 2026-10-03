@@ -2,9 +2,11 @@
 
 Use available conversation questions, not a new website or approval system. If `request_user_input_async` is present, each suggested-answer question is single-select with free-text input. Never claim native checkboxes, treat a default as submitted, or infer consent from timeout. Follow the actual tool schema; use numbered text choices when no question tool is available.
 
+Start with [source and feature selection](selection.md). Save explicit source/target/per-platform-feature answers before dependent actions; never infer new integrations from what the old source happened to contain.
+
 ## Select platforms
 
-Only ask when the user actually requests adaptation and has not named targets. Offer 233, 4399, Xiaohongshu MiniTool, Bilibili TOY and NetEase Xingxia. With single-select tools, group 2–3 platform-specific yes/no questions or accept one text list. For “all platforms”, state the current list and apply each profile’s compatibility requirements. Do not silently include platforms outside the requested scope.
+Only ask when the user actually requests adaptation and has not named targets. Offer TapTap H5, 233, 4399, Xiaohongshu MiniTool, Bilibili TOY and NetEase Xingxia. With single-select tools, group 2–3 platform-specific yes/no questions or accept one text list. For “all platforms”, state the current list and apply each profile’s compatibility requirements. Do not silently include platforms outside the requested scope.
 
 While waiting for a required selection, inventory source/assets read-only. Do not create unselected channel projects. If several source games are possible, offer known game names rather than guessing from a studio directory. Do not ask users to choose ordinary implementation details.
 

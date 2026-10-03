@@ -39,6 +39,13 @@
         "zip"
       ],
       "basis": "50 MB from official Track A existing-game upload documentation reviewed 2026-09-22; creator forms may also offer workshop-managed content. Recheck the selected upload route; imported H5 uses the existing-game route."
+    },
+    "taptap": {
+      "max_bytes": null,
+      "formats": [
+        "zip"
+      ],
+      "basis": "2026-10-03: verify the current H5 upload workflow and backend limit; no borrowed limit."
     }
   }
 }

@@ -22,3 +22,6 @@ Our responsibility is independent channel projects, code adaptation, listing mat
 Use the actual enabled tool registry to discover platform tools and inspect their schemas. If the official workflow advertises an MCP connector that is not available, state that dependency and provide its verified official setup path; do not call guessed tool names or infer authorization from the presence of a server. Auth/configuration must stay outside frontend packages and this Skill. An MCP schema refresh may matter even when no local CLI version changed.
 
 Updates are checked when this Skill is used. This does **not** create a background monitor, scheduled job or automatic global rewrite.
+
+
+TapTap H5 uses the independent official MiniGame MCP. Setup, credential-free example, schema discovery, app identity, ads and upload ordering are in [TapTap](taptap.md#independent-official-mcp-dependency). Maker MCP is a separate product.

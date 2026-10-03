@@ -2,9 +2,9 @@
 
 ![H5 Channel Adapter — 一个项目，多个发布平台](assets/branding/banner.svg)
 
-**把你的 TapTap H5 游戏带到更多平台，一次发起，按需适配。**
+**把本地 H5 游戏适配到 TapTap 和更多平台，一次发起，按需适配。**
 
-这个 Skill 为 AI Agent 提供各渠道的接入规则、物料处理指引与出包流程。给出项目目录，挑好目标平台和需要制作的物料，代码调整、图片适配与打包由 Agent 接着完成。
+这个 Skill 为 AI Agent 提供各渠道的接入规则、物料处理指引与出包流程。给出项目目录，确认来源类型，挑好目标平台、各平台功能和物料，代码调整、图片适配与打包由 Agent 接着完成。
 
 [English](README.md) · [快速上手](#快速上手) · [支持平台](#支持平台) · [工作流程](#工作流程) · [参与贡献](#参与贡献)
 
@@ -22,6 +22,7 @@
 
 | 平台 | 适配能力与范围 |
 | --- | --- |
+| **TapTap H5** | 新接入或增量维护；按选项处理广告、身份、存档、榜单、分享和诊断，未核实 H5 能力保持待定 |
 | <img src="assets/branding/233.png" width="24" height="24" alt="233"> **233 乐园 H5** | H5 打包、激励广告、上架图文物料 |
 | <img src="assets/branding/4399.ico" width="24" height="24" alt="4399"> **4399 H5 小游戏** | H5 打包、AppID 配置、广告、云存档、可选排行榜 |
 | <img src="assets/branding/xiaohongshu.ico" width="24" height="24" alt="小红书"> **小红书小工具** | 离线 H5 适配、权限配置、小体积 ZIP 与后台字段 |
@@ -51,11 +52,11 @@ git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $sk
 
 其他支持 `SKILL.md` 的 Agent，按其安装方式载入本仓库。中英文共用一次安装。已有同名目录时先检查本地修改；干净的 Git 安装可在 Skill 目录运行 `git pull --ff-only` 更新。
 
-工作室项目可固定已验证的 `v0.5.0` 标签；以后按需更新 Skill，已交付的游戏包不会自动变化。这个仓库提供执行规则和检查工具，具体 SDK 接入与代码改造仍由 Agent 在游戏工程里完成。
+工作室项目可固定已验证的发布标签；以后按需更新 Skill，已交付的游戏包不会自动变化。这个仓库提供执行规则和检查工具，具体 SDK 接入与代码改造仍由 Agent 在游戏工程里完成。
 
 ### 2. 准备源码与物料
 
-把源码、构建说明、TapTap 上架文案和已有图片放进项目主目录。保留原文件夹结构即可；有现成游戏 ZIP 也可以一起放入。
+把源码、构建说明、已有上架文案和已有图片放进项目主目录。保留原文件夹结构即可；有现成游戏 ZIP 也可以一起放入。
 
 **视频是可选输入。** 准备制作或复用宣传视频时，再提供已有宣传片和实录。账号密钥放在本地安全配置中，不混入源码、物料或发布包。
 
@@ -75,6 +76,14 @@ git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $sk
 使用 $h5-channel-adapter，把 <项目绝对路径> 适配到 4399 和 B 站 TOY。
 文案和截图都在主工程里。本次只处理图文，不制作或检查视频。
 ```
+
+## 来源与功能按需选择
+
+来源可为普通 H5、TapTap H5 或其他平台 H5；TapTap → TapTap 属于增量维护，Maker Lua 不属于此转换范围。每个平台分别选择功能，不默认全加，保护已有机制和存档。
+
+[选择流程](references/zh-CN/selection.md)在游戏交付目录保存 `source.kind`、目标和功能状态：`not_selected`、`pending_verification`、`unsupported`、`configured`。单选弹窗不能伪称复选框；无原生多选时使用编号多选与明确汇总确认。缺回答只做只读盘点。
+
+平台功能与离线、签到、音乐、音效、字号／设置等游戏逻辑分别选择。[可靠性配方](references/zh-CN/h5-reliability.md)覆盖存储失败、切号、云冲突、奖励事务、榜单竞态及设备音频，不承诺通用代码已实现。
 
 ## 物料按需选择
 

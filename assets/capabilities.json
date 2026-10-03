@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-03",
+  "source_kinds": [
+    "generic_h5",
+    "taptap_h5",
+    "other_platform_h5"
+  ],
+  "statuses": [
+    "not_selected",
+    "pending_verification",
+    "unsupported",
+    "configured"
+  ],
+  "features": {
+    "ads": {
+      "en": "Rewarded ads",
+      "zh_CN": "激励广告"
+    },
+    "identity": {
+      "en": "Account identity",
+      "zh_CN": "账号身份"
+    },
+    "local_save": {
+      "en": "Local persistence",
+      "zh_CN": "本地存档"
+    },
+    "cloud_save": {
+      "en": "Cloud saves",
+      "zh_CN": "云存档"
+    },
+    "leaderboard": {
+      "en": "Leaderboards",
+      "zh_CN": "排行榜"
+    },
+    "achievements": {
+      "en": "Platform achievements",
+      "zh_CN": "平台成就"
+    },
+    "gifts": {
+      "en": "Gifts / redeem codes",
+      "zh_CN": "礼包／兑换码"
+    },
+    "share": {
+      "en": "Sharing",
+      "zh_CN": "分享"
+    },
+    "vibrate": {
+      "en": "Vibration",
+      "zh_CN": "振动"
+    },
+    "diagnostics": {
+      "en": "Debug feedback / diagnostics",
+      "zh_CN": "调试反馈／诊断"
+    },
+    "multiplayer": {
+      "en": "Multiplayer",
+      "zh_CN": "多人联机"
+    },
+    "review_prompt": {
+      "en": "In-game review prompt",
+      "zh_CN": "游戏内评价入口"
+    }
+  },
+  "game_logic_options": [
+    "offline_progress",
+    "checkin",
+    "music",
+    "sfx",
+    "font_settings",
+    "performance_settings"
+  ],
+  "targets": {
+    "taptap": {
+      "label": "TapTap H5",
+      "features": [
+        "ads",
+        "identity",
+        "local_save",
+        "cloud_save",
+        "leaderboard",
+        "achievements",
+        "gifts",
+        "share",
+        "vibrate",
+        "diagnostics",
+        "multiplayer",
+        "review_prompt"
+      ],
+      "profile": "references/taptap.md"
+    },
+    "233": {
+      "label": "233 Leyuan H5 / 233 乐园 H5",
+      "features": [
+        "ads",
+        "identity",
+        "local_save",
+        "cloud_save",
+        "leaderboard",
+        "achievements",
+        "gifts",
+        "share",
+        "vibrate",
+        "diagnostics",
+        "multiplayer",
+        "review_prompt"
+      ],
+      "profile": "references/233.md"
+    },
+    "4399": {
+      "label": "4399 H5",
+      "features": [
+        "ads",
+        "identity",
+        "local_save",
+        "cloud_save",
+        "leaderboard",
+        "achievements",
+        "gifts",
+        "share",
+        "vibrate",
+        "diagnostics",
+        "multiplayer",
+        "review_prompt"
+      ],
+      "profile": "references/4399.md"
+    },
+    "xiaohongshu": {
+      "label": "Xiaohongshu MiniTool / 小红书小工具",
+      "features": [
+        "ads",
+        "identity",
+        "local_save",
+        "cloud_save",
+        "leaderboard",
+        "achievements",
+        "gifts",
+        "share",
+        "vibrate",
+        "diagnostics",
+        "multiplayer",
+        "review_prompt"
+      ],
+      "profile": "references/xiaohongshu.md"
+    },
+    "bilibili-toy": {
+      "label": "Bilibili TOY / B 站 TOY",
+      "features": [
+        "ads",
+        "identity",
+        "local_save",
+        "cloud_save",
+        "leaderboard",
+        "achievements",
+        "gifts",
+        "share",
+        "vibrate",
+        "diagnostics",
+        "multiplayer",
+        "review_prompt"
+      ],
+      "profile": "references/bilibili-toy.md"
+    },
+    "xingxia": {
+      "label": "NetEase Xingxia / 网易星匣",
+      "features": [
+        "ads",
+        "identity",
+        "local_save",
+        "cloud_save",
+        "leaderboard",
+        "achievements",
+        "gifts",
+        "share",
+        "vibrate",
+        "diagnostics",
+        "multiplayer",
+        "review_prompt"
+      ],
+      "profile": "references/xingxia.md"
+    }
+  },
+  "policy": "Selectable means a user can request verification, not guaranteed support. No feature is enabled by default; configured is not runtime/device verified."
+}

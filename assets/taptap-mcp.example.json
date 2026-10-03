@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "taptap-minigame": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@taptap/instant-games-open-mcp"
+      ],
+      "env": {
+        "TAPTAP_MCP_WORKSPACE_ROOT": "<absolute-game-project-directory>"
+      }
+    }
+  }
+}

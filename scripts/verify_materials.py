@@ -241,7 +241,7 @@ def validate(manifest_path, rules_path):
         warnings.append('Video work deferred by selection; pass covers checked materials only, not a complete listing.')
     return {'schema_version': 3, 'channel': m['channel'], 'game': m.get('game'),
             'processing': {'video': video_enabled}, 'deferred': deferred,
-            'profile_complete': not errors and not deferred,
+            'profile_complete': not errors and not deferred and rules.get('requirements_verified', True),
             'technical_status': 'pass' if not errors else 'fail', 'errors': errors,
             'warnings': warnings, 'files': records, 'manual_review': m.get('manual_review', {}),
             'not_certified': ['visual authenticity/quality', 'full image/video decode and listening',

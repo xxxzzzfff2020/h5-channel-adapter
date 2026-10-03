@@ -1,6 +1,6 @@
 # 资源制作和交付
 
-`<skill-dir>/assets/material-rules.json` 是尺寸/大小/字数的唯一机器规则表。它维护五个平台的已知上架字段，未知上限为空；字段和示例见[字段映射](listing-fields.md)。游戏包体另按[包体超限流程](package-budget.md)检查。默认导出设置不等于平台要求。正式交付核对官方或用户最新表单，无法访问则按已知要求制作并列未核验项，不阻塞不相关工作。
+`<skill-dir>/assets/material-rules.json` 是尺寸/大小/字数的唯一机器规则表。它维护六个平台的已知上架字段，未知上限为空；字段和示例见[字段映射](listing-fields.md)。游戏包体另按[包体超限流程](package-budget.md)检查。默认导出设置不等于平台要求。正式交付核对官方或用户最新表单，无法访问则按已知要求制作并列未核验项，不阻塞不相关工作。
 
 规则中已核实的平台要求才通过 `variants`、`count`、`codecs` 和已知字节上限阻断；`recommended_variants`、`recommended_count`、`recommended_codecs`、`recommended` 与 `recommended_ratio` 只提醒。`null` 表示该约束未知。4399 的 1920×1080 H.264 视频和预备 4–5 张详情截图属于工作室默认，当前后台要求仍须核实。
 

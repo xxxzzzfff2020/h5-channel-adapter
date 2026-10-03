@@ -1,5 +1,11 @@
 # Changelog / 更新记录
 
+## 0.6.0 — 2026-10-03
+
+- Accept generic, TapTap and other-platform H5 sources; add TapTap as the sixth target, including same-channel maintenance. / 接受普通、TapTap 与其他平台 H5 来源，新增 TapTap 第六目标及同渠道维护。
+- Persist explicit per-target capability/material choices and validate resumed scope; unselected work never becomes enabled by default. / 保存逐平台功能与物料选择，恢复时校验范围，未选项目不默认启用。
+- Add independent official MiniGame MCP setup and capability boundaries, plus reusable H5 reliability/acceptance recipes with coverage notes. / 补官方 MiniGame MCP 独立接入、能力边界及 H5 可靠性／验收配方与覆盖表。
+- Extend package and material helpers for TapTap, leaving unverified platform limits explicit. / 检查脚本支持 TapTap，未知规格保持待核实。
 ## 0.5.0 — 2026-09-23
 
 - Treat 4399's video export dimensions/codec and prepared detail-shot sizes/count as studio recommendations, not platform rejection rules. / 4399 宣传片导出尺寸与编码、预备详情图尺寸和数量只提醒，不再冒充平台硬限制。

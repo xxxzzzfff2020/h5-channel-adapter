@@ -40,7 +40,7 @@ If the selected plan still exceeds the limit, show the new measured result and a
 
 ## Execute a chosen removal completely
 
-Work only in that channel's independent source. Record the choice, affected features/resources, before/after hashes and bytes, and retain the original TapTap source and previous package.
+Work only in that channel's independent source. Record the choice, affected features/resources, before/after hashes and bytes, and retain the original H5 source and previous package.
 
 Removing music/video means updating assets **and** imports, manifests, preload/progress totals, decoders/players, playback triggers, lifecycle/ad-resume hooks, scene scripts, settings toggles/sliders, menus, help text and related fallback branches. Do not merely delete files or hide a settings row. Retain sound effects if only BGM was removed. Required gameplay/story/tutorial dependencies need a reviewed alternative, not silent omission.
 

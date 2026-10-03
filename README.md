@@ -2,9 +2,9 @@
 
 ![H5 Channel Adapter — one project, multiple platforms](assets/branding/banner.svg)
 
-**Take your TapTap H5 game to more platforms. Start once, choose what to adapt.**
+**Adapt your local H5 game for TapTap and other platforms. Start once, choose what to adapt.**
 
-This Skill gives AI Agents platform integration rules, listing-material guidance and packaging workflows. Point it at your project, choose platforms and materials, and let the agent carry out the code changes, image preparation and builds.
+This Skill gives AI Agents platform integration rules, listing-material guidance and packaging workflows. Point it at your project, choose source type, platforms, per-platform features and materials, and let the agent carry out the code changes, image preparation and builds.
 
 [简体中文](README.zh-CN.md) · [Quick start](#quick-start) · [Platforms](#platforms) · [Workflow](#workflow) · [Contribute](#contribute)
 
@@ -20,6 +20,7 @@ This Skill gives AI Agents platform integration rules, listing-material guidance
 
 | Platform | Adaptation scope |
 | --- | --- |
+| **TapTap H5** | New or incremental H5 integration; selected ads, identity, saves, leaderboard, sharing and diagnostics; uncertain H5 capabilities stay pending |
 | <img src="assets/branding/233.png" width="24" height="24" alt="233"> **233 Leyuan H5** | H5 packaging, rewarded ads and listing copy/images |
 | <img src="assets/branding/4399.ico" width="24" height="24" alt="4399"> **4399 H5 minigames** | H5 packaging, AppID, ads, cloud saves and optional leaderboards |
 | <img src="assets/branding/xiaohongshu.ico" width="24" height="24" alt="Xiaohongshu"> **Xiaohongshu MiniTool** | Offline H5 adaptation, permissions, compact ZIP and listing fields |
@@ -49,11 +50,11 @@ git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $sk
 
 For other agents supporting `SKILL.md`, use their Skill installation method. One installation serves both languages. If the directory exists, inspect local changes first; clean Git installations can update with `git pull --ff-only` from the Skill directory.
 
-Studios can pin the tested `v0.5.0` tag and update this Skill when needed; existing game packages are not rebuilt automatically. This repository supplies instructions and checks, while the agent still implements SDK and source changes in each game project.
+Studios can pin a tested release tag and update this Skill when needed; existing game packages are not rebuilt automatically. This repository supplies instructions and checks, while the agent still implements SDK and source changes in each game project.
 
 ### 2. Prepare source and materials
 
-Keep source code, build instructions, TapTap listing copy and existing images in the main project folder. Preserve your existing folder structure. Include a current game ZIP if available.
+Keep source code, build instructions, available listing copy and existing images in the main project folder. Preserve your existing folder structure. Include a current game ZIP if available.
 
 **Video is optional.** Provide promotional footage and gameplay recordings when you want video production or reuse. Keep account secrets in secure local configuration, outside source, listing assets and release packages.
 
@@ -63,7 +64,7 @@ Get guided platform and material selection:
 
 ```text
 Use $h5-channel-adapter for <absolute project path>.
-Guide me through choosing platforms and listing materials, then prepare
+Guide me through source type, platforms, per-platform features and listing materials, then prepare
 independent projects and packages. List any platform setup inputs still needed.
 ```
 
@@ -74,6 +75,14 @@ Use $h5-channel-adapter to adapt <absolute project path> for 4399 and Bilibili T
 Copy and screenshots are in the project folder. Process images and copy only;
 do not produce or inspect videos this time.
 ```
+
+## Choose source and features
+
+Sources may be generic H5, TapTap H5 or another platform’s H5 port. TapTap → TapTap is an incremental update. Maker Lua is outside H5 conversion scope. Select features separately for each target; nothing is added by default. Existing game behavior and saves remain protected.
+
+The [selection workflow](references/selection.md) persists `source.kind`, targets and feature statuses (`not_selected`, `pending_verification`, `unsupported`, `configured`) in the game delivery directory. Single-select popups are not checkboxes: use numbered multiple choices and an explicit recap when native multiselect is unavailable. Missing answers allow read-only inventory only.
+
+Platform features and game logic (offline progress, check-in, audio, font/settings) are separate scopes. [Reliability recipes](references/h5-reliability.md) cover storage failure, account switches, cloud conflicts, reward transactions, leaderboard races and device audio without promising a universal implementation.
 
 ## Choose your materials
 
@@ -91,7 +100,7 @@ When selected, 233/4399 videos combine promotional content with real gameplay. S
 
 ```mermaid
 flowchart LR
-    A[Inspect project and assets] --> B[Choose platforms and materials]
+    A[Inspect project and assets] --> B[Choose targets, features and materials]
     B --> C[Prepare projects and selected assets]
     C --> D[Fill platform configuration]
     D --> E[Build platform packages]

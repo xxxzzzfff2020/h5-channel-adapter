@@ -1,6 +1,6 @@
 # Listing manifest fields
 
-Listing requirements were recorded from creator forms on 2026-09-22. `assets/material-rules.json` is the shared machine source for all five platforms; `assets/package-rules.json` covers game upload size separately. Field snapshots are not permanent API contracts. Refresh official tooling/form requirements at use time.
+Listing requirements were recorded from creator forms on 2026-09-22. `assets/material-rules.json` is the shared machine source for the platform catalog; `assets/package-rules.json` covers game upload size separately. Field snapshots are not permanent API contracts. Refresh official tooling/form requirements at use time.
 
 ## New-platform mapping
 
@@ -25,3 +25,5 @@ Every output needs sources with path/hash. Gameplay captures also need a version
 A technical pass covers encoded rules only. Unknown fields, live permissions, visual quality, platform validation and device tests remain separately reported.
 
 Examples / 示例：[xiaohongshu](../assets/material-manifest.xiaohongshu.example.json) · [bilibili-toy](../assets/material-manifest.bilibili-toy.example.json) · [xingxia](../assets/material-manifest.xingxia.example.json)
+
+TapTap preparation roles are icon/cover/detail; required fields and all current form limits remain unverified in the shared rules. Do not claim a complete kit from a helper pass. See [TapTap](taptap.md).

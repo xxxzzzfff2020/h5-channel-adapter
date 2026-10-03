@@ -1,22 +1,26 @@
 ---
 name: h5-channel-adapter
-description: "Prepare an existing TapTap H5 game for multiple publishing platforms: independent source projects, listing assets, guided configuration and game packages. 将已有 TapTap H5 项目适配到多个发布平台，生成独立工程、上架物料与渠道包；支持增量更新和平台扩展。"
+description: "Prepare any existing local H5 game for multiple publishing platforms: independent source projects, listing assets, guided configuration and game packages. 将普通、TapTap 或其他平台 H5 项目适配到多个发布平台，生成独立工程、上架物料与渠道包；支持增量更新和平台扩展。"
 ---
 
 # H5 Channel Adapter / H5 多平台适配
 
-Turn an existing H5 project and its TapTap materials into independent platform projects and listing kits. Guide platform selection, finish credential-independent work first, then collect missing configuration and build each platform's package. Apply this Skill to adaptation, channel updates and platform-profile maintenance.
+Turn an existing local H5 project and its available materials into independent platform projects and listing kits. Guide platform selection, finish credential-independent work first, then collect missing configuration and build each platform's package. Apply this Skill to adaptation, channel updates and platform-profile maintenance.
 
-从现有 H5 工程及 TapTap 物料生成各平台独立工程和上架资料。先引导选平台、完成不依赖凭证的工作，再补齐配置并分别出包；适用于首次适配、渠道更新和平台扩展。
+从现有普通、TapTap 或其他平台 H5 工程及可用物料生成各平台独立工程和上架资料。先引导选平台、完成不依赖凭证的工作，再补齐配置并分别出包；适用于首次适配、渠道更新和平台扩展。
 
 ## Start / 开始
 
-Use the user's language and read one workflow, then only the selected platform references. If targets are absent, offer the platform list through available question tools or short text choices. Use explicit selections; do not silently add platforms or infer answers from defaults/timeouts. For “all platforms”, state the current five-platform list and apply each profile's requirements.
+Use the user's language and read one workflow, then only the selected platform references. If targets are absent, offer the platform list through available question tools or short text choices. Use explicit selections; do not silently add platforms or infer answers from defaults/timeouts. For “all platforms”, state the current six-platform list and apply each profile's requirements.
 
-按用户语言读取一份流程，再按选定平台读取说明。未指定平台时通过可用提问工具或文字选项引导；沿用明确选择，不把默认选中或超时当回答。用户选择“全部平台”时列明当前五个平台，并分别处理其接入条件。
+按用户语言读取一份流程，再按选定平台读取说明。未指定平台时通过可用提问工具或文字选项引导；沿用明确选择，不把默认选中或超时当回答。用户选择“全部平台”时列明当前六个平台，并分别处理其接入条件。
 
 - **English:** [Workflow](references/workflow.md), [guided setup](references/guided-flow.md), [listing materials](references/materials.md).
 - **简体中文：**[适配流程](references/zh-CN/workflow.md)、[引导配置](references/zh-CN/guided-flow.md)、[物料制作](references/zh-CN/materials.md)。
+
+Before adaptation, follow [source and capability selection](references/selection.md) / [来源与功能选择](references/zh-CN/selection.md): source type is single-select; targets and each target’s features are multiselect. Persist explicit choices and reuse them. TapTap is both a possible source and a target, including same-channel incremental maintenance. Maker Lua is not an H5 source. No answer means read-only inventory, no unselected projects or integrations.
+
+适配前单选来源类型，多选目标，逐平台多选功能并保存。已有答案直接沿用，未回答不执行依赖工作；离线、签到、音乐、音效与字体设置单列游戏逻辑，不冒充平台 API。当前弹窗若只支持单选，使用编号多选加汇总确认，不伪称复选框。按所选范围读 [H5 reliability](references/h5-reliability.md) / [H5 可靠性](references/zh-CN/h5-reliability.md)。
 
 ## Material selection / 物料选择
 
@@ -28,6 +32,7 @@ After choosing platforms, ask for **images and copy / images, copy and video / p
 
 | Platform / 平台 | English | 简体中文 |
 | --- | --- | --- |
+| TapTap H5 | [TapTap](references/taptap.md) | [TapTap](references/zh-CN/taptap.md) |
 | 233 Leyuan H5 / 233 乐园 H5 | [233](references/233.md) | [233](references/zh-CN/233.md) |
 | 4399 H5 minigames / 4399 H5 小游戏 | [4399](references/4399.md) | [4399](references/zh-CN/4399.md) |
 | Xiaohongshu MiniTool / 小红书小工具 | [MiniTool](references/xiaohongshu.md) | [小红书](references/zh-CN/xiaohongshu.md) |

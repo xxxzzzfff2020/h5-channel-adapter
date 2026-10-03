@@ -34,6 +34,14 @@
       "sdk_docs": "https://www.bilibili.com/toy/publish/sdk",
       "refresh": "Read current upstream Skill and references; compare installed revision, inspect current CLI help-json and available official MCP schemas.",
       "integration": "official_skill_cli_sdk"
+    },
+    "taptap": {
+      "docs": "https://developer.taptap.cn/minigameapidoc/quick-start/mcp-guide/mcp-setup/",
+      "official_repository": "https://github.com/taptap/instant-games-open-mcp",
+      "npm_package": "@taptap/instant-games-open-mcp",
+      "integration": "official_mcp_host_global_tap",
+      "reviewed_on": "2026-10-03",
+      "refresh": "Read current upstream setup, check installed version and rediscover tool schemas; do not mix with Maker MCP."
     }
   }
 }

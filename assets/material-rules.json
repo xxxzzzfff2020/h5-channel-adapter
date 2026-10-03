@@ -63,6 +63,93 @@
         "cover": {"count": [1, 1], "formats": ["png", "jpeg"], "max_bytes": 5000000, "variants": null, "recommended": [800, 450]},
         "promo_media": {"count": [0, 8], "variants": null, "recommended": [1024, 556], "media": {"image": {"formats": ["png", "jpeg", "webp"], "max_bytes": 5000000}, "video": {"formats": ["mp4", "webm", "ogg"], "max_bytes": 100000000, "max_duration_seconds": 60}}}
       }
+    },
+    "taptap": {
+      "basis": "2026-10-03: preparation roles only; current H5 creator form requirements still require verification.",
+      "unverified": [
+        "TapTap H5 listing required fields, image dimensions/counts/formats/bytes and video requirements must be verified in the current creator form."
+      ],
+      "text": {
+        "name": {
+          "required": false,
+          "max_chars": null
+        },
+        "description": {
+          "required": false,
+          "max_chars": null
+        },
+        "controls": {
+          "required": false,
+          "max_chars": null
+        }
+      },
+      "roles": {
+        "icon": {
+          "count": [
+            0,
+            null
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": null,
+          "variants": null,
+          "basis_override": "Optional prepared image; not a verified platform requirement."
+        },
+        "cover": {
+          "count": [
+            0,
+            null
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": null,
+          "variants": null,
+          "basis_override": "Optional prepared image; not a verified platform requirement."
+        },
+        "detail": {
+          "count": [
+            0,
+            null
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": null,
+          "variants": null,
+          "basis_override": "Optional prepared image; not a verified platform requirement."
+        },
+        "video": {
+          "count": [
+            0,
+            null
+          ],
+          "formats": [
+            "mp4"
+          ],
+          "max_bytes": null,
+          "variants": null,
+          "basis_override": "Optional MP4 preparation format only; current platform acceptance unverified."
+        },
+        "video_cover": {
+          "count": [
+            0,
+            null
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": null,
+          "variants": null,
+          "basis_override": "Optional prepared image; not a verified platform requirement."
+        }
+      },
+      "requirements_verified": false
     }
   }
 }

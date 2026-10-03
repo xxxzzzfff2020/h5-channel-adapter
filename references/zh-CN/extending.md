@@ -12,3 +12,5 @@
 官方 Skill、CLI、MCP 按[上游机制](upstream-tools.md)独立使用和更新，不在本仓库维护修改副本。平台说明不能授权上传、账号变更或新收费服务。
 
 中英文同步维护，机器规则只保留一个来源，影响使用方式的变化记录在 `CHANGELOG.md`。私有项目历史及专属 ID、数值、素材不进入 Skill。贡献流程见[贡献指南](../../CONTRIBUTING.zh-CN.md)。
+
+新增平台同步登记 `assets/capabilities.json` 的目标与可选功能 ID，保留明确选择和核实状态；再运行 `tests/no_ffmpeg.py` 覆盖选择保存／恢复及平台检查。TapTap 未核实表单使用 `requirements_verified: false`，不得把技术通过报为物料完整。

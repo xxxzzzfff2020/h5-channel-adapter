@@ -1,6 +1,6 @@
 # Listing materials
 
-`assets/material-rules.json` (relative to the Skill root) is the single machine-readable rule set. It contains the known listing fields for the five platform profiles. Read [listing fields](listing-fields.md) for text/metadata/role mapping and examples. Unknown limits must remain unknown. Workflow export defaults are not platform requirements.
+`assets/material-rules.json` (relative to the Skill root) is the single machine-readable rule set. It contains the known listing fields for the six platform profiles. Read [listing fields](listing-fields.md) for text/metadata/role mapping and examples. Unknown limits must remain unknown. Workflow export defaults are not platform requirements.
 
 In the rules, `variants`, `count`, `codecs` and known byte limits are enforced only where the profile records a platform requirement. `recommended_variants`, `recommended_count`, `recommended_codecs`, `recommended` and `recommended_ratio` produce advice, not errors. `null` means the constraint is unknown. For 4399, 1920×1080 H.264 video and 4–5 prepared detail shots are studio defaults; current backend requirements still need checking.
 
@@ -14,7 +14,7 @@ With video off, video entries and missing video/cover deliverables appear under 
 
 ## Provenance and images
 
-Inventory the game root and TapTap source. Map roles to source paths/hashes, version, orientation and reuse/convert/recapture/missing status. The helper skips dependencies, backups, generated caches, credentials and symlinks; inspect a backup separately if it holds the only source. It cannot choose the newest authoritative asset or edit images.
+Inventory the game root and selected H5 source. Map roles to source paths/hashes, version, orientation and reuse/convert/recapture/missing status. The helper skips dependencies, backups, generated caches, credentials and symlinks; inspect a backup separately if it holds the only source. It cannot choose the newest authoritative asset or edit images.
 
 Prefer confirmed brand masters and actual current gameplay, then verified supplied assets, fresh channel captures, and generated artwork for missing compositions. Never infer authority from timestamps/names. Export platform variants from high-resolution masters with correct aspect ratios and safe areas; do not stretch. Follow the active image tool's editing constraints, and visually review exact outputs.
 
