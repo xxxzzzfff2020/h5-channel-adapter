@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "recorded_on": "2026-09-22",
+  "recorded_on": "2026-10-06",
   "byte_unit": "decimal MB; conservative interpretation of forms using MB/M",
   "scope": "Actual uploaded game artifact bytes, never listing-media files or uncompressed source directory totals. Recheck live platform limits at use time.",
   "channels": {
@@ -41,11 +41,14 @@
       "basis": "50 MB from official Track A existing-game upload documentation reviewed 2026-09-22; creator forms may also offer workshop-managed content. Recheck the selected upload route; imported H5 uses the existing-game route."
     },
     "taptap": {
-      "max_bytes": null,
+      "max_bytes": 300000000,
       "formats": [
         "zip"
       ],
-      "basis": "2026-10-03: verify the current H5 upload workflow and backend limit; no borrowed limit."
+      "upload_route": "manual_zip",
+      "entry_layout": "single_top_level_directory",
+      "recorded_on": "2026-10-06",
+      "basis": "Owner-reported TapTap H5 manual upload form, 2026-10-06: ZIP only, maximum 300 MB, exactly one top-level directory containing index.html directly. Decimal bytes conservatively. Recheck the current form; this does not specify the MCP build-directory input or its generated archive."
     }
   }
 }

@@ -85,6 +85,8 @@ git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $sk
 
 平台功能与离线、签到、音乐、音效、字号／设置等游戏逻辑分别选择。[可靠性配方](references/zh-CN/h5-reliability.md)覆盖存储失败、切号、云冲突、奖励事务、榜单竞态及设备音频，不承诺通用代码已实现。
 
+**TapTap 接入顺序：**后台建好应用后，先接所选非广告功能并生成本地首包；逐包经 Owner 确认上传、设置后台横竖屏后，再通过 MCP 核验并接广告。禁止为了接广告而发布应用。完整步骤及可转交开发对话的工单见[两阶段流程](references/zh-CN/taptap.md#两阶段接入与发布边界)。
+
 ## 物料按需选择
 
 | 本次要做什么 | 处理内容 | 需要 FFmpeg？ |

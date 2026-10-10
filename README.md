@@ -84,6 +84,8 @@ The [selection workflow](references/selection.md) persists `source.kind`, target
 
 Platform features and game logic (offline progress, check-in, audio, font/settings) are separate scopes. [Reliability recipes](references/h5-reliability.md) cover storage failure, account switches, cloud conflicts, reward transactions, leaderboard races and device audio without promising a universal implementation.
 
+**TapTap onboarding:** once the backend app exists, integrate selected non-ad features and build a local first package. Upload only after per-artifact Owner confirmation, set backend orientation, then verify and integrate ads through MCP. Never publish to enable ads. See the [full sequence and developer handoff template](references/taptap.md#two-stage-integration-and-release-boundary).
+
 ## Choose your materials
 
 | Scope | Work included | FFmpeg needed? |

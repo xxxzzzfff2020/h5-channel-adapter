@@ -78,13 +78,14 @@ def exercise(base):
     results.append('cli-resumes-persisted-selection')
 
     package=base/'taptap.zip'
-    with zipfile.ZipFile(package,'w') as z:z.writestr('index.html','<html><body>Synthetic H5</body></html>')
+    with zipfile.ZipFile(package,'w') as z:z.writestr('game/index.html','<html><body>Synthetic H5</body></html>')
     assert inspect(package,'taptap')['status']=='pass'
     results.append('taptap-static-package')
     budget=check(package,['taptap'],Path(__file__).resolve().parents[1]/'assets/package-rules.json','candidate')
-    assert budget['overall_status']=='needs_limit_verification' and budget['checks'][0]['max_bytes'] is None
-    results.append('taptap-unknown-package-limit-not-pass')
-    with zipfile.ZipFile(package,'w') as z:z.writestr('index.html','<script src="https://cdn.233xyx.com/h5ad/metah5ad_v1.min.js"></script>')
+    assert budget['overall_status']=='within_known_limits' and budget['checks'][0]['max_bytes']==300000000
+    assert 'manual upload' in budget['checks'][0]['basis']
+    results.append('taptap-manual-zip-budget-300-decimal-mb')
+    with zipfile.ZipFile(package,'w') as z:z.writestr('game/index.html','<script src="https://cdn.233xyx.com/h5ad/metah5ad_v1.min.js"></script>')
     assert any('wrong-channel' in e.lower() for e in inspect(package,'taptap')['errors'])
     results.append('taptap-rejects-known-other-channel-sdk')
     manifest=base/'taptap-materials.json';manifest.write_text(json.dumps({'channel':'taptap','game':'Synthetic','source_version':'fixture','processing':{'video':False},'files':[]}))

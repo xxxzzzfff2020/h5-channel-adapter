@@ -16,6 +16,8 @@ If converting color-mix, count source declarations independently; counts must ma
 
 ## Runtime checks
 
+For CDN/subdirectory image failures, use [deployed-resource checks](deployed-assets.md): actual URL/status/MIME/raw bytes, dynamic CSS/SVG/srcset, root and nested deployment, decoding and relevant screens. Local-root success does not establish nested-path or device acceptance. Explicit TapTap device automation follows its [opt-in reference](android-taptap-automation.md).
+
 Ads: completion, cancellation, failure/no fill, timeout, duplicate/late callbacks, persistence failure and restart-safe single rewards. Saves: refresh, corrupt primary, unwritable storage, old versions, multiple windows and channel isolation. Play meaningful actions with a new save; preserve old-save unlock/tutorial state.
 
 Check actual release ZIP contents, CRC, root entry, relative resources, forbidden markers and hashes; smoke-test that artifact. Modern Chromium with an old UA/viewport or fault-injected APIs is not an old kernel or physical Xiaomi 8. Mock ads do not verify real rewards.

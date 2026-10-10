@@ -1,5 +1,21 @@
 # Changelog / 更新记录
 
+## Unreleased — 2026-10-10
+
+- Incorporate inspected time-hotfix lessons: rollback sampling, save/journal day migration, bounded valid boosts, entitlement/offline/cloud time separation, live daily refresh and evidence boundaries; verify MCP-resolved build paths and version-level review versus online state. / 汇入已核对时间热修复经验：回拨采样、主档／日志日界迁移、合法加速、权益／离线／云时间隔离、长开跨日及证据边界；补 MCP 路径解析和版本级审核／线上核验。
+- Add opt-in Android USB-device TapTap automation with full-flow startup confirmation, existing-tool/package reuse, fresh preview identity, conditional CDP and per-case read/write evidence; document observed automatic review and immediate-release risk plus CDN subdirectory resource diagnosis. / 新增按需安卓 USB 真机 TapTap 自动化：完整启动确认、复用工具与包、新鲜版本身份、有条件 CDP 及逐用例读写证据；纳入实测自动提审／立即发布风险与 CDN 子目录资源排查。
+
+## Unreleased — 2026-10-06
+
+- Correct TapTap manual ZIP packaging from the Owner-reported 2026-10-06 form: exactly one top-level folder with a direct index.html, at most 300 decimal MB; add dedicated preflight and regressions while preserving MCP build-directory and 233/4399 contracts. / 按 2026-10-06 Owner 转交后台表单修正 TapTap 手动 ZIP：唯一顶层文件夹内直接包含 index.html、最多十进制 300 MB；补专属预检及回归，保留 MCP 构建目录和 233／4399 独立契约。
+- Add the TapTap onboarding sequence and developer handoff: selected non-ad features before the first package, per-artifact confirmed upload and backend orientation before ads, and no publication to enable ads; align workflow entry points with the upload gate. / 新增 TapTap 两阶段接入及开发交接模板：首包前接所选非广告功能，逐包确认上传和后台方向核验后接广告，禁止为接广告发布；同步各流程入口的上传确认边界。
+- Extend rewarded-ad guidance for completion before show resolves, optional owned instances, verified/deduplicated host lifecycle, entitlement-level idempotency and recoverable confirmation-ledger commits; keep source assertions and case timeouts separate from executed evidence and defaults. / 补充完成早于 show 返回、可选独占实例、宿主生命周期核验去重、权益级幂等与确认账本恢复；来源自述和案例时长不冒充执行证据或默认值。
+- Require per-artifact Owner confirmation before any external H5 game upload, with target, hash, purpose and live-impact disclosure. / 明确所有 H5 游戏外部上传的逐制品 Owner 二次确认及目标、哈希、用途和线上影响说明。
+
+## Unreleased — 2026-10-04
+
+- Clarify TapTap rewarded-ad readiness, shared request ownership, external-jump handling, one recovery budget, durable reward commits and bounded diagnostics; separate official API evidence from uncorroborated device anecdotes. / 补充 TapTap 广告就绪、共享请求所有权、外跳、单次恢复预算、奖励持久化与有界诊断；区分官方接口证据和待补证设备转述。
+
 ## 0.6.0 — 2026-10-03
 
 - Accept generic, TapTap and other-platform H5 sources; add TapTap as the sixth target, including same-channel maintenance. / 接受普通、TapTap 与其他平台 H5 来源，新增 TapTap 第六目标及同渠道维护。

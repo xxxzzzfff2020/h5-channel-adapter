@@ -8,7 +8,9 @@ Identify the game root, authoritative H5 source and its inspected source kind, s
 
 Complete [source and per-target feature selection](selection.md), persist the answers, and constrain all work to its plan. Same-channel TapTap updates preserve existing integration rather than recreating it. Consult [H5 reliability](h5-reliability.md) only for the selected areas.
 
-Use [guided interaction](guided-flow.md) to choose platforms and material scope when missing. Video is optional and requires an explicit selection; projects-only requests skip material work. While waiting for platform selection, inventory sources read-only. After selection, finish independent local work before asking for configuration. One channel waiting for an ID does not block another. Continue already-authorized uploads within their original scope; otherwise deliver local candidates and exact next inputs.
+Use [guided interaction](guided-flow.md) to choose platforms and material scope when missing. Video is optional and requires an explicit selection; projects-only requests skip material work. While waiting for platform selection, inventory sources read-only. After selection, finish independent local work before asking for configuration. One channel waiting for an ID does not block another. Every external game upload requires [per-artifact Owner confirmation](h5-reliability.md#h5-external-upload-confirmation); general or previous upload authorization does not replace it. Otherwise deliver local candidates and exact next inputs.
+
+For TapTap, apply the [two-stage integration sequence](taptap.md#two-stage-integration-and-release-boundary) within the phases below. It defines non-ad work before the first package, upload/orientation prerequisites for ads, the prohibition on publishing to enable ads, and the developer-chat handoff template. The generic phases do not override that order.
 
 ## Phase 1: credential-independent work
 
@@ -75,7 +77,7 @@ Confirm game/channel identity, fill required fields and enabled capabilities, re
 
 Accept partial answers. Store non-secret IDs, permissions and gaps in existing channel notes; resume ready channels immediately. Pending permissions may allow a disabled-feature candidate; never claim those features work. New product systems require explicit scope.
 
-Deliver clickable source, game ZIP, material ZIP, copy and validation records. If the user uploads, ask for the preview URL; if uploading is authorized, continue within scope. Do not preserve temporary preview tokens in reusable documentation.
+Deliver clickable source, game ZIP, material ZIP, copy and validation records. If the user uploads, collect the resulting upload record or preview URL; if uploading for the user, apply the per-artifact confirmation gate above. Review and publication require their own authorization. Do not preserve temporary preview tokens in reusable documentation.
 
 Separate local, real-SDK, device, upload, review and release evidence. Verify completed/cancelled ads and save round trips on the real host. A selected upload, QR code or successful build is not publication.
 

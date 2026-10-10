@@ -12,7 +12,8 @@ import zipfile
 
 from inventory_project import digest
 
-CHANNELS = set(json.loads((Path(__file__).resolve().parents[1] / 'assets/package-rules.json').read_text(encoding='utf-8'))['channels'])
+PACKAGE_RULES = json.loads((Path(__file__).resolve().parents[1] / 'assets/package-rules.json').read_text(encoding='utf-8'))['channels']
+CHANNELS = set(PACKAGE_RULES)
 SDK_URLS = {
     '233': 'https://cdn.233xyx.com/h5ad/metah5ad_v1.min.js',
     '4399': 'https://h.api.4399.com/h5mini-2.0/h5api-interface.php',
@@ -77,6 +78,21 @@ def test_name(name):
             and Path(leaf).suffix.lower() in {'.html', '.js', '.mjs'})
 
 
+def taptap_zip_entry(items, errors):
+    """Manual ZIP upload only; explicit directory records are optional."""
+    roots = {item.filename.split('/', 1)[0] for item in items}
+    if len(roots) != 1:
+        errors.append('TapTap manual ZIP must contain exactly one top-level directory')
+    if any(not item.is_dir() and '/' not in item.filename for item in items):
+        errors.append('TapTap manual ZIP must not contain root-level files')
+    files = {item.filename for item in items if not item.is_dir()}
+    entry = next(iter(roots)) + '/index.html' if len(roots) == 1 else None
+    if entry not in files:
+        errors.append('TapTap index.html must be directly inside the single top-level directory')
+        return None
+    return entry
+
+
 def static_ref(source, target, names, channel, errors, unverified):
     target = target.strip()
     if not target or target.startswith('#') or target.startswith(('data:', 'blob:', 'javascript:')):
@@ -113,6 +129,8 @@ def inspect(path, channel, expected_public_id=None):
         raise ValueError('Provide an existing game ZIP or, for TOY, standalone HTML')
     before = path.stat()
     errors, unverified = [], []
+    if channel == 'taptap' and before.st_size > PACKAGE_RULES[channel]['max_bytes']:
+        errors.append(f"TapTap manual ZIP exceeds {PACKAGE_RULES[channel]['max_bytes']} bytes")
     if path.suffix.lower() in {'.html', '.htm'}:
         if channel != 'bilibili-toy':
             errors.append('Standalone HTML is only supported for Bilibili TOY')
@@ -138,14 +156,15 @@ def inspect(path, channel, expected_public_id=None):
         if not zipfile.is_zipfile(path):
             raise ValueError('Artifact has .zip suffix but is not a ZIP')
         with zipfile.ZipFile(path) as archive:
-            files = [i for i in archive.infolist() if not i.is_dir()]
+            items = archive.infolist()
+            files = [i for i in items if not i.is_dir()]
             names = [i.filename for i in files]
             name_set = set(names)
             if not files:
                 errors.append('ZIP contains no files')
             if len(name_set) != len(names) or len({n.casefold() for n in names}) != len(names):
                 errors.append('Duplicate or case-colliding ZIP paths')
-            for item in archive.infolist():
+            for item in items:
                 name = item.filename
                 if unsafe_name(name.rstrip('/') if item.is_dir() else name):
                     errors.append('Unsafe ZIP path: ' + name[:120])
@@ -162,6 +181,8 @@ def inspect(path, channel, expected_public_id=None):
                 if 'index.html' not in name_set:
                     errors.append('Root index.html is missing')
                 entry = 'index.html'
+            elif channel == 'taptap':
+                entry = taptap_zip_entry(items, errors)
             elif channel == 'xiaohongshu':
                 if len(html) != 1:
                     errors.append('Xiaohongshu package must have exactly one HTML entry')
@@ -250,7 +271,9 @@ def inspect(path, channel, expected_public_id=None):
             'unverified': sorted(set(unverified)), 'static_bytes_checked': checked_bytes,
             'public_id_check': 'literal_found' if expected_public_id and not any('Expected public ID' in x for x in errors + unverified)
                                else 'missing_or_incomplete' if expected_public_id else 'not_requested',
-            'scope': 'Static package checks only; no SDK, host, device, upload or review certification.'}
+            'scope': ('TapTap manual ZIP layout and byte limit; not MCP build-directory input. '
+                      if channel == 'taptap' else '') +
+                     'Static package checks only; no SDK, host, device, upload or review certification.'}
 
 
 def main():

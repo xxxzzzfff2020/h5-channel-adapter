@@ -43,7 +43,11 @@ Check current requirements and project compatibility before committing to a feat
 
 先核对当前规则与项目条件，再确定功能接入方式。平台说明用于指导实现，不能替代具体项目的平台测试。官方 Skill/CLI/MCP 独立使用并跟随更新。
 
+For TapTap onboarding, follow the [two-stage sequence and developer handoff](references/taptap.md#two-stage-integration-and-release-boundary): selected non-ad features → confirmed first upload → backend orientation → ads. Never publish to enable ads. / 本地开发接近完成、开始接入 TapTap 时，遵循[两阶段流程及开发交接模板](references/zh-CN/taptap.md#两阶段接入与发布边界)：先接所选非广告功能，再逐包确认首包上传、设置后台方向，最后接广告；禁止为接广告发布应用。
+
 ## Delivery / 交付
+
+Read [Android-device TapTap automation](references/android-taptap-automation.md) / [安卓真机自动化](references/zh-CN/android-taptap-automation.md) only for an explicit device-automation request; require its startup confirmation before device actions. Ordinary integration or Skill maintenance does not start it. For missing images or subdirectory deployment, read [deployed assets](references/deployed-assets.md) / [部署资源排查](references/zh-CN/deployed-assets.md).
 
 1. **Prepare before asking for IDs.** Inventory source and local materials, preserve one source baseline, create independent channel projects and complete work that does not require missing configuration. Preserve originals, saves and previous packages. / **先准备，再补 ID**：盘点源码和本地物料，固定来源，创建独立工程；保护原工程、存档与旧包。
 2. **Guide the next step per platform.** Provide ready-to-use listing copy, material paths, package status and the actual missing fields. Continue unblocked platforms. Keep server secrets out of frontend code and reports. / 按平台展示建项资料、文件、包状态与缺失字段，其他平台继续；服务端密钥不进前端或报告。
@@ -51,5 +55,7 @@ Check current requirements and project compatibility before committing to a feat
 4. **Ask before reducing content.** Check original and final package sizes using [package budgets](references/package-budget.md) / [包体流程](references/zh-CN/package-budget.md). On overflow, obtain a specific plan; an approved media removal must also update menus, playback and save compatibility. / 初始包和最终包均测大小；超限先选方案，删媒体时同步菜单、播放逻辑与旧档兼容。
 5. **Fit the environment.** Follow [macOS/Windows guidance](references/portability.md) / [系统环境](references/zh-CN/portability.md). Default Android target: Xiaomi 8 / Android 10, unless overridden. Check host-engine constraints using [compatibility guidance](references/compatibility.md) / [兼容说明](references/zh-CN/compatibility.md). / 按系统执行，安卓默认小米 8、Android 10，并单独核对宿主内核。
 6. **Check the final artifact and report the actual result.** Run [game-package preflight](references/package-budget.md) / [游戏包预检](references/zh-CN/package-budget.md) on each candidate. Keep the short [validation-state template](assets/validation-status.example.md) in the game's delivery notes. Distinguish local preparation, SDK/device testing and platform upload/review/release. Never fabricate rewarded-ad completion or borrow another game's IDs. / 对每个候选包运行静态预检，在游戏交付文档记录简短验证状态；区分本地准备、SDK/真机测试与上传/审核/发布，不伪造广告完成、不借用其他游戏 ID。
+
+Before any external game-package upload, follow the [per-artifact Owner confirmation gate](references/h5-reliability.md#h5-external-upload-confirmation) / [逐制品 Owner 二次确认](references/zh-CN/h5-reliability.md#h5-外部上传确认), including test packages, reuploads and combined packaging/upload tools.
 
 To add or update a platform, read [extension guidance](references/extending.md) / [扩展说明](references/zh-CN/extending.md). Repository contributions start with [CONTRIBUTING](CONTRIBUTING.md) / [贡献指南](CONTRIBUTING.zh-CN.md). Keep reusable instructions independent of private project history.

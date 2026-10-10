@@ -2,6 +2,8 @@
 
 Check package size twice: the frozen TapTap artifact at intake, then each actual channel artifact after building. Use `assets/package-rules.json` as the dated limit registry. Current known snapshots: Xiaohongshu ZIP 10 MB; Bilibili ZIP/HTML 140 MB; Xingxia existing-game Track A 50 MB from official docs. Workshop-managed publishing is a separate route; confirm the limit for the chosen upload route. 233/4399 package limits remain unknown. Never confuse a promotional-video limit with the game-package limit. MB is interpreted conservatively as decimal bytes; refresh the real form at use time.
 
+TapTap's **manual ZIP upload** snapshot reported by the Owner on 2026-10-06 is 300 MB (300,000,000 bytes), with [one top-level folder containing index.html directly](taptap.md#manual-zip-layout-and-size). Its registry entry is scoped to `manual_zip`; it does not establish the MCP build-directory contract or MCP limits. Recheck the selected route's current form/tool before use.
+
 ## Measure before asking
 
 Use the existing authoritative TapTap ZIP when available; otherwise build an isolated baseline with the existing build process. Do not compare the entire source folder or a material archive to an upload limit. Record source version/hash and actual artifact bytes. Each target may bundle differently: an initially small package can grow, and an initially large one may fit after packaging. Recheck each final artifact.
@@ -24,6 +26,8 @@ python3 <skill-dir>/scripts/verify_game_package.py <channel-game.zip> --channel 
 ```
 
 For other channels omit `--expected-public-id`; TOY also accepts a standalone `.html`. The ID option currently checks only 4399 and records whether its public value appears, never the value itself. The check reads ZIP entries and CRC, entry layout, static HTML/CSS local assets, known wrong-channel SDK script URLs, 4399's page-game API marker, selected mock/test markers, and obvious credential/development files. Xiaohongshu's recorded offline file whitelist and TOY's relative-path requirement are also checked. The scan is bounded; an oversized text entry yields `needs_review`. Dynamic JS-generated paths, SDK callbacks, host behavior, device checks and backend acceptance remain separate. Exit codes: 0 = static checks passed, 1 = static errors, 2 = bad arguments/existing report, 3 = incomplete review. A missing 4399 ID leaves a local candidate at `needs_review`, not a publish-ready pass.
+
+For TapTap manual ZIP candidates use `--channel taptap`: preflight enforces the single top-level folder, direct `index.html`, no root files or extra folders (including empty ones), safe paths and the dated byte limit. Run the budget helper with `--channels taptap --stage candidate` as well. The 233/4399 root-entry rules remain independent; these TapTap checks do not validate an MCP build-directory input.
 
 ## Required decision when over limit
 
