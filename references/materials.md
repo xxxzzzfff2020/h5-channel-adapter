@@ -39,3 +39,5 @@ python3 <skill-dir>/scripts/verify_materials.py <manifest.json> --report <eviden
 ```
 
 The helper checks actual encoding, size/ratio/dimensions, roles/counts, text limits and source records. MB uses decimal bytes. It does not watch video, certify authenticity/branding/audio or verify live backend rules. `pass` means encoded technical rules only. Report manual review, host and device validation separately; suffixes must match actual encodings.
+
+For 4399, use the [listing-copy template](../assets/listing-copy.4399.example.md) and [field-specific delivery checks](4399.md#media-constraints-and-rechecks). A supplied video-cover image is checked on the image path even with video off. Any encoded byte/dimension violation blocks technical pass; preserve originals and repair/recheck only within the actual authorization. Owner-handled replacement files stay pending until received and tested. Never use image/video dimensions as the recommended game viewport.

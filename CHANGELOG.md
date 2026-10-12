@@ -1,5 +1,10 @@
 # Changelog / 更新记录
 
+## Unreleased — 2026-10-12
+
+- Enforce the Owner-reported 4399 video-cover limit with a conservative 500,000-byte cap, scoped to that image role; add byte/dimension and repair/recheck regressions. / 按 Owner 当前后台反馈为 4399 视频封面执行保守 500,000 字节上限，仅限该图片字段；补字节／尺寸与修复复查回归。
+- Add bilingual 4399 listing copy with explicit game width, height and orientation, separate from promotional-media specifications; preserve unknown rejection reasons and pending Owner-corrected artifacts. / 新增含游戏宽高与方向的双语 4399 上架文案模板，与宣传物料规格分开；保留未知拒绝原因和 Owner 修正产物待验状态。
+
 ## Unreleased — 2026-10-10
 
 - Incorporate inspected time-hotfix lessons: rollback sampling, save/journal day migration, bounded valid boosts, entitlement/offline/cloud time separation, live daily refresh and evidence boundaries; verify MCP-resolved build paths and version-level review versus online state. / 汇入已核对时间热修复经验：回拨采样、主档／日志日界迁移、合法加速、权益／离线／云时间隔离、长开跨日及证据边界；补 MCP 路径解析和版本级审核／线上核验。

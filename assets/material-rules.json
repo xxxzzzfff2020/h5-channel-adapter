@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "recorded_on": "2026-09-22",
+  "recorded_on": "2026-10-12",
   "byte_unit": "decimal MB",
   "channels": {
     "233": {
@@ -18,12 +18,12 @@
     },
     "4399": {
       "basis": "4399 创作者后台字段；视频、截图的默认制作标准不代表平台硬限制",
-      "unverified": ["视频时长与大小上限", "图片字节上限", "详情截图字段、数量和规格", "当前后台额外必填字段"],
+      "unverified": ["视频时长与大小上限", "图标、宣传图及详情截图字节上限", "视频封面500K的精确字节定义（本地保守按500000字节执行）", "详情截图字段、数量和规格", "当前后台额外必填字段"],
       "text": {"description": 300, "controls": 300},
       "roles": {
         "icon": {"count": [1, 1], "formats": ["png"], "max_bytes": null, "variants": [[124, 124, "exact"]]},
         "promo": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[300, 200, "exact"]]},
-        "video_cover": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": null, "variants": [[1080, 1920, "exact"]]},
+        "video_cover": {"count": [1, 1], "formats": ["jpeg"], "max_bytes": 500000, "variants": [[1080, 1920, "exact"]], "recorded_on": "2026-10-12", "basis_override": "Owner 当前4399后台反馈：视频封面1080×1920、不超过500K；本地保守按≤500000字节执行，非平台已确认的精确字节定义。仅覆盖视频封面，其他图片字段逐项核实，交付时复核当前表单。"},
         "video": {"count": [1, 1], "formats": ["mp4"], "max_bytes": null, "variants": null, "recommended_variants": [[1920, 1080, "exact"]], "recommended_codecs": ["h264"], "basis_override": "宣传与实录合成；尺寸和编码是工作流导出默认值，并非已核实的平台硬限制", "require_promo_gameplay": true},
         "detail": {"count": [0, null], "recommended_count": [4, 5], "formats": ["png", "jpeg"], "max_bytes": null, "variants": null, "recommended_variants": [[720, 1280, "min"], [1280, 720, "min"]], "basis_override": "可选预备截图，数量和尺寸是工作室建议，非已核实平台要求"}
       }

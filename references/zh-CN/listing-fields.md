@@ -22,6 +22,8 @@ B 站封面4:3、图标1:1按表单比例检查，1200×900、500×500仅推荐�
 
 技术通过仅覆盖已编码规则；未知字段、权限、视觉、平台与真机仍分别记录。
 
+4399 的每份上架文案须按[专用模板](../../assets/listing-copy.4399.example.md)填写建议游戏宽、高和横竖屏，与图标、宣传图、视频封面及视频尺寸分开。[4399 交付说明](4399.md#上架文案中的游戏分辨率)给出当前 FAQ 与逐游戏推荐要求；物料脚本不验证运行时自适应。视频封面必须同时满足机器表的尺寸和保守字节上限，其他图片字节限制仍逐字段核实。
+
 Examples / 示例：[xiaohongshu](../../assets/material-manifest.xiaohongshu.example.json) · [bilibili-toy](../../assets/material-manifest.bilibili-toy.example.json) · [xingxia](../../assets/material-manifest.xingxia.example.json)
 
 TapTap 预备物料角色为 icon/cover/detail，当前表单必填项与全部规格仍待核实；脚本通过不代表全套已齐，见 [TapTap](taptap.md)。

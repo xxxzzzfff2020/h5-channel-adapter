@@ -24,6 +24,8 @@ Every output needs sources with path/hash. Gameplay captures also need a version
 
 A technical pass covers encoded rules only. Unknown fields, live permissions, visual quality, platform validation and device tests remain separately reported.
 
+For 4399, every listing-copy document must include the recommended game width, height and orientation using the [dedicated template](../assets/listing-copy.4399.example.md). These viewport fields are separate from icon, promotional image, video-cover and video dimensions. Read [4399 delivery guidance](4399.md#game-resolution-in-listing-copy) for the current FAQ and per-game recommendation; material validation alone does not verify runtime adaptation. Video covers require both the recorded dimensions and conservative byte limit in the shared registry; other image byte limits remain field-specific.
+
 Examples / 示例：[xiaohongshu](../assets/material-manifest.xiaohongshu.example.json) · [bilibili-toy](../assets/material-manifest.bilibili-toy.example.json) · [xingxia](../assets/material-manifest.xingxia.example.json)
 
 TapTap preparation roles are icon/cover/detail; required fields and all current form limits remain unverified in the shared rules. Do not claim a complete kit from a helper pass. See [TapTap](taptap.md).
