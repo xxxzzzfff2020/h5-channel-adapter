@@ -119,6 +119,11 @@ def main():
                            'files': [item('icon', small), item('promo', promo),
                                      item('video_cover', portrait), video(movie4399)]}
         check('valid-4399', channel_4399, True)
+        explicit = copy.deepcopy(channel_4399)
+        explicit['files'][-1]['target_dimensions'] = [1920, 1080]
+        check('video-explicit-width-height-matches', explicit, True)
+        explicit['files'][-1]['target_dimensions'] = [1080, 1920]
+        check('video-explicit-width-height-rejects-swapped-orientation', explicit, False)
         channel_4399['files'][-1] = video(movie)
         path = check('4399-workflow-video-size-is-advisory', channel_4399, True)
         report = validate(path, SKILL / 'assets/material-rules.json')

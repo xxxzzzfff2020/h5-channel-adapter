@@ -62,6 +62,17 @@ def exercise(base, skill, image, item, run):
     assert {d['role'] for d in report['deferred']} == {'video'}
     results.append('4399-cover-exact-byte-limit-checked-with-video-off')
 
+    requested = copy.deepcopy(manifest)
+    requested['files'][2]['target_dimensions'] = [1080, 1920]
+    assert verify('4399-explicit-portrait-target', requested)[1]['technical_status'] == 'pass'
+    results.append('material-explicit-width-height-target-matches')
+    requested['files'][2]['target_dimensions'] = [1920, 1080]
+    assert any('explicitly selected' in e for e in verify('4399-swapped-target', requested)[1]['errors'])
+    results.append('material-explicit-width-height-target-rejects-swapped-orientation')
+    requested['files'][2]['target_dimensions'] = [True, 1920]
+    assert any('invalid target_dimensions' in e for e in verify('4399-invalid-target', requested)[1]['errors'])
+    results.append('material-explicit-target-rejects-invalid-width')
+
     oversized = jpeg('4399-cover-one-byte-over.jpg', 'cover', 500001)
     bad = copy.deepcopy(manifest)
     bad['files'][2] = item('video_cover', oversized)

@@ -110,3 +110,7 @@ For each selected area record **already covered / adopted / not applicable / pen
 | Historical audio/device/feedback observations | Evidence boundaries retained; no cross-project device or release guarantee. |
 
 This table covers engineering topics, not a claim to ship implementations. Public distribution contains generalized contracts only, no private source documents, account/player data, internal task links or project assets.
+
+## Native-store startup compatibility
+
+For selected native-store work, use the [boot and recovery matrix](native-storage-boot.md). Confirm authoritative inventory before interpreting absence; preserve corruption and pending progress, keep optional browser migration atomic, unchanged startup read-only, and player-chosen temporary play strictly nonpersistent. Existing local saves do not establish account/cloud/recommendation/ranking SDK integration. Record each actual feature and acceptance layer separately.

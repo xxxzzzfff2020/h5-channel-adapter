@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "recorded_on": "2026-10-06",
+  "recorded_on": "2026-10-13",
   "byte_unit": "decimal MB; conservative interpretation of forms using MB/M",
   "scope": "Actual uploaded game artifact bytes, never listing-media files or uncompressed source directory totals. Recheck live platform limits at use time.",
   "channels": {
@@ -12,18 +12,26 @@
       "basis": "Package size limit not yet recorded; verify the current creator requirements; do not reuse the 500 MB promotional-video limit."
     },
     "4399": {
-      "max_bytes": null,
+      "max_bytes": 2000000000,
       "formats": [
         "zip"
       ],
-      "basis": "Package size limit not yet recorded; verify the current creator requirements."
+      "basis": "Owner-delegated read-only current 4399 main game-upload form, 2026-10-12: single-file cap 2G. Conservatively 2,000,000,000 bytes; exact G byte definition not confirmed. This field covers the game upload only, not listing media or other platforms. Refresh the actual selected form.",
+      "upload_route": "creator_main_game_file",
+      "recorded_on": "2026-10-12"
     },
     "xiaohongshu": {
       "max_bytes": 10000000,
       "formats": [
         "zip"
       ],
-      "basis": "Creator upload form, 2026-09-22: ZIP only, maximum 10 MB."
+      "basis": "Creator upload form, 2026-09-22: ZIP only, maximum 10 MB.",
+      "resource_budget": {
+        "base64_review_decoded_bytes": 102400,
+        "base64_max_decoded_bytes": 1048576,
+        "recorded_on": "2026-10-13",
+        "basis": "Official minitool builder performance-budget.md inspected 2026-10-13: decoded Base64 above 100 KiB requires documented resource review; a single decoded payload may not exceed 1 MiB. Prefer a permitted separate resource; this does not approve an audio packaging workaround."
+      }
     },
     "bilibili-toy": {
       "max_bytes": 140000000,

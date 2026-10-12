@@ -86,3 +86,7 @@ Separate local, real-SDK, device, upload, review and release evidence. Verify co
 Compare previous SOURCE_BASELINE, current source and current channel in a three-way update. Merge upstream changes while preserving channel hooks, saves and compatibility. For selected video work, rerecord changed UI; label older footage with its actual version. Reuse verified brand masters and recheck exports.
 
 For new platform knowledge use [extension rules](extending.md), separating user decisions, official rules, observed implementation and assumptions.
+
+## Organized current delivery
+
+Keep each platform's current game ZIP, listing copy, images and selected promotional video in its established delivery folder. Shared reusable video may stay in one source location with exact platform references. Follow [the compact delivery record](../assets/channel-delivery.example.md): selected version, exact path/size/hash, checks and one artifact to upload. Preserve older packages and Owner edits. Generated, Owner-uploaded, reviewed and online identities remain separate; unknown uploaded hashes stay unknown. Music/branding fixes do not imply newly integrated native SDK capabilities. The existing per-artifact game-upload reconfirmation gate still applies.

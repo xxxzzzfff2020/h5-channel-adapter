@@ -163,6 +163,13 @@ def validate(manifest_path, rules_path):
             record = {'role': role, 'path': rel, 'format': fmt, 'width': w, 'height': h,
                       'bytes': p.stat().st_size, 'sha256': digest(p), 'probe': info}
             records.append(record)
+            requested = entry.get('target_dimensions')
+            if requested is not None:
+                if (not isinstance(requested, list) or len(requested) != 2
+                        or any(type(v) is not int or v <= 0 for v in requested)):
+                    errors.append(f'{role}: invalid target_dimensions; use positive integer width and height')
+                elif [w, h] != requested:
+                    errors.append(f'{role}: output differs from explicitly selected target_dimensions {requested}')
             if 'error' in info:
                 errors.append(f'{role}: media probe failed')
             if fmt not in constraints.get('formats', []):

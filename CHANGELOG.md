@@ -1,5 +1,10 @@
 # Changelog / 更新记录
 
+## Unreleased — 2026-10-13
+
+- Add channel-specific music decisions, built branding checks and scoped 4399 upload name/2G field preflight. / 补逐平台音乐选择、成品竞品文案检查和 4399 上传文件名／2G 字段预检。
+- Add native-store boot/recovery exception guidance, current XHS builder identity/resource review, explicit video geometry checks and organized artifact delivery. / 补原生存储异常指引、小红书构建器身份／资源审查、视频明确宽高检查与交付身份记录。
+
 ## Unreleased — 2026-10-12
 
 - Enforce the Owner-reported 4399 video-cover limit with a conservative 500,000-byte cap, scoped to that image role; add byte/dimension and repair/recheck regressions. / 按 Owner 当前后台反馈为 4399 视频封面执行保守 500,000 字节上限，仅限该图片字段；补字节／尺寸与修复复查回归。

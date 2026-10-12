@@ -27,6 +27,11 @@ TEST_CODE = re.compile(rb'\b(?:simulateAdSuccess|grantRewardForTest|mockReward|s
 WRONG_4399_API = re.compile(rb'\b(?:window\.)?H5API\b')
 CSS_URL = re.compile(r'url\(\s*[\'\"]?([^\'\")]+)|@import\s+[\'\"]([^\'\"]+)', re.I)
 DRIVE = re.compile(r'^[A-Za-z]:')
+COMPETING_BRAND = re.compile(r'taptap', re.I)
+RESOURCE_BUDGET = PACKAGE_RULES['xiaohongshu']['resource_budget']
+BASE64_MIN_CHARS = RESOURCE_BUDGET['base64_review_decoded_bytes'] // 3 * 4
+BASE64_LITERAL = re.compile(rb"(['\"])(?:data:[^'\"\r\n,]{1,80};base64,)?([A-Za-z0-9+/]{" +
+                            str(BASE64_MIN_CHARS).encode() + rb",}={0,2})\1")
 
 
 class HTMLRefs(HTMLParser):
@@ -37,9 +42,23 @@ class HTMLRefs(HTMLParser):
         self.inline_scripts = 0
         self.inline_handlers = 0
         self.iframes = 0
+        self.player_text = []
+        self.media_refs = []
+        self.hidden_tags = []
+        self.media_depth = 0
 
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
+        if tag in {'script', 'style'}:
+            self.hidden_tags.append(tag)
+        if tag in {'audio', 'video'}:
+            self.media_depth += 1
+        if tag in {'audio', 'video'} or tag == 'source' and self.media_depth:
+            if values.get('src'):
+                self.media_refs.append(values['src'])
+        self.player_text.extend(values[k] for k in ('title', 'alt', 'aria-label', 'placeholder') if values.get(k))
+        if tag == 'a' and values.get('href'):
+            self.player_text.append(values['href'])
         for key in ('src', 'href', 'poster'):
             if values.get(key) and (key != 'href' or tag == 'link'):
                 self.refs.append(values[key])
@@ -54,6 +73,16 @@ class HTMLRefs(HTMLParser):
             for candidate in values.get(key, '').split(','):
                 if candidate.strip():
                     self.refs.append(candidate.strip().split()[0])
+
+    def handle_endtag(self, tag):
+        if tag in self.hidden_tags:
+            self.hidden_tags.remove(tag)
+        if tag in {'audio', 'video'}:
+            self.media_depth = max(0, self.media_depth - 1)
+
+    def handle_data(self, data):
+        if not self.hidden_tags:
+            self.player_text.append(data)
 
 
 def unsafe_name(name):
@@ -129,8 +158,14 @@ def inspect(path, channel, expected_public_id=None):
         raise ValueError('Provide an existing game ZIP or, for TOY, standalone HTML')
     before = path.stat()
     errors, unverified = [], []
+    resources = []
     if channel == 'taptap' and before.st_size > PACKAGE_RULES[channel]['max_bytes']:
         errors.append(f"TapTap manual ZIP exceeds {PACKAGE_RULES[channel]['max_bytes']} bytes")
+    if channel == '4399':
+        if before.st_size > PACKAGE_RULES[channel]['max_bytes']:
+            errors.append(f"4399 main game-upload file exceeds {PACKAGE_RULES[channel]['max_bytes']} bytes")
+        if not re.fullmatch(r'[A-Za-z0-9_()\-]+\.zip', path.name, re.I):
+            errors.append('4399 upload ZIP needs a conservative ASCII basename with one extension dot')
     if path.suffix.lower() in {'.html', '.htm'}:
         if channel != 'bilibili-toy':
             errors.append('Standalone HTML is only supported for Bilibili TOY')
@@ -228,9 +263,36 @@ def inspect(path, channel, expected_public_id=None):
                 if channel == '4399' and WRONG_4399_API.search(data):
                     errors.append('4399 page-game H5API marker; expected h5api: ' + name[:120])
                 suffix = PurePosixPath(name).suffix.lower()
+                if channel == 'xiaohongshu':
+                    if len(data) == item.file_size:
+                        try:
+                            data.decode('utf-8')
+                            if b'\0' in data:
+                                raise UnicodeError('NUL byte')
+                        except UnicodeError:
+                            errors.append(f'{name}: binary or invalid UTF-8 content under text extension')
+                    for match in BASE64_LITERAL.finditer(data):
+                        literal = match.group(2)
+                        if len(literal) % 4:
+                            continue
+                        padding = len(literal) - len(literal.rstrip(b'='))
+                        decoded = len(literal) // 4 * 3 - padding
+                        resources.append({'path': name, 'encoded_bytes': len(literal), 'decoded_bytes': decoded})
+                        if decoded > RESOURCE_BUDGET['base64_max_decoded_bytes']:
+                            errors.append(f"{name}: embedded Base64 exceeds {RESOURCE_BUDGET['base64_max_decoded_bytes']} decoded bytes; use a permitted separate resource")
+                        elif decoded > RESOURCE_BUDGET['base64_review_decoded_bytes']:
+                            unverified.append(f"{name}: embedded Base64 exceeds {RESOURCE_BUDGET['base64_review_decoded_bytes']} decoded bytes; documented resource-budget review required")
+                if channel in {'233', '4399'} and suffix not in {'.html', '.htm'} and COMPETING_BRAND.search(data.decode('utf-8', 'replace')):
+                    unverified.append(f'{name}: competing-platform branding marker needs player-facing review; preserve legal notices')
                 if suffix in {'.html', '.htm'}:
                     parser = HTMLRefs()
                     parser.feed(data.decode('utf-8', 'replace'))
+                    if channel in {'233', '4399'} and any(COMPETING_BRAND.search(t) for t in parser.player_text):
+                        errors.append(f'{name}: competing-platform name/link in HTML player text or navigation')
+                    elif channel in {'233', '4399'} and COMPETING_BRAND.search(data.decode('utf-8', 'replace')):
+                        unverified.append(f'{name}: competing-platform marker outside static player text needs review; preserve legal notices')
+                    if channel == 'xiaohongshu' and any(urlsplit(u).scheme in {'data', 'blob'} for u in parser.media_refs):
+                        errors.append(f'{name}: Xiaohongshu-disallowed data/blob audio or video URL')
                     if channel == 'xiaohongshu' and (parser.inline_scripts or parser.inline_handlers or parser.iframes):
                         errors.append(f'{name}: Xiaohongshu-disallowed inline script, event handler or iframe')
                     for ref in parser.refs:
@@ -264,11 +326,13 @@ def inspect(path, channel, expected_public_id=None):
     status = 'fail' if errors else 'needs_review' if any(
         marker in note for note in unverified for marker in
         ('scan incomplete', 'scan stopped', 'static scan limit', 'could not be confirmed',
-         'AppID binding not checked')) else 'pass'
+         'AppID binding not checked', 'documented resource-budget review required',
+         'competing-platform')) else 'pass'
     return {'schema_version': 1, 'channel': channel, 'artifact': str(path.resolve()),
             'sha256': sha, 'bytes': before.st_size, 'entry': entry, 'entries': len(names),
             'status': status, 'errors': sorted(set(errors)),
             'unverified': sorted(set(unverified)), 'static_bytes_checked': checked_bytes,
+            'embedded_resource_review': resources,
             'public_id_check': 'literal_found' if expected_public_id and not any('Expected public ID' in x for x in errors + unverified)
                                else 'missing_or_incomplete' if expected_public_id else 'not_requested',
             'scope': ('TapTap manual ZIP layout and byte limit; not MCP build-directory input. '
