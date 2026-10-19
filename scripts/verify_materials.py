@@ -10,9 +10,9 @@ import subprocess
 from inventory_project import digest, probe
 from image_metadata import image_probe
 
-VIDEO_FORMATS = {'mp4', 'webm', 'ogg'}
+VIDEO_FORMATS = {'mp4', 'mov', 'webm', 'ogg'}
 SUFFIXES = {'png': {'.png'}, 'jpeg': {'.jpg', '.jpeg'}, 'webp': {'.webp'},
-            'mp4': {'.mp4'}, 'webm': {'.webm'}, 'ogg': {'.ogg'}}
+            'mp4': {'.mp4'}, 'mov': {'.mov'}, 'webm': {'.webm'}, 'ogg': {'.ogg'}}
 
 
 def media_format(path):
@@ -30,6 +30,8 @@ def media_format(path):
     if b.startswith(b'OggS'):
         return 'ogg'
     if len(b) >= 12 and b[4:8] == b'ftyp':
+        if b[8:12] == b'qt  ':
+            return 'mov'
         return 'mp4'
     return 'unknown'
 
@@ -110,14 +112,16 @@ def validate(manifest_path, rules_path):
         raise ValueError('files must be an array of objects')
     counts = Counter(x.get('role') for x in files)
     for role, rule in rules['roles'].items():
-        video_role = role in {'video', 'video_cover'}
+        video_role = role in {'video', 'video_cover', 'trailer', 'gameplay_demo_video'}
         minimum = rule['count'][0]
         if video_role and not video_enabled:
-            if role == 'video' or counts[role] < minimum:
+            if role in {'video', 'trailer', 'gameplay_demo_video'} or counts[role] < minimum:
                 deferred.append({'role': role, 'reason': 'video processing not selected',
                                  'required_by_profile': minimum > 0})
             minimum = 0
         maximum = rule['count'][1]
+        if counts[role] and counts[role] < rule.get('min_count_when_present', 0):
+            errors.append(f'{role}: fewer than minimum when provided')
         if counts[role] < minimum or (maximum is not None and counts[role] > maximum):
             errors.append(f'{role}: count {counts[role]} outside {rule["count"]}')
         recommended_count = rule.get('recommended_count')
@@ -178,6 +182,14 @@ def validate(manifest_path, rules_path):
                 errors.append(f'{role}: suffix does not match actual encoding')
             if not w or not h:
                 errors.append(f'{role}: no visual image/video stream')
+            if min(w, h) < constraints.get('min_short_edge', 0) or max(w, h) < constraints.get('min_long_edge', 0):
+                errors.append(f'{role}: resolution below minimum edge size')
+            either = constraints.get('min_any_dimension')
+            if either and w < either[0] and h < either[1]:
+                errors.append(f'{role}: width or height must meet its alternative minimum')
+            ranges = constraints.get('aspect_ratio_ranges')
+            if ranges and h and not any(lo <= w / h <= hi for lo, hi in ranges):
+                errors.append(f'{role}: aspect ratio outside supported range')
             variants = constraints.get('variants')
             if variants and not any(size_ok(w, h, v) for v in variants):
                 errors.append(f'{role}: invalid dimensions/ratio {w}x{h}')
@@ -192,6 +204,12 @@ def validate(manifest_path, rules_path):
                 errors.append(f'{role}: exceeds {limit} bytes')
             if is_video:
                 duration = float(info.get('format', {}).get('duration', 0))
+                minimum_duration = constraints.get('min_duration_seconds')
+                if minimum_duration is not None:
+                    exclusive = constraints.get('min_duration_exclusive', False)
+                    if duration < minimum_duration or (exclusive and duration == minimum_duration):
+                        relation = 'more than' if exclusive else 'at least'
+                        errors.append(f'{role}: video duration must be {relation} {minimum_duration} seconds')
                 if not math.isfinite(duration) or duration <= 0:
                     errors.append('video: invalid duration')
                 if constraints.get('codecs') and stream.get('codec_name') not in constraints['codecs']:
@@ -238,6 +256,21 @@ def validate(manifest_path, rules_path):
                 errors.append('detail: only first detail may use brand artwork without real screenshot')
         except (OSError, subprocess.TimeoutExpired, ValueError, TypeError) as e:
             errors.append(f'{role}: {str(e)[:250]}')
+    for role, rule in rules['roles'].items():
+        same_role = [r for r in records if r['role'] == role and r['width'] and r['height']]
+        if rule.get('same_aspect_ratio') and same_role:
+            first = same_role[0]
+            if any(r['width'] * first['height'] != r['height'] * first['width'] for r in same_role[1:]):
+                errors.append(f'{role}: images must share one aspect ratio and orientation')
+    for group in rules.get('co_required_groups', []):
+        if any(counts[role] for role in group) and not all(counts[role] for role in group):
+            errors.append('Paired materials required: ' + ', '.join(group))
+    for condition in rules.get('conditional_roles', []):
+        trigger = [r for r in records if r['role'] == condition['when_role']]
+        if condition.get('orientation') == 'portrait':
+            trigger = [r for r in trigger if r['height'] > r['width']]
+        if trigger and not counts[condition['required_role']]:
+            errors.append('Conditional material missing: ' + condition['required_role'])
     # 233 horizontal video needs a horizontal cover, and vice versa.
     if m['channel'] == '233':
         videos = [r for r in records if r['role'] == 'video']

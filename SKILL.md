@@ -11,6 +11,10 @@ Turn an existing local H5 project and its available materials into independent p
 
 ## Start / 开始
 
+At each new adapter task, resolve the actual installed Skill root (including symlinks), read its current on-disk `VERSION` and `SKILL.md`, then read only the current references needed for the task. `VERSION` is the canonical release identity; conversation memory and GitHub HEAD are not substitutes for installed bytes. Record the used path/version in existing task delivery notes, adding Git commit/status or relevant file hashes when traceability matters. A dirty working tree may differ from its release tag. No network update or per-tool-call reread is required; reread affected files if the installation changes during the task.
+
+每次开始新的适配任务，解析实际安装根目录（含符号链接），读取磁盘上的当前 `VERSION` 与 `SKILL.md`，再按需读取当前参考文件。`VERSION` 是统一发布版本标识；对话记忆和 GitHub HEAD 不能替代实际安装字节。在已有任务交付记录中写明使用路径／版本，需要追溯时补 Git 提交／状态或相关文件哈希；脏工作区可能不同于发布标签。不要求每次联网更新或每次工具调用重读；任务中安装发生变化时，重读受影响文件。
+
 Use the user's language and read one workflow, then only the selected platform references. If targets are absent, offer the platform list through available question tools or short text choices. Use explicit selections; do not silently add platforms or infer answers from defaults/timeouts. For “all platforms”, state the current six-platform list and apply each profile's requirements.
 
 按用户语言读取一份流程，再按选定平台读取说明。未指定平台时通过可用提问工具或文字选项引导；沿用明确选择，不把默认选中或超时当回答。用户选择“全部平台”时列明当前六个平台，并分别处理其接入条件。
@@ -21,6 +25,8 @@ Use the user's language and read one workflow, then only the selected platform r
 Before adaptation, follow [source and capability selection](references/selection.md) / [来源与功能选择](references/zh-CN/selection.md): source type is single-select; targets and each target’s features are multiselect. Persist explicit choices and reuse them. TapTap is both a possible source and a target, including same-channel incremental maintenance. Maker Lua is not an H5 source. No answer means read-only inventory, no unselected projects or integrations.
 
 适配前单选来源类型，多选目标，逐平台多选功能并保存。已有答案直接沿用，未回答不执行依赖工作；离线、签到、音乐、音效与字体设置单列游戏逻辑，不冒充平台 API。当前弹窗若只支持单选，使用编号多选加汇总确认，不伪称复选框。按所选范围读 [H5 reliability](references/h5-reliability.md) / [H5 可靠性](references/zh-CN/h5-reliability.md)。
+
+For selected developer/Owner controls, use [Settings-based tools and production exclusion](references/h5-reliability.md#developer-and-owner-tools) / [设置内工具与生产排除](references/zh-CN/h5-reliability.md#开发者与-owner-工具); keep normal gameplay unobstructed and test rewards separate from real ads.
 
 ## Material selection / 物料选择
 
@@ -43,7 +49,7 @@ Check current requirements and project compatibility before committing to a feat
 
 先核对当前规则与项目条件，再确定功能接入方式。平台说明用于指导实现，不能替代具体项目的平台测试。官方 Skill/CLI/MCP 独立使用并跟随更新。
 
-For TapTap onboarding, follow the [two-stage sequence and developer handoff](references/taptap.md#two-stage-integration-and-release-boundary): selected non-ad features → confirmed first upload → backend orientation → ads. Never publish to enable ads. / 本地开发接近完成、开始接入 TapTap 时，遵循[两阶段流程及开发交接模板](references/zh-CN/taptap.md#两阶段接入与发布边界)：先接所选非广告功能，再逐包确认首包上传、设置后台方向，最后接广告；禁止为接广告发布应用。
+For TapTap onboarding, follow the [two-stage sequence and developer handoff](references/taptap.md#two-stage-integration-and-release-boundary): selected non-ad features → authorized first upload → backend orientation → ads. Never publish to enable ads. / 本地开发接近完成、开始接入 TapTap 时，遵循[两阶段流程及开发交接模板](references/zh-CN/taptap.md#两阶段接入与发布边界)：先接所选非广告功能，再按当前授权上传首包、设置后台方向，最后接广告；禁止为接广告发布应用。
 
 ## Delivery / 交付
 
@@ -56,6 +62,6 @@ Read [Android-device TapTap automation](references/android-taptap-automation.md)
 5. **Fit the environment.** Follow [macOS/Windows guidance](references/portability.md) / [系统环境](references/zh-CN/portability.md). Default Android target: Xiaomi 8 / Android 10, unless overridden. Check host-engine constraints using [compatibility guidance](references/compatibility.md) / [兼容说明](references/zh-CN/compatibility.md). / 按系统执行，安卓默认小米 8、Android 10，并单独核对宿主内核。
 6. **Check the final artifact and report the actual result.** Run [game-package preflight](references/package-budget.md) / [游戏包预检](references/zh-CN/package-budget.md) on each candidate. Keep the short [validation-state template](assets/validation-status.example.md) in the game's delivery notes. Distinguish local preparation, SDK/device testing and platform upload/review/release. Never fabricate rewarded-ad completion or borrow another game's IDs. / 对每个候选包运行静态预检，在游戏交付文档记录简短验证状态；区分本地准备、SDK/真机测试与上传/审核/发布，不伪造广告完成、不借用其他游戏 ID。
 
-Before any external game-package upload, follow the [per-artifact Owner confirmation gate](references/h5-reliability.md#h5-external-upload-confirmation) / [逐制品 Owner 二次确认](references/zh-CN/h5-reliability.md#h5-外部上传确认), including test packages, reuploads and combined packaging/upload tools.
+For game-package uploads and publication, follow the current [route-specific authorization](references/h5-reliability.md#h5-upload-and-publication-authorization) / [按路线区分上传与发布授权](references/zh-CN/h5-reliability.md#h5-上传与发布授权). Authorized `taptap-cli` upload-only work needs no per-package second confirmation; MCP publication/combined-submit actions require specific Owner confirmation. / 已授权的 CLI 纯上传不逐包再确认；MCP 发布及组合提审等动作按本次具体确认执行。
 
 To add or update a platform, read [extension guidance](references/extending.md) / [扩展说明](references/zh-CN/extending.md). Repository contributions start with [CONTRIBUTING](CONTRIBUTING.md) / [贡献指南](CONTRIBUTING.zh-CN.md). Keep reusable instructions independent of private project history.

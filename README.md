@@ -33,24 +33,40 @@ This Skill gives AI Agents platform integration rules, listing-material guidance
 
 ### 1. Install the Skill
 
-For Codex, clone this public repository into your `skills` directory. No repository access invitation is needed.
+For a new Codex installation, clone this public repository into the user discovery root `~/.agents/skills`. No repository access invitation is needed.
 
 **macOS / Linux — zsh / bash**
 
 ```bash
-git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git "${CODEX_HOME:-$HOME/.codex}/skills/h5-channel-adapter"
+git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git "$HOME/.agents/skills/h5-channel-adapter"
 ```
 
 **Windows — PowerShell**
 
 ```powershell
-$skillBase = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $env:USERPROFILE '.codex' }
+$skillBase = Join-Path $env:USERPROFILE '.agents'
 git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $skillBase 'skills/h5-channel-adapter')
 ```
+
+Existing installs in `~/.codex/skills` or another location can remain there when a discoverable `~/.agents/skills/h5-channel-adapter` symlink points to that root. Inspect the selected path and any existing alias first; do not create a second copy or migrate a working installation just to match these new-install commands.
 
 For other agents supporting `SKILL.md`, use their Skill installation method. One installation serves both languages. If the directory exists, inspect local changes first; clean Git installations can update with `git pull --ff-only` from the Skill directory.
 
 Studios can pin a tested release tag and update this Skill when needed; existing game packages are not rebuilt automatically. This repository supplies instructions and checks, while the agent still implements SDK and source changes in each game project.
+
+### Check and update the installed version
+
+Start from the Skill path actually selected by your agent. In that directory, inspect the resolved root, canonical release version and Git state:
+
+```sh
+python3 -c "from pathlib import Path; p=Path('.').resolve(); print(p); print((p/'VERSION').read_text().strip())"
+git rev-parse HEAD
+git status --short --branch
+```
+
+On Windows PowerShell use `py -3` or your verified Python command. Preserve local edits before updating; do not reset, overwrite or automatically stash them. For a clean branch tracking the intended upstream, use `git pull --ff-only`; stop if histories diverge. A checkout pinned to a tested tag stays pinned until you deliberately select another verified tag or branch. Read `VERSION` and current instructions again after an update; a version label alone does not identify dirty working-tree bytes.
+
+Symlinked entries share their target's files; separate clones/copies update independently. Publishing to GitHub does not update those installs or prove that an existing chat has reread its instructions. At each new adapter task, explicitly read the installed `VERSION`, `SKILL.md` and needed references, and record path/version in existing delivery notes. No network pull or new chat is required for every task. [Official Codex documentation](https://learn.chatgpt.com/docs/build-skills) describes automatic change detection and symlink support, but does not certify replacement of instructions already read in every active conversation; if an update does not appear, it suggests restarting Codex.
 
 ### 2. Prepare source and materials
 
@@ -84,7 +100,7 @@ The [selection workflow](references/selection.md) persists `source.kind`, target
 
 Platform features and game logic (offline progress, check-in, audio, font/settings) are separate scopes. [Reliability recipes](references/h5-reliability.md) cover storage failure, account switches, cloud conflicts, reward transactions, leaderboard races and device audio without promising a universal implementation.
 
-**TapTap onboarding:** once the backend app exists, integrate selected non-ad features and build a local first package. Upload only after per-artifact Owner confirmation, set backend orientation, then verify and integrate ads through MCP. Never publish to enable ads. See the [full sequence and developer handoff template](references/taptap.md#two-stage-integration-and-release-boundary).
+**TapTap onboarding:** once the backend app exists, integrate selected non-ad features and build a local first package. Upload under current Owner authorization and the [route-specific rules](references/h5-reliability.md#h5-upload-and-publication-authorization), set backend orientation, then verify and integrate ads through MCP. Never publish to enable ads. See the [full sequence and developer handoff template](references/taptap.md#two-stage-integration-and-release-boundary).
 
 ## Choose your materials
 

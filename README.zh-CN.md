@@ -35,24 +35,40 @@
 
 ### 1. 安装 Skill
 
-在 Codex 中，将公开仓库克隆到 `skills` 目录，无需申请仓库访问权限。
+全新安装 Codex Skill 时，将公开仓库克隆到用户发现目录 `~/.agents/skills`，无需申请仓库访问权限。
 
 **macOS / Linux（zsh / bash）**
 
 ```bash
-git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git "${CODEX_HOME:-$HOME/.codex}/skills/h5-channel-adapter"
+git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git "$HOME/.agents/skills/h5-channel-adapter"
 ```
 
 **Windows（PowerShell）**
 
 ```powershell
-$skillBase = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $env:USERPROFILE '.codex' }
+$skillBase = Join-Path $env:USERPROFILE '.agents'
 git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $skillBase 'skills/h5-channel-adapter')
 ```
+
+既有安装若位于 `~/.codex/skills` 或其他位置，可保留原目录，由可被发现的 `~/.agents/skills/h5-channel-adapter` 符号链接指向它。先核对实际选中路径与已有别名，不为套用以上全新安装命令另建副本或迁移正常安装。
 
 其他支持 `SKILL.md` 的 Agent，按其安装方式载入本仓库。中英文共用一次安装。已有同名目录时先检查本地修改；干净的 Git 安装可在 Skill 目录运行 `git pull --ff-only` 更新。
 
 工作室项目可固定已验证的发布标签；以后按需更新 Skill，已交付的游戏包不会自动变化。这个仓库提供执行规则和检查工具，具体 SDK 接入与代码改造仍由 Agent 在游戏工程里完成。
+
+### 核对并更新实际安装版本
+
+从 Agent 实际选中的 Skill 路径出发，在该目录检查解析后的根目录、统一发布版本及 Git 状态：
+
+```sh
+python3 -c "from pathlib import Path; p=Path('.').resolve(); print(p); print((p/'VERSION').read_text().strip())"
+git rev-parse HEAD
+git status --short --branch
+```
+
+Windows PowerShell 使用 `py -3` 或已核实的 Python 命令。更新前保留本地修改，不 reset、覆盖或自动 stash；只有干净且跟踪预期上游的分支才运行 `git pull --ff-only`，分叉时停止。固定在已验证标签的安装保持固定，直到明确选择另一个已核实标签或分支。更新后重读 `VERSION` 与当前指令；单独版本号不能标识脏工作区的实际字节。
+
+符号链接入口共用目标文件，独立 clone／副本各自更新。发布到 GitHub 不会自动更新这些安装，也不能证明既有聊天已经重读指令。每个新的适配任务明确读取实际安装的 `VERSION`、`SKILL.md` 与所需参考资料，并在已有交付记录中注明路径／版本；不要求每次联网 pull 或新开聊天。[Codex 官方文档](https://learn.chatgpt.com/docs/build-skills)说明会自动检测修改并支持符号链接，但未保证每个活跃对话里已读过的指令都被替换；更新未出现时，文档建议重启 Codex。
 
 ### 2. 准备源码与物料
 
@@ -85,7 +101,7 @@ git clone https://github.com/xxxzzzfff2020/h5-channel-adapter.git (Join-Path $sk
 
 平台功能与离线、签到、音乐、音效、字号／设置等游戏逻辑分别选择。[可靠性配方](references/zh-CN/h5-reliability.md)覆盖存储失败、切号、云冲突、奖励事务、榜单竞态及设备音频，不承诺通用代码已实现。
 
-**TapTap 接入顺序：**后台建好应用后，先接所选非广告功能并生成本地首包；逐包经 Owner 确认上传、设置后台横竖屏后，再通过 MCP 核验并接广告。禁止为了接广告而发布应用。完整步骤及可转交开发对话的工单见[两阶段流程](references/zh-CN/taptap.md#两阶段接入与发布边界)。
+**TapTap 接入顺序：**后台建好应用后，先接所选非广告功能并生成本地首包；按当前 Owner 授权与[分路线规则](references/zh-CN/h5-reliability.md#h5-上传与发布授权)上传、设置后台横竖屏后，再通过 MCP 核验并接广告。禁止为了接广告而发布应用。完整步骤及可转交开发对话的工单见[两阶段流程](references/zh-CN/taptap.md#两阶段接入与发布边界)。
 
 ## 物料按需选择
 

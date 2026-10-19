@@ -28,4 +28,4 @@ For 4399, every listing-copy document must include the recommended game width, h
 
 Examples / 示例：[xiaohongshu](../assets/material-manifest.xiaohongshu.example.json) · [bilibili-toy](../assets/material-manifest.bilibili-toy.example.json) · [xingxia](../assets/material-manifest.xingxia.example.json)
 
-TapTap preparation roles are icon/cover/detail; required fields and all current form limits remain unverified in the shared rules. Do not claim a complete kit from a helper pass. See [TapTap](taptap.md).
+TapTap uses exact banner_4/square_promo_image/screenshots/trailer/gameplay_demo_video roles and conditionally visible windows_* roles; numeric defaults live in material-rules.json. Legacy cover/detail/video remain compatible. Refresh current CLI modules before claiming completeness; see [TapTap](taptap.md).

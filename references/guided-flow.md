@@ -24,7 +24,7 @@ After phase one show each platform's source/material status, game ZIP and next a
 
 ## Collect only necessary fields
 
-For TapTap, use the [two-stage sequence and handoff](taptap.md#two-stage-integration-and-release-boundary). Collect the target app and actual orientation, then finish selected non-ad work and a local first package before requesting its upload confirmation. After confirmed upload and backend orientation, resume selected ads through MCP. Reuse known answers and verified completed stages; never instruct the user to publish to unlock ads or request a manually copied ad-space ID.
+For TapTap, use the [two-stage sequence and handoff](taptap.md#two-stage-integration-and-release-boundary). Collect the target app and actual orientation, then finish selected non-ad work and a local first package before applying the [route-specific upload/publication authorization](h5-reliability.md#h5-upload-and-publication-authorization). After confirmed upload and backend orientation, resume selected ads through MCP. Reuse known answers and verified completed stages; never instruct the user to publish to unlock ads or request a manually copied ad-space ID.
 
 Provide the verified creation URL and ready-to-copy name/description/controls/images. For missing 4399 configuration ask AppID, ad status (enabled/pending/not requested) and save API status. Ask rank ID and score/order only if a leaderboard is in scope. Do not imply a positive status through default selections.
 
@@ -36,7 +36,7 @@ Accept a combined free-text answer, extract fields and resume without making the
 
 Persist selected platforms, non-secret IDs, permissions, candidate paths, gaps and next actions in existing delivery notes. Partial responses unblock ready channels. Pending capabilities may be safely disabled when allowed, but do not invent reward success or silently change product economics.
 
-Do not recopy source, replace saves or remake unchanged materials just because the user returns later. Continue ordinary local steps without further approvals. Every external game upload still requires [per-artifact Owner confirmation](h5-reliability.md#h5-external-upload-confirmation); handle other external writes within the actual user's authorization and applicable platform workflow.
+Do not recopy source, replace saves or remake unchanged materials just because the user returns later. Continue ordinary local steps without further approvals. Follow current [route-specific upload/publication authorization](h5-reliability.md#h5-upload-and-publication-authorization); handle other external writes within the actual user's authorization and applicable platform workflow.
 
 ## Over-limit package question
 

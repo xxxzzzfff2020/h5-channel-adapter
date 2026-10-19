@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "recorded_on": "2026-10-12",
+  "recorded_on": "2026-10-15",
   "byte_unit": "decimal MB",
   "channels": {
     "233": {
@@ -65,9 +65,10 @@
       }
     },
     "taptap": {
-      "basis": "2026-10-03: preparation roles only; current H5 creator form requirements still require verification.",
+      "basis": "TapTap official Game Material Requirements v4 sections 1, 2.1–2.5, 4.1–4.2 and 5.1–5.3, checked 2026-10-15. Current app CLI field visibility/state/image_spec/video_spec take precedence. Roles are conditional, not universal required slots.",
       "unverified": [
-        "TapTap H5 listing required fields, image dimensions/counts/formats/bytes and video requirements must be verified in the current creator form."
+        "Refresh basic-info/assets-upload/profile-promotion and windows-exclusive with current app-scoped TapTap CLI before declaring listing completeness.",
+        "These reusable defaults validate prepared files only; invisible Windows fields are not missing. Remote upload, draft-field binding and review remain separate."
       ],
       "text": {
         "name": {
@@ -81,21 +82,35 @@
         "controls": {
           "required": false,
           "max_chars": null
+        },
+        "developer_message": {
+          "required": false,
+          "max_chars": null
+        },
+        "promotion_text": {
+          "required": false,
+          "max_chars": null
         }
       },
       "roles": {
         "icon": {
           "count": [
             0,
-            null
+            1
           ],
           "formats": [
             "png",
             "jpeg"
           ],
           "max_bytes": null,
-          "variants": null,
-          "basis_override": "Optional prepared image; not a verified platform requirement."
+          "variants": [
+            [
+              512,
+              512,
+              "min"
+            ]
+          ],
+          "content_note": "Square full artwork; no pre-rounded corners, default icon, flat white/black or transparent background."
         },
         "cover": {
           "count": [
@@ -147,9 +162,260 @@
           "max_bytes": null,
           "variants": null,
           "basis_override": "Optional prepared image; not a verified platform requirement."
+        },
+        "banner_4": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 4000000,
+          "variants": [
+            [
+              1920,
+              1080,
+              "min"
+            ]
+          ],
+          "field_id": "banner_4",
+          "content_note": "Title only; no icon or screenshot collage. 4:3 center-safe composition."
+        },
+        "square_promo_image": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 4000000,
+          "variants": [
+            [
+              1440,
+              1440,
+              "min"
+            ]
+          ],
+          "field_id": "square_promo_image",
+          "content_note": "Same scene as banner_4; title only. Needed when portrait gameplay video is used."
+        },
+        "screenshots": {
+          "count": [
+            0,
+            10
+          ],
+          "min_count_when_present": 3,
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 4000000,
+          "variants": null,
+          "min_short_edge": 720,
+          "min_long_edge": 1280,
+          "aspect_ratio_ranges": [
+            [
+              0.375,
+              0.625
+            ],
+            [
+              1.6,
+              2.6666666666666665
+            ]
+          ],
+          "same_aspect_ratio": true,
+          "field_id": "screenshots",
+          "content_note": "Actual gameplay first; consistent ratio/orientation; source/version required. Current collection_spec supplies the app-specific upper bound."
+        },
+        "trailer": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "mp4",
+            "mov"
+          ],
+          "max_bytes": 5000000000,
+          "variants": [
+            [
+              1280,
+              720,
+              "min"
+            ]
+          ],
+          "min_duration_seconds": 15,
+          "codecs": [
+            "h264",
+            "hevc"
+          ],
+          "field_id": "trailer",
+          "content_note": "Landscape 16:9 promotional film; core gameplay focus. Different videoId from gameplay_demo_video."
+        },
+        "gameplay_demo_video": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "mp4",
+            "mov"
+          ],
+          "max_bytes": 5000000000,
+          "variants": null,
+          "min_short_edge": 540,
+          "aspect_ratio_ranges": [
+            [
+              0.42857142857142855,
+              2.3333333333333335
+            ]
+          ],
+          "min_duration_seconds": 15,
+          "min_duration_exclusive": true,
+          "max_duration_seconds": 1800,
+          "codecs": [
+            "h264",
+            "hevc"
+          ],
+          "field_id": "gameplay_demo_video",
+          "content_note": "Show core in first 5s and continuously >10s; no added voice/captions, PIP, device UI or marketing text. Current video_spec prevails."
+        },
+        "windows_logo": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png"
+          ],
+          "max_bytes": 4000000,
+          "variants": null,
+          "field_id": "logo",
+          "min_any_dimension": [
+            1280,
+            720
+          ],
+          "content_note": "Transparent PNG; tightly fit logo. Width>=1280 OR height>=720, not both."
+        },
+        "windows_cover": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 3000000,
+          "variants": [
+            [
+              460,
+              215,
+              "exact"
+            ]
+          ],
+          "field_id": "cover",
+          "content_note": "Windows landscape cover with title/logo only; not banner_4."
+        },
+        "windows_cover_vertical": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 3000000,
+          "variants": [
+            [
+              600,
+              900,
+              "exact"
+            ]
+          ],
+          "field_id": "cover_vertical",
+          "content_note": "Windows portrait cover with title/logo only; not 1:1 video cover."
+        },
+        "windows_library_hero": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 10000000,
+          "variants": [
+            [
+              3840,
+              1240,
+              "exact"
+            ]
+          ],
+          "field_id": "library_hero",
+          "content_note": "No text/logo; avoid lower-left UI and right-side logo overlay. Legacy library_banner is not the current write field."
+        },
+        "windows_logoless_banner": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 6000000,
+          "variants": [
+            [
+              1920,
+              1080,
+              "min"
+            ]
+          ],
+          "field_id": "logoless_banner",
+          "content_note": "Windows editor recommendation, no text or logo; paired with portrait variant."
+        },
+        "windows_logoless_vertical_banner": {
+          "count": [
+            0,
+            1
+          ],
+          "formats": [
+            "png",
+            "jpeg"
+          ],
+          "max_bytes": 6000000,
+          "variants": [
+            [
+              720,
+              1080,
+              "min"
+            ]
+          ],
+          "field_id": "logoless_vertical_banner",
+          "content_note": "Windows editor recommendation, no text/logo; same/similar scene as landscape."
         }
       },
-      "requirements_verified": false
+      "requirements_verified": false,
+      "conditional_roles": [
+        {
+          "when_role": "gameplay_demo_video",
+          "orientation": "portrait",
+          "required_role": "square_promo_image"
+        }
+      ],
+      "co_required_groups": [
+        [
+          "windows_logoless_banner",
+          "windows_logoless_vertical_banner"
+        ]
+      ]
     }
   }
 }

@@ -26,4 +26,4 @@ B 站封面4:3、图标1:1按表单比例检查，1200×900、500×500仅推荐�
 
 Examples / 示例：[xiaohongshu](../../assets/material-manifest.xiaohongshu.example.json) · [bilibili-toy](../../assets/material-manifest.bilibili-toy.example.json) · [xingxia](../../assets/material-manifest.xingxia.example.json)
 
-TapTap 预备物料角色为 icon/cover/detail，当前表单必填项与全部规格仍待核实；脚本通过不代表全套已齐，见 [TapTap](taptap.md)。
+TapTap 使用精确角色 banner_4/square_promo_image/screenshots/trailer/gameplay_demo_video，以及按实际可见性启用的 windows_* 角色；数值维护在 material-rules.json。旧 cover/detail/video 是兼容角色。完整性需当前 CLI 模块核实，见 [TapTap](taptap.md)。
