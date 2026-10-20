@@ -126,15 +126,17 @@ MCP 调用可能把上传与提审／发布／线上覆盖合并时，先列出�
 
 ## 云档读取兼容与上传预算
 
-**2026-10-19** 按宿主全局 `tap` 核对：官方 [H5 云档指南](https://developer.taptap.cn/minigameapidoc/dev/tutorial/open-capabilities/cloud-save-tutorial/)、[createArchive](https://developer.taptap.cn/minigameapidoc/dev/api/open-api/cloudsave/CloudSaveManager.createArchive/) 和 [updateArchive](https://developer.taptap.cn/minigameapidoc/dev/api/open-api/cloudsave/CloudSaveManager.updateArchive/) 规定创建／更新每分钟最多一次，超频错误码为 `400001`。[SDK v4 功能页](https://developer.taptap.cn/docs/sdk/tap-cloudsave/features/) 记载另一频率（每分钟 60 次），不能移用到 H5；使用时重查当前 H5 合同。仅有 errMsg 的回调不能证明发生了数字码 `400001`。
+**2026-10-20** 按宿主全局 `tap` 核对：官方 [H5 云档指南](https://developer.taptap.cn/minigameapidoc/dev/tutorial/open-capabilities/cloud-save-tutorial/)、[createArchive](https://developer.taptap.cn/minigameapidoc/dev/api/open-api/cloudsave/CloudSaveManager.createArchive/) 和 [updateArchive](https://developer.taptap.cn/minigameapidoc/dev/api/open-api/cloudsave/CloudSaveManager.updateArchive/) 规定创建／更新每分钟最多一次，超频错误码为 `400001`。[SDK v4 功能页](https://developer.taptap.cn/docs/sdk/tap-cloudsave/features/) 记载另一频率（每分钟 60 次），不能移用到 H5；使用时重查当前 H5 合同。仅有 errMsg 的回调不能证明发生了数字码 `400001`。
 
 官方 [readFile](https://developer.taptap.cn/minigameapidoc/dev/api/file/FileSystemManager.readFile/) 使用回调、不支持 Promise 风格；不传 `encoding` 时返回二进制 `ArrayBuffer`。[getArchiveData](https://developer.taptap.cn/minigameapidoc/dev/api/open-api/cloudsave/CloudSaveManager.getArchiveData/) 接收已捕获的 `archiveUUID` 与 `archiveFileId`；不传 `targetFilePath` 时由宿主创建临时文件并返回路径。这些是文档接口，以下有界兜底和协调策略是工程建议，不是额外 SDK 保证。
 
-- 分别诊断本地持久化、运行时身份、云列表／下载／文件读取／校验、配额预留及云提交。云端缺数据不证明 UID、实名或防沉迷被拒；本地 `QuotaExceededError` 不能证明身份失败。遵循[通用存储／冲突合同](h5-reliability.md#身份本地存档与云)。
+- 分别诊断本地持久化、本机会话尝试限流、真实数字码服务端限流、可选辅助文件失败、主文件真实读写失败、运行时身份失败与远端结果未知；保留失败阶段及是否实际返回数字码。仅 errMsg 的“missing”分类或可选原生错误 `100` 既不是官方缺失证明，也不是数字码 `400001`；不得采用 Android 全面错误即不存在规则。云端缺数据不证明 UID、实名或防沉迷被拒；本地 `QuotaExceededError` 不能证明身份失败。遵循[通用存储／冲突合同](h5-reliability.md#身份本地存档与云)。
 - 主档读取独立于可选诊断／配额文件。先读 UTF-8；明确读取失败后最多一次二进制读取，严格 UTF-8 解码并拒绝非法字节。固定下载文件仍明确不可读时，最多一次由宿主选临时路径的重下载，保持**同一已捕获 UUID/fileId**，沿用一次 UTF-8／至多一次二进制读取，不再重下载。超时结果未知时不并发启动兜底。使用前按官方宿主存储根校验返回本地路径（拒绝越界或任意 URL）、字节上限、JSON、schema、checksum、归属／谱系，以及最终账号／请求身份。内容无效不是换档、制造空数据或覆盖云进度的理由。
 - 按[默认停用诊断及隐私合同](h5-reliability.md#启动布局性能与诊断)处理。明确重新启用诊断时，保守统一协调同账号／游戏的适用 create/update：首次创建、手动／force、自动保存、诊断及重试。不同名称／UUID、独立计时器、串行执行或主档成功后短暂延迟都不证明配额隔离；主档优先，诊断可丢弃。服务端具体限流作用域仍需目标宿主证据；结构性竞争风险不等于所有线上失败的原因。
 - 即使诊断关闭，所有主档路径仍遵守上述预算：手动／关键优先级、`force`、首次创建及替换均不豁免。按[队列与真实状态合同](h5-reliability.md#云保存队列与真实状态)处理；停用竞争写入方不能证明已有完整共享仲裁或跨设备安全。
-- 不可读的旧诊断 pending 标记继续按未知操作保留，不能为开局将其删除或宣称已结算。独立受保护的主档仅可按目标已验证的恢复策略恢复提交：根据已核实限频保守设置单调时钟冷启动等待、取可信写入时间戳最大值、精确读回持久化时间／pending 预留、核对当前账号／token，且无并发操作。项目额外等待余量不是官方间隔或通用默认值；时间经过也不证明未知远端写已失败。没有持久标记后端时继续阻止云提交并保留本地进度，只读主档恢复保持独立。
+- 先按写入方、操作和存档归属区分旧标记，再套用恢复规则。退役诊断／配额辅助文件字节与未知标记保持原样，不宣称不存在、失败或已结算。冷启动等待、可信持久时间戳及时间预留精确读回，**仅是选定且仍启用的旧协议可采用的恢复措施**，须经目标验证、核对当前账号／token 且无并发操作；计时措施绝不结算未决写入。它们不是诊断写入方已关闭时生产主档的统一前置条件。不能把不透明的退役辅助文件变成主保存必需依赖；属于主写入方的未决操作仍须对账，绝不能靠计时清除。
+- 一种可选生产设计是用经核验的单调时钟在当前会话内存中控制尝试／预留间隔，不读写退役辅助文件及其持久配额时间戳。本会话尚无尝试时不人为增加启动等待，但身份、pending 与冲突门仍有效。这是设计选项，不是统一 SDK 迁移要求。预留只记录尝试提交窗口，不证明服务端接受或消耗了配额。重启或其他标签页／设备写入后的首次尝试仍可能收到真实 `400001`；保留该失败、安全的同会话间隔及真实状态。内存节奏不证明跨会话／标签页／设备仲裁，也不代表已实现自动重试队列；既有队列合同仍是独立实施要求。
+- **每次**云提交前持久化并精确读回**独立的 pending 操作证明**。保留原账号／操作／存档绑定、预期远端 token／版本与稳定快照；未知超时跨刷新保留，清除或重试前先对账，重新核对身份及完整内容／checksum／读回。迟到成功回执本身不是完整远端内容核验。事务证明无法持久化时阻止提交并保留进度；这不要求恢复退役配额辅助文件。保留备份、游戏存档 key、谱系、严格防过期选择与奖励防重复保护。`createArchive`／`updateArchive` 要求的 H5 上传数据文件仍必需，且与退役辅助文件不同。
 
 在目标真实实现中验证仅 errMsg 错误、非法二进制、错误路径／归属、fileId／账号变化、未知超时、可选文件不可用、旧 pending 及停用诊断输入。区分本地替身和宿主／真机验收；后续上传／重开成功不能证明此前失败都同因，也不能证明另一设备的本地写失败已修复。
 

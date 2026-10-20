@@ -1,5 +1,16 @@
 # Changelog / 更新记录
 
+## 0.6.1 — 2026-10-20
+
+Documentation refinement of v0.6.0. This release incorporates the local maintenance below; it does not claim a shipped game fix, executed runtime acceptance or a refresh of every active chat. / 在 v0.6.0 基础上完善文档，纳入以下本地维护；不代表游戏修复已交付、运行验收已执行或所有活跃对话已重读。
+
+- Clarify that chat lessons enter reusable guidance only when written into the maintained Skill files; retain task-start installed-path/version checks and explicit rereading after updates. / 明确聊天经验须写入所维护的 Skill 文件才能复用，保留新任务安装路径／版本核对及更新后重读要求。
+
+- Refine empty-only optional-backup startup to allow an explicitly selected, schema-validated auxiliary-only namespace while preserving all bytes/identifiers, probe stability, initial commit/reopen and unknown-native/cloud guards. Keep real storage denial and unproven player-specific triggers explicit. / 可选备份启动从仅全空细化为可明确选择、按 schema 严格校验的仅辅助项命名空间；保留原字节／标识、探针稳定性、初档提交／重开及未知原生／云保护，保留真实写入拒绝与玩家特定触发未证实的边界。
+
+- Separate optional legacy diagnostic recovery from selected production session-only attempt pacing; retain server limits, durable pending proof, full reconciliation and the required upload data file. Keep queue behavior as requirements, not source acceptance. / 区分可选旧诊断恢复与选定的生产会话尝试节奏；保留服务端限频、持久 pending 证明、完整对账及必需上传数据文件；队列行为仍为要求，不冒充来源验收。
+- Bound optional-native PC startup to the existing authoritative-store policy, strict namespace inventory, disposable probe and verified initial commit; preserve unknown/corrupt data and cloud gates. Add version/startup-bound feedback provenance and explicitly unexecuted acceptance rows. / PC 可选原生启动受既有权威存储策略、严格命名空间清单、临时探针与初档提交读回约束，保留未知／损坏数据及云写入门；补版本／启动边界证据归属及明确未执行的验收行。
+
 ## 0.6.0 — 2026-10-19
 
 `VERSION` is the canonical release identity. This release collects the dated maintenance entries below; their dates describe the work, not separate published versions. The earlier 2026-10-03 heading anticipated 0.6.0 while `VERSION` and the latest tag remained 0.5.0. / `VERSION` 为统一发布版本标识。本版汇总以下按日期记录的维护；日期是工作发生时间，不代表独立发布版本。2026-10-03 的旧标题提前记为 0.6.0，当时 `VERSION` 与最新标签仍为 0.5.0。

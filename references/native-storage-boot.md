@@ -13,9 +13,23 @@ Use for selected native-storage adaptation, especially Xiaohongshu. These are en
 
 The current Xiaohongshu contract separates Promise calls from callback calls (callbacks return undefined); `getStorage` returns data and `getStorageInfo` returns key inventory. Keep encryption options consistent and validate current version/method availability. Observed legacy request handles and mock sentinel shapes are compatibility cases, not extra official response guarantees.
 
+## Optional native backup and browser startup
+
+First identify the authoritative store and any optional backup in the existing product policy. Filesystem/cloud/device method names with empty host metadata do not prove operational support, and unknown numeric `100` does not acquire a documented meaning from those names. This does not authorize switching away from uncertain authoritative native storage.
+
+Only where the existing policy permits a browser-authoritative path may an optional native-backup failure allow fresh initialization. Inventory the complete game namespace, including journals, pending records and backups. The selected policy may require it empty, or explicitly permit a finite, named allowlist of non-progress preference/installation keys with strictly validated value schemas and verified roles. A key's name or mere presence proves neither safety nor progress. Progress or identity/lineage-bearing saves, active sessions, pending operations, journals, backups, malformed auxiliary values and unknown/future keys cannot qualify. Preserve every original byte; never clear records, regenerate or rebind an auxiliary identifier to make the branch eligible.
+
+For an eligible snapshot, verify write, exact readback and removal through an unused disposable non-game key, then compare the complete namespace's keys and raw values with the original snapshot. Exceptions, no-op writes, readback/removal failure or concurrent changes block selection; cleanup is limited to this attempt's exact temporary bytes. A successful probe alone is insufficient: commit and read back the initial profile before gameplay/cloud startup, then verify identity and progress survive reopen. This sequence is not an atomic cross-tab lock. Real quota/security denial may still block persistence; do not label memory as saved or promise a universal repair/new backend.
+
+Preserve existing, corrupt or orphaned native/browser records and journals, explicit recovery/backup policy, and account/lineage/conflict/reward/pending-operation guards. Unknown native state remains unknown; browser readiness never authorizes automatic empty-profile cloud overwrite. A fixture is not physical-host or affected-player acceptance, nor permission to re-enable distribution.
+
+Keep inventory, existing-profile validation, write, readback and cleanup diagnostics bounded to allowlisted stages/error categories. Exclude identifiers, raw values, local paths and arbitrary exception text. A test fixture or an unobserved player action is not evidence of the actual player's root cause.
+
 ## Exception tests on the actual target implementation
 
 Replace only external SDK, browser storage, clock and faults; execute the game's real boot, migration, recovery and save code. Assert writes, retained bytes, UI claims and pending progression, not merely a fake SDK's return value.
+
+These are acceptance requirements for later target execution, not results of documentation maintenance.
 
 | Input / fault | Required observation |
 | --- | --- |
@@ -31,6 +45,12 @@ Replace only external SDK, browser storage, clock and faults; execute the game's
 | Callback-only API / request handle | Await the callback; handle is not response data |
 | Promise plus duplicate callback/error | One settlement; one intended write |
 | Write failure or mismatched readback | Unsaved status; latest pending progression retained |
+| Selected browser path; empty or strictly valid auxiliary-only namespace | Apply the explicit policy/schema; retain auxiliary bytes and identifiers, then verify initial commit and reopen |
+| Progress/session/pending/journal/backup, unknown key or invalid auxiliary value | Fresh initialization blocked; all original bytes retained |
+| Namespace changes during probe; no-op write or failed readback/removal | Selection blocked; changed records preserved; cleanup touches only exact disposable bytes |
+| Initial profile commit/readback fails; later reopen | No durable success claim before confirmed commit; successful reopen retains the same identity/progress |
+| Real quota or security denial | Retain the actual failure and safe recovery; no fabricated persistence, clearing data or unconditional memory fallback |
+| Diagnostics contain arbitrary/private fields | Only bounded stages/categories remain; no identifiers, raw values, paths or exception payloads |
 | Temporary session after read failure | All persistent writes zero; no saved/backup claim; retry available |
 | Previous package fails on a real phone | New isolated passes do not certify the new phone/package |
 
